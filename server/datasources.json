@@ -1,0 +1,12 @@
+{
+  "mysqlDS": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "fswe",
+    "password": "use-fswe",
+    "name": "mysqlDS",
+    "user": "fswe-user",
+    "connector": "mysql"
+  }
+}
