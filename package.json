@@ -1,0 +1,45 @@
+{
+  "name": "voting-app",
+  "version": "0.1.0",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Kevin Blicharski",
+      "email": "kevin-blicharski@uiowa.edu",
+      "url": ""
+    },
+    {
+      "name": "Joseph Leiferman",
+      "email": "joseph-leiferman@uiowa.edu",
+      "url": ""
+    },
+    {
+      "name": "Logan Brown",
+      "email": "logan-brown@uiowa.edu",
+      "url": ""
+    }
+  ],
+  "main": "./src",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/kblicharski/fswe-project.git"
+  },
+  "scripts": {
+    "start": "NODE_PATH=src react-scripts start",
+    "build": "react-scripts build",
+    "test": "NODE_PATH=src react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "private": true
+}
