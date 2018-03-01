@@ -13,7 +13,31 @@ module.exports = function(app) {
     }], function(err, voters) {
       if (err) throw err;
 
-      console.log('Models created: \n', voters);
+      console.log('Voter models created: \n', voters);
+    });
+  });
+  app.dataSources.mysqlDS.automigrate('administrators', function(err) {
+    if (err) throw err;
+
+    app.models.administrators.create([{
+      userName: "jDeer",
+      password: "jD123@"
+    }], function(err, administrators) {
+      if (err) throw err;
+
+      console.log('Administrator models created: \n', administrators);
+    });
+  });
+  app.dataSources.mysqlDS.automigrate('manager', function(err) {
+    if (err) throw err;
+
+    app.models.manager.create([{
+      userName: "jDoe",
+      password: "jDoe123@"
+    }], function(err, administrators) {
+      if (err) throw err;
+
+      console.log('Manager models created: \n', administrators);
     });
   });
 };
