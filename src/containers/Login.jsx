@@ -1,41 +1,52 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import {
+  Button,
+  ControlLabel,
+  FormControl,
+  FormGroup,
+  Panel
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      email: '',
+      username: '',
       password: ''
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.username.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.id]: event.target.value
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event);
   };
+
+  nextPath(path) {
+    this.props.history.push(path);
+  }
 
   render() {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="username" bsSize="large">
+            <ControlLabel>Username</ControlLabel>
             <FormControl
               autoFocus
-              type="email"
-              value={this.state.email}
+              type="username"
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -51,10 +62,19 @@ export default class Login extends Component {
             block
             bsSize="large"
             disabled={!this.validateForm()}
+            onClick={() => this.nextPath('/home')}
             type="submit"
-          >
-            Login
+          >Login
           </Button>
+          <br />
+          <Panel>
+            <Panel.Body>
+              <Link to="/registration">New account?</Link>
+              <Link
+                style={{float: 'right'}} to="/forgot-password"
+              >Forgot password</Link>
+            </Panel.Body>
+          </Panel>
         </form>
       </div>
     );
