@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ControlLabel, FormControl, FormGroup, Col, Row } from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import './Registration.css';
 
 export default class Registration extends Component {
@@ -8,23 +8,28 @@ export default class Registration extends Component {
     this.state = {
       firstName: '',
       lastName: '',
+      dob: '',
+      driversLicense: '',
+      ssn: '',
       email: '',
       username: '',
-      password: '',
-      dob: '',
-      ssn: '',
-      driversLicense: ''
+      password: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // TODO: Add actual validation later
   validateForm() {
-    for (let property in this.state) {
-      if (!property) {
-        return false;
-      }
-    }
-    return true;
+    const state = this.state;
+    return state.firstName !== '' &&
+      state.lastName !== '' &&
+      state.dob !== '' &&
+      state.driversLicense !== '' &&
+      state.ssn.length < 6 && state.ssn.length > 1 &&
+      state.email.match(
+        '(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\\])') &&
+      state.username !== '' &&
+      state.password !== '';
   }
 
   handleChange = event => {
@@ -35,13 +40,17 @@ export default class Registration extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
+    this.props.history.push('/login')
   };
+
+
 
   render() {
     return (
       <div className="Registration">
         <form onSubmit={this.handleSubmit}>
-          <Col>
+
           <FormGroup controlId="firstName" bsSize="large">
             <ControlLabel>First Name</ControlLabel>
             <FormControl
@@ -51,6 +60,7 @@ export default class Registration extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
+
           <FormGroup controlId="lastName" bsSize="large">
             <ControlLabel>Last Name</ControlLabel>
             <FormControl
@@ -60,6 +70,40 @@ export default class Registration extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
+
+          <FormGroup controlId="dob" bsSize="large">
+            <ControlLabel>Date of Birth (MM/DD/YY)</ControlLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.dob}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="driversLicense" bsSize="large">
+            <ControlLabel>Drivers License ID</ControlLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.driversLicense}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup
+            controlId="ssn" bsSize="large"
+            // validationState={this.validateSSN()}
+          >
+            <ControlLabel>Last 5 Digits of SSN</ControlLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.ssn}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
@@ -69,8 +113,7 @@ export default class Registration extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          </Col>
-          <Col>
+
           <FormGroup controlId="username" bsSize="large">
             <ControlLabel>Username</ControlLabel>
             <FormControl
@@ -80,6 +123,7 @@ export default class Registration extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
+
           <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
             <FormControl
@@ -88,7 +132,7 @@ export default class Registration extends Component {
               type="password"
             />
           </FormGroup>
-          </Col>
+
           <Button
             block
             bsSize="large"
@@ -96,6 +140,7 @@ export default class Registration extends Component {
             type="submit"
           >Register
           </Button>
+
         </form>
       </div>
     );
