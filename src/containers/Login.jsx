@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -30,12 +31,11 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
+    const instance = axios.create({baseURL: 'http://localhost:3000'});
+    instance.get('/api/voters')
+      .then((response) => {console.log(response);})
+      .catch((error) => {console.log(error);});
   };
-
-  nextPath(path) {
-    this.props.history.push(path);
-  }
 
   render() {
     return (
@@ -62,7 +62,6 @@ export default class Login extends Component {
             block
             bsSize="large"
             disabled={!this.validateForm()}
-            onClick={() => this.nextPath('/home')}
             type="submit"
           >Login
           </Button>
