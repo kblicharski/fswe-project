@@ -6,51 +6,28 @@
  - [Commit Message Guidelines](#commit)
 
 # <a name="devenv"></a> Setting Up A Development Environment
-**TODO**
+* Install nvm using curl
+    ```shell
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+    ```
+
+* Install node using nvm
+     ```shell
+    nvm install node
+    ```
+    
+* Install the necessary npm dependencies globally
+    ```shell
+    npm install -g npm @angular/cli typescript
+    ```
 
 # <a name="workflow"></a> Development Workflow
-**TODO**
-
-#### After your merge request is merged
-**TODO** 
-
-After your merge request is merged, you can safely delete your branch and pull the changes
-from the main (upstream) repository:
-
-* Delete the remote branch on GitLab either through the GitLab web UI or your local shell as follows:
-
-    ```shell
-    git push origin --delete my-fix-branch
-    ```
-
-* Check out the master branch:
-
-    ```shell
-    git checkout master -f
-    ```
-
-* Delete the local branch:
-
-    ```shell
-    git branch -D my-fix-branch
-    ```
-
-* Update your master with the latest upstream version:
-
-    ```shell
-    git pull --ff upstream master
-    ```
 
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
 * All public API methods **must be documented**.
-* We follow the style guide configured in the ESLint configuration file.
-  * Wrap lines at 80 characters.
-  * Two spaces per indentation level.
-  * Use [] and {} instead of Array() and Object().
-  * Prefer ES6 features where applicable.
 
 ## <a name="commit"></a> Commit Message Guidelines
 Git commit messages should be formatted very precisely. This leads to **more
@@ -58,7 +35,7 @@ readable messages** that are easy to follow when looking through the **project h
 
 ### Commit Message Format
 Each commit message consists of a **header**, a **body** and a **footer**. 
-The header has a special format that includes a **type**, a **scope** and a **subject**:
+The header has a special format that includes a **type** and a **subject**:
 
 ```
 <type>(<scope>): <subject>
@@ -77,6 +54,8 @@ The **footer** is used to contain a closing reference to an issue, if applicable
 or external references to resources used.
 
 ### Type
+Note: Can be omitted if the change doesn't fit discretely into any of these.
+
 Must be one of the following:
 
 * **build**: Changes that affect the build system or external dependencies
@@ -88,16 +67,6 @@ Must be one of the following:
 * **refactor**: A code change that neither fixes a bug nor adds a feature
 * **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 * **test**: Adding missing tests or correcting existing tests
-
-### Scope
-Must be one of the following:
-
-* **frontend**
-* **backend**
-* **devops**
-* **db**
-
-If the change is project-wide, scope may be omitted.
 
 ### Subject
 The subject contains a succinct description of the change:
@@ -116,10 +85,10 @@ The footer contains references to closed issues or external resources.
 
 ### Examples
 ```
-docs(frontend): document added button component
+docs: document added button component
 ```
 ```
-fix(backend): update dependencies to latest rxjs and zone.js
+fix: update dependencies to latest rxjs and zone.js
 
 The version in our package.json gets copied to the one we publish, and users need the latest of these.
 ```
