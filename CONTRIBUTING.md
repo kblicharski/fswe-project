@@ -18,7 +18,7 @@
     
 * Install the necessary npm dependencies globally
     ```shell
-    npm install -g npm @angular/cli typescript
+    npm install -g npm @angular/cli typescript npm-check-updates
     ```
 
 # <a name="workflow"></a> Development Workflow
