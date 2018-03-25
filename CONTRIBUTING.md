@@ -1,7 +1,7 @@
 # Project Contribution Guide
 
  - [Setting Up A Development Environment](#devenv)
- - [Development Workflow](#worflow)
+ - [Running the Application](#running)
  - [Coding Rules](#rules)
  - [Commit Message Guidelines](#commit)
 
@@ -21,9 +21,24 @@
     npm install -g npm @angular/cli typescript npm-check-updates
     ```
 
-# <a name="workflow"></a> Development Workflow
+# <a name="running"></a> Running the Application
+* Ensure you're up to date
+    ```shell
+    git pull origin master
+    ```
 
-## <a name="rules"></a> Coding Rules
+* Change directories into the application folder and install dependencies
+    ```shell
+    cd voting-app
+    npm install
+    ```
+
+* Run the application
+    ```shell
+    ng serve --open
+    ```
+
+# <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All features or bug fixes **must be tested** by one or more specs (unit-tests).
