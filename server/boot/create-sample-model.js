@@ -5,7 +5,7 @@ module.exports = function(app) {
     app.models.voter.create([{
       email: "jon.smith@nope.com",
       userName: "jonSmith",
-      password: "jon123@",
+      password: "joN123@",
       ssn: "55555",
       dob: "2018-02-24T23:40:26.663Z",
       driversLicense: "js555123",
@@ -34,10 +34,23 @@ module.exports = function(app) {
     app.models.manager.create([{
       userName: "jDoe",
       password: "jDoe123@"
-    }], function(err, administrators) {
+    }], function(err, manager) {
       if (err) throw err;
 
-      console.log('Manager models created: \n', administrators);
+      console.log('Manager models created: \n', manager);
+    });
+  });
+  app.dataSources.mysqlDS.automigrate('vote', function(err) {
+    if (err) throw err;
+
+    app.models.vote.create([{
+      ballotNumber: 1,
+      candidate: "John Smith",
+      voter: 1
+    }], function(err, vote) {
+      if (err) throw err;
+
+      console.log('Vote models created: \n', vote);
     });
   });
 };

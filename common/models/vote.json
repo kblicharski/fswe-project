@@ -1,0 +1,27 @@
+{
+  "name": "vote",
+  "plural": "votes",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ballotNumber": {
+      "type": "number",
+      "required": true
+    },
+    "candidate": {
+      "type": "string",
+      "required": true
+    },
+    "voter" : {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

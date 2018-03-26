@@ -24,5 +24,9 @@
   "administrators": {
     "dataSource": "mysqlDS",
     "public": true
+  },
+  "vote": {
+    "dataSource": "mysqlDS",
+    "public": true
   }
 }
