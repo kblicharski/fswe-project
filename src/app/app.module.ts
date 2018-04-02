@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material.module';
+import { AlertService } from './_services/alert.service';
+import { AuthenticationService } from './_services/authentication.service';
+import { UserService } from './_services/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +26,7 @@ import { AppMaterialModule } from './app-material.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -29,7 +34,10 @@ import { AppMaterialModule } from './app-material.module';
     AppMaterialModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
