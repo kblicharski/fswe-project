@@ -1,6 +1,6 @@
 {
-  "name": "user",
-  "plural": "users",
+  "name": "voter",
+  "plural": "voters",
   "base": "User",
   "idInjection": true,
   "options": {
@@ -8,14 +8,6 @@
   },
   "properties": {
     "ssn": {
-      "type": "string",
-      "required": true
-    },
-    "email": {
-      "type": "string",
-      "required": true
-    },
-    "password": {
       "type": "string",
       "required": true
     },
@@ -30,10 +22,20 @@
     "status": {
       "type": "string",
       "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+      "accessTokens": {
+        "model": "accessToken",
+        "type": "hasMany",
+        "foreignKey": "userId"
+      }
+  },
   "acls": [],
   "methods": {}
 }
