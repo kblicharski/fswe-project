@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span><img src="./assets/logo.png"></span>
+    <span class="spacer"></span>
+    <button mat-button>Placeholder 1</button>
+    <button mat-button>Placeholder 2</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="card">
+  <mat-card-title>
+    FSWE Voting App
+  </mat-card-title>
+  <br><br>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="center">
+        <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+      </mat-form-field>
+      <mat-form-field class="center">
+        <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+      </mat-form-field>
+    </form>
+    <mat-spinner [style.display]="loading ? 'block' : 'none'"></mat-spinner>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="login()" color="primary">Login</button>
+    <button mat-raised-button [routerLink]="['/register']" color="accent">Register</button>
+    <button mat-raised-button [routerLink]="['/password-reset']" color="warn">Forgot Password</button>
+  </mat-card-actions>
+</mat-card>
