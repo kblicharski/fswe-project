@@ -53,4 +53,20 @@ module.exports = function(app) {
       console.log('Vote models created: \n', vote);
     });
   });
+  app.dataSources.mysqlDS.automigrate('accessToken', function(err) {
+    if (err) throw err;
+
+    app.models.accessToken.create([{
+      id: "Test",
+      ttl : 1209600,
+      scopes: [
+        "Test"
+      ],
+      created : "2018-04-02T18:40:41.312Z"
+    }], function(err, accessToken) {
+      if (err) throw err;
+
+      console.log('Access Token models created: \n', accessToken);
+    });
+  });
 };
