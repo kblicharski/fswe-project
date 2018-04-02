@@ -13,10 +13,6 @@
       "./mixins"
     ]
   },
-  "voter": {
-    "dataSource": "mysqlDS",
-    "public": true
-  },
   "manager": {
     "dataSource": "mysqlDS",
     "public": true
@@ -26,6 +22,14 @@
     "public": true
   },
   "vote": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "accessToken": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "user": {
     "dataSource": "mysqlDS",
     "public": true
   }

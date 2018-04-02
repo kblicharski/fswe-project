@@ -1,24 +1,21 @@
 {
-  "name": "voter",
-  "base": "PersistedModel",
+  "name": "user",
+  "plural": "users",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "ssn": {
+      "type": "string",
+      "required": true
+    },
     "email": {
       "type": "string",
       "required": true
     },
-    "userName": {
-      "type": "string",
-      "required": true
-    },
     "password": {
-      "type": "string",
-      "required": true
-    },
-    "ssn": {
       "type": "string",
       "required": true
     },

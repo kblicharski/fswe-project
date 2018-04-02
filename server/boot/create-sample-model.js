@@ -1,8 +1,8 @@
 module.exports = function(app) {
-  app.dataSources.mysqlDS.automigrate('voter', function(err) {
+  app.dataSources.mysqlDS.automigrate('user', function(err) {
     if (err) throw err;
 
-    app.models.voter.create([{
+    app.models.user.create([{
       email: "jon.smith@nope.com",
       userName: "jonSmith",
       password: "joN123@",
@@ -10,10 +10,10 @@ module.exports = function(app) {
       dob: "2018-02-24T23:40:26.663Z",
       driversLicense: "js555123",
       status: "unregistered"
-    }], function(err, voters) {
+    }], function(err, users) {
       if (err) throw err;
 
-      console.log('Voter models created: \n', voters);
+      console.log('User models created: \n', users);
     });
   });
   app.dataSources.mysqlDS.automigrate('administrators', function(err) {
