@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
+    this.router.navigate([this.returnUrl]);
+    // TODO: Implement actual login later
+    /*
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
@@ -38,5 +41,6 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+     */
   }
 }

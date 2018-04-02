@@ -1,7 +1,10 @@
 export class User {
-  id: number;
+  email: string;
   username: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  ssn: string;
+  dob: Date;
+  driversLicense: string;
+  status: string;
+  id: number;
 }
