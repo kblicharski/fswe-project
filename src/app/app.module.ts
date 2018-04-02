@@ -11,11 +11,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material.module';
+
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { BallotComponent } from './ballot/ballot.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    BallotComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
   ],
   providers: [
     AuthGuard,

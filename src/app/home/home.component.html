@@ -1,3 +1,33 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <button (click)="logout()">Logout</button>
+      <br>
+      <h1>
+        Current Ballots
+      </h1>
+      <p>
+        This will be a simple dashboard of ongoing ballots for the user's county.
+        In the future, when the user votes for a particular candidate for a particular position,
+        that position will be removed from the listing and the vote will be logged for that particular candidate.
+        Also, I'll probably replace the lists with checkboxes, and make this look decent.
+      </p>
+      <p>
+        I intend to add a navbar with certain options for users to perform. For example, changing their county if they
+        have moved recently. If a logged in user has manager
+        or admin permissions, then they will be able to access more information and the administrative dashboard from
+        here. It will also add some styling to what is currently a barren page.
+      </p>
+      <p>
+        The individual ballots will be turned into Angular Material cards, each with much more information.
+        Additionally, the ballots will prompt the user for a confirmation when the vote button is clicked, and only one
+        vote button will exist per ballot, because the information will be passed in the form of a checkbox. This might
+        even enable weighted voting later.
+      </p>
+      <br>
+    </div>
+  </div>
+  <div *ngFor="let ballot of ballots">
+    <app-ballot [ballot]="ballot"></app-ballot>
+  </div>
+</div>
