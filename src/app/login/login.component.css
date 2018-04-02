@@ -1,0 +1,24 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.card {
+  /* Center the card both vertically and horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Make the card not take up the full window size */
+  width: 50%;
+  height: 50%;
+
+  /* Center the form fields, note that the center class must still be applied */
+  text-align: center;
+}
+
+.center {
+  /* Allows us to center the form fields, but not take up the full width */
+  margin: auto;
+  width: 50%;
+}
