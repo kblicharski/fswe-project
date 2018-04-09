@@ -10,7 +10,8 @@ module.exports = function(Voter) {
   Voter.validatesFormatOf('password', {with: strongPassword , message : {with: 'Password is in wrong format'}});
   Voter.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
   Voter.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message : {with: 'User name is in wrong format'}});
-  Voter.validatesLengthOf('ssn', {min: 5, max: 5, message: {min: 'SSN is too short', max: 'SSN is too long'}});
+  Voter.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
+ // Voter.validatesLengthOf('zipCode',  {is: 5, message: {is: 'ZipCode must be 5 numbers in length'}});
   Voter.validate('status', statusValidator, {message: 'Invalid status'});
 };
 

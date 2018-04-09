@@ -11,8 +11,20 @@
       "type": "number",
       "required": true
     },
-    "candidate": {
+    "location": {
       "type": "string",
+      "required": true
+    },
+    "timeStart": {
+      "type": "date",
+      "required": true
+    },
+    "timeEnd": {
+      "type": "date",
+      "required": true
+    },
+    "candidate": {
+      "type": ["string"],
       "required": true
     },
     "voter": {

@@ -10,7 +10,13 @@ module.exports = function(app) {
       dob: "2018-02-24T23:40:26.663Z",
       driversLicense: "js555123",
       status: "unregistered",
-      emailVerified: true
+      emailVerified: true,
+      address: {
+        street: "University Avenue",
+        city: "Iowa City",
+        state: "IA",
+        zipCode: "52245"
+      },
 
     }], function(err, voters) {
       if (err) throw err;
@@ -47,8 +53,12 @@ module.exports = function(app) {
 
     app.models.vote.create([{
       ballotNumber: 1,
-      candidate: "John Smith",
-      voter: 1
+      candidate:  ["John Adams", "John Smith"],
+      voter: 1,
+      location: "Iowa City",
+      timeStart: new Date(2018,5,20),
+      timeEnd: new Date(2018,6,20)
+
     }], function(err, vote) {
       if (err) throw err;
 
