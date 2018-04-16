@@ -1,0 +1,171 @@
+{
+	"name": "zipCodeDatabase",
+	"properties": {
+		"zip": {
+			"type": "number",
+			"required": false,
+			"length": null,
+			"precision": 10,
+			"scale": 0,
+			"mysql": {
+				"columnName": "zip",
+				"dataType": "int",
+				"dataLength": null,
+				"dataPrecision": 10,
+				"dataScale": 0,
+				"nullable": "Y"
+			}
+		},
+		"type": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "type",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"primaryCity": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "primary_city",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"state": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "state",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"county": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "county",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"timezone": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "timezone",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"area_codes": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "area_codes",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"country": {
+			"type": "string",
+			"required": false,
+			"length": 65535,
+			"precision": null,
+			"scale": null,
+			"mysql": {
+				"columnName": "country",
+				"dataType": "text",
+				"dataLength": 65535,
+				"dataPrecision": null,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"latitude": {
+			"type": "number",
+			"required": false,
+			"length": null,
+			"precision": 22,
+			"scale": null,
+			"mysql": {
+				"columnName": "latitude",
+				"dataType": "double",
+				"dataLength": null,
+				"dataPrecision": 22,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"longitude": {
+			"type": "number",
+			"required": false,
+			"length": null,
+			"precision": 22,
+			"scale": null,
+			"mysql": {
+				"columnName": "longitude",
+				"dataType": "double",
+				"dataLength": null,
+				"dataPrecision": 22,
+				"dataScale": null,
+				"nullable": "Y"
+			}
+		},
+		"id": {
+			"type": "number",
+			"id": 1,
+			"generated": true,
+			"updateOnly": true
+		}
+	},
+	"settings": {
+		"strict": false,
+		"forceId": "auto",
+		"replaceOnPUT": true,
+		"idInjection": false,
+		"mysql": {
+			"schema": "fswe",
+			"table": "zipCodeDatabase"
+		}
+	}
+}

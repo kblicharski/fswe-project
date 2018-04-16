@@ -32,5 +32,9 @@
   "voter": {
     "dataSource": "mysqlDS",
     "public": true
-  }
+  },
+    "zipCodeDatabase": {
+      "dataSource": "mysqlDS",
+      "public": true
+    }
 }
