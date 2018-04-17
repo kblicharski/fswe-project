@@ -28,7 +28,7 @@ module.exports = function(app) {
     if (err) throw err;
 
     app.models.administrators.create([{
-      userName: "jDeer",
+      username: "jDeer",
       password: "jD123@"
     }], function(err, administrators) {
       if (err) throw err;
@@ -40,7 +40,7 @@ module.exports = function(app) {
     if (err) throw err;
 
     app.models.manager.create([{
-      userName: "jDoe",
+      username: "jDoe",
       password: "jDoe123@"
     }], function(err, manager) {
       if (err) throw err;
