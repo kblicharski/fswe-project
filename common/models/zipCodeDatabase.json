@@ -16,21 +16,6 @@
 				"nullable": "Y"
 			}
 		},
-		"type": {
-			"type": "string",
-			"required": false,
-			"length": 65535,
-			"precision": null,
-			"scale": null,
-			"mysql": {
-				"columnName": "type",
-				"dataType": "text",
-				"dataLength": 65535,
-				"dataPrecision": null,
-				"dataScale": null,
-				"nullable": "Y"
-			}
-		},
 		"primaryCity": {
 			"type": "string",
 			"required": false,
@@ -69,36 +54,6 @@
 			"scale": null,
 			"mysql": {
 				"columnName": "county",
-				"dataType": "text",
-				"dataLength": 65535,
-				"dataPrecision": null,
-				"dataScale": null,
-				"nullable": "Y"
-			}
-		},
-		"timezone": {
-			"type": "string",
-			"required": false,
-			"length": 65535,
-			"precision": null,
-			"scale": null,
-			"mysql": {
-				"columnName": "timezone",
-				"dataType": "text",
-				"dataLength": 65535,
-				"dataPrecision": null,
-				"dataScale": null,
-				"nullable": "Y"
-			}
-		},
-		"area_codes": {
-			"type": "string",
-			"required": false,
-			"length": 65535,
-			"precision": null,
-			"scale": null,
-			"mysql": {
-				"columnName": "area_codes",
 				"dataType": "text",
 				"dataLength": 65535,
 				"dataPrecision": null,
