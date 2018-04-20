@@ -10,6 +10,7 @@ import { UserService } from '../_services/user.service';
 export class HomeComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
+  private votingStatus: boolean;
 
   constructor(private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -19,16 +20,22 @@ export class HomeComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  deleteUser(id: number) {
-    this.userService.delete(id).subscribe(() => {
-      this.loadAllUsers();
-    });
-  }
-
   private loadAllUsers() {
     this.userService.getAll().subscribe(users => {
       this.users = users;
     });
+  }
+
+  onSubmitVoteRequest() {
+    this.votingStatus = true;
+  }
+
+  ongoingCurrentElection() {
+    return true;
+  }
+
+  userCanVote() {
+    return this.votingStatus;
   }
 }
 

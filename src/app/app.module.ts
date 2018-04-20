@@ -16,6 +16,9 @@ import { AlertComponent } from './alert/alert.component';
 import { UserService } from './_services/user.service';
 import { BackendProvider } from './_interceptors/backend.interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { BallotComponent } from './ballot/ballot.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     PageNotFoundComponent,
     AlertComponent,
     ForgotPasswordComponent,
+    BallotComponent,
+    FooterComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

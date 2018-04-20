@@ -60,9 +60,9 @@ export class BackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           // find user by id in users array
           const urlParts = request.url.split('/');
-          const id = parseInt(urlParts[urlParts.length - 1]);
-          const matchedUsers = users.filter(user => {
-            return user.id === id;
+          const id = parseInt(urlParts[urlParts.length - 1], 10);
+          const matchedUsers = users.filter(u => {
+            return u.id === id;
           });
           const user = matchedUsers.length ? matchedUsers[0] : null;
 
@@ -101,7 +101,7 @@ export class BackendInterceptor implements HttpInterceptor {
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
           // find user by id in users array
           const urlParts = request.url.split('/');
-          const id = parseInt(urlParts[urlParts.length - 1]);
+          const id = parseInt(urlParts[urlParts.length - 1], 10);
           for (let i = 0; i < users.length; i++) {
             const user = users[i];
             if (user.id === id) {
