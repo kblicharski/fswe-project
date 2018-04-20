@@ -5,10 +5,10 @@ import { AlertService } from '../_services/alert.service';
 import { UserService } from '../_services/user.service';
 
 @Component({
-  moduleId: module.id,
-  templateUrl: 'register.component.html'
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-
 export class RegisterComponent {
   model: any = {};
   loading = false;
@@ -25,7 +25,7 @@ export class RegisterComponent {
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
         },
         error => {
           this.alertService.error(error);

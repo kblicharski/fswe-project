@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('voting-app App', () => {
+describe('fswe-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {

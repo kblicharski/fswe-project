@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import { AlertService } from '../_services/alert.service';
 
 @Component({
-  moduleId: module.id,
-  selector: 'alert',
-  templateUrl: 'alert.component.html'
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.css']
 })
-
 export class AlertComponent implements OnInit {
   message: any;
 
@@ -19,4 +17,5 @@ export class AlertComponent implements OnInit {
       this.message = message;
     });
   }
+
 }
