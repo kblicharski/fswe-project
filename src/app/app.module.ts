@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { UserService } from './_services/user.service';
 import { BackendProvider } from './_interceptors/backend.interceptor';
-
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,8 @@ import { BackendProvider } from './_interceptors/backend.interceptor';
     RegisterComponent,
     LoginComponent,
     PageNotFoundComponent,
-    AlertComponent
+    AlertComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
