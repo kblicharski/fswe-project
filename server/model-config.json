@@ -13,14 +13,6 @@
       "./mixins"
     ]
   },
-  "manager": {
-    "dataSource": "mysqlDS",
-    "public": true
-  },
-  "administrators": {
-    "dataSource": "mysqlDS",
-    "public": true
-  },
   "vote": {
     "dataSource": "mysqlDS",
     "public": true
@@ -29,12 +21,16 @@
     "dataSource": "mysqlDS",
     "public": true
   },
-  "voter": {
+  "user": {
     "dataSource": "mysqlDS",
     "public": true
   },
-    "zipCodeDatabase": {
-      "dataSource": "mysqlDS",
-      "public": true
-    }
+  "zipCodeDatabase": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "ballot": {
+    "dataSource": "mysqlDS",
+    "public": true
+  }
 }
