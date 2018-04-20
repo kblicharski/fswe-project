@@ -1,26 +1,36 @@
 {
-  "name": "vote",
-  "plural": "votes",
+  "name": "ballot",
+  "plural": "ballots",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "ballotNumber": {
-      "type": "number",
+    "candidates": {
+      "type": [
+        "string"
+      ],
       "required": true
     },
-    "candidate": {
-      "type": "string",
+    "managers": {
+      "type": [
+        "string"
+      ],
       "required": true
     },
-    "voter": {
-      "type": "number",
-      "required": true
-    },
-    "time": {
+    "start": {
       "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date",
+      "required": true
+    },
+    "locations": {
+      "type": [
+        "string"
+      ],
       "required": true
     }
   },
