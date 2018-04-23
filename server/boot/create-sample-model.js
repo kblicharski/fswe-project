@@ -81,7 +81,8 @@ module.exports = function(app) {
       managers: ["Suzy Collins"],
       locations: ["Iowa City"],
       start: new Date(2018,5,20),
-      end: new Date(2018,6,20)
+      end: new Date(2018,6,20),
+      description: "Iowa City Election"
 
   }], function(err, vote) {
       if (err) throw err;
