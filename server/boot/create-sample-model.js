@@ -72,6 +72,24 @@ module.exports = function(app) {
       console.log('Vote models created: \n', vote);
     });
   });
+  app.dataSources.mysqlDS.automigrate('candidate', function(err) {
+    if (err) throw err;
+
+    app.models.candidate.create([{
+      name: "John Smith",
+      party:  "Democrat",
+      dob: new Date(1965,5,20)
+
+    },{
+      name: "John Adams",
+      party:  "Republican",
+      dob: new Date(1964,5,20)
+    }], function(err, vote) {
+      if (err) throw err;
+
+      console.log('Candidate models created: \n', vote);
+    });
+  });
   app.dataSources.mysqlDS.automigrate('ballot', function(err) {
     if (err) throw err;
 
