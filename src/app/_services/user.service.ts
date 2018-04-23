@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models/user';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class UserService {
@@ -9,7 +10,8 @@ export class UserService {
   }
 
   getAll() {
-    return this.http.get<User[]>('/api/users');
+    // return this.http.get<User[]>('/api/users');
+    return of(JSON.parse(localStorage.getItem('users')));
   }
 
   getById(id: number) {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/materialize';
@@ -16,7 +16,7 @@ export class BackendInterceptor implements HttpInterceptor {
     const users: any[] = JSON.parse(localStorage.getItem('users')) || [];
 
     // wrap in delayed observable to simulate server api call
-    return Observable.of(null).mergeMap(() => {
+    return of(null).mergeMap(() => {
 
       // authenticate
       if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
@@ -36,7 +36,7 @@ export class BackendInterceptor implements HttpInterceptor {
             token: 'fake-jwt-token'
           };
 
-          return Observable.of(new HttpResponse({status: 200, body: body}));
+          return of(new HttpResponse({status: 200, body: body}));
         } else {
           // else return 400 bad request
           return Observable.throw('Username or password is incorrect');
@@ -47,7 +47,7 @@ export class BackendInterceptor implements HttpInterceptor {
       if (request.url.endsWith('/api/users') && request.method === 'GET') {
         // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-          return Observable.of(new HttpResponse({status: 200, body: users}));
+          return of(new HttpResponse({status: 200, body: users}));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');
@@ -66,7 +66,7 @@ export class BackendInterceptor implements HttpInterceptor {
           });
           const user = matchedUsers.length ? matchedUsers[0] : null;
 
-          return Observable.of(new HttpResponse({status: 200, body: user}));
+          return of(new HttpResponse({status: 200, body: user}));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');
@@ -92,7 +92,7 @@ export class BackendInterceptor implements HttpInterceptor {
         localStorage.setItem('users', JSON.stringify(users));
 
         // respond 200 OK
-        return Observable.of(new HttpResponse({status: 200}));
+        return of(new HttpResponse({status: 200}));
       }
 
       // delete user
@@ -113,7 +113,7 @@ export class BackendInterceptor implements HttpInterceptor {
           }
 
           // respond 200 OK
-          return Observable.of(new HttpResponse({status: 200}));
+          return of(new HttpResponse({status: 200}));
         } else {
           // return 401 not authorised if token is null or invalid
           return Observable.throw('Unauthorised');

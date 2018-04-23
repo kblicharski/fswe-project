@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
+
   constructor(private http: HttpClient) {
   }
 
@@ -15,7 +16,6 @@ export class AuthenticationService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
         }
-
         return user;
       });
   }

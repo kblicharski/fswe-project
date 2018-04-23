@@ -19,6 +19,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BallotComponent } from './ballot/ballot.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { FilterPipe } from './filter-user.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     BallotComponent,
     FooterComponent,
     NavbarComponent,
+    SettingsComponent,
+    UserInfoComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
