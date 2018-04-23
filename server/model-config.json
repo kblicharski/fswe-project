@@ -32,5 +32,9 @@
   "ballot": {
     "dataSource": "mysqlDS",
     "public": true
+  },
+  "candidate": {
+    "dataSource": "mysqlDS",
+    "public": true
   }
 }
