@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { UserService } from './_services/user.service';
-import { BackendProvider } from './_interceptors/backend.interceptor';
+// import { BackendProvider } from './_interceptors/backend.interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { BallotComponent } from './ballot/ballot.component';
 import { FooterComponent } from './footer/footer.component';
@@ -50,7 +50,7 @@ import { FilterPipe } from './filter-user.pipe';
     AlertService,
     AuthenticationService,
     UserService,
-    BackendProvider
+    // BackendProvider
   ],
   bootstrap: [AppComponent]
 })

@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // this.userStatus = 'voter';
-    this.userStatus = 'manager';
+    this.userStatus = 'voter';
+    // this.userStatus = 'manager';
     // this.userStatus = 'administrator';
   }
 

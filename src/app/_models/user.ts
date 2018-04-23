@@ -11,5 +11,5 @@ export interface User {
   status: 'registered' | 'unregistered';
   email: string;
   address: Address;
-  type: 'voter' | 'manager' | 'administrator';
+  role: 'voter' | 'manager' | 'administrator';
 }
