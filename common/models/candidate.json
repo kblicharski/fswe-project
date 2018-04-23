@@ -1,0 +1,27 @@
+{
+  "name": "candidate",
+  "plural": "candidates",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "party": {
+      "type": "string",
+      "required": true
+    },
+    "dob": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
