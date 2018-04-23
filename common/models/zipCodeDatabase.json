@@ -71,21 +71,6 @@
         "nullable": "Y"
       }
     },
-    "country": {
-      "type": "string",
-      "required": false,
-      "length": 65535,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "country",
-        "dataType": "text",
-        "dataLength": 65535,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "Y"
-      }
-    },
     "latitude": {
       "type": "number",
       "required": false,
