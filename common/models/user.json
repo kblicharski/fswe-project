@@ -50,7 +50,8 @@
     },
     "votingStatus": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "idle"
     }
   },
   "validations": [],
