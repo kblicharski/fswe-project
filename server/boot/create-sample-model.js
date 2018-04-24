@@ -14,7 +14,7 @@ module.exports = function(app) {
       driversLicense: "js555123",
       status: "unregistered",
       emailVerified: true,
-        votingStatus: "approved",
+        votingStatus: "idle",
       role: "voter",
       address: {
         street: "University Avenue",
