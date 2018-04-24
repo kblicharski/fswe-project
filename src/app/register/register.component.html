@@ -25,6 +25,54 @@
              required/>
       <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
     </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !email.valid" class="help-block">Valid e-mail is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ssn.valid }">
+      <label for="ssn">SSN</label>
+      <input type="ssn" class="form-control" name="ssn" [(ngModel)]="model.ssn" #ssn="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !ssn.valid" class="help-block">Last 5 digits of ssn is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !dob.valid }">
+    <label for="dob">DOB</label>
+    <input type="dob" class="form-control" name="dob" [(ngModel)]="model.dob" #dob="ngModel"
+           required/>
+    <div *ngIf="f.submitted && !dob.valid" class="help-block">Properly formatted date of birth is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !driversLicense.valid }">
+      <label for="driversLicense">Driver's License Num.</label>
+      <input type="driversLicense" class="form-control" name="driversLicense" [(ngModel)]="model.driversLicense" #driversLicense="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !driversLicense.valid" class="help-block">Driver's License Number is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
+      <label for="address">Street Address</label>
+      <input type="address" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !address.valid" class="help-block">Properly formatted street address is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
+      <label for="city">City</label>
+      <input type="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !state.valid }">
+      <label for="state">State</label>
+      <input type="state" class="form-control" name="state" [(ngModel)]="model.state" #state="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !state.valid" class="help-block">State of residence (ex. IA) is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zip.valid }">
+      <label for="zip">Zip Code</label>
+      <input type="zip" class="form-control" name="zip" [(ngModel)]="model.zip" #zip="ngModel"
+             required/>
+      <div *ngIf="f.submitted && !zip.valid" class="help-block">Zip code is required</div>
+    </div>
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">Register</button>
       <img *ngIf="loading"
