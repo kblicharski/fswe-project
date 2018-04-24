@@ -14,6 +14,7 @@ module.exports = function(app) {
       driversLicense: "js555123",
       status: "unregistered",
       emailVerified: true,
+        votingStatus: "approved",
       role: "voter",
       address: {
         street: "University Avenue",
@@ -31,6 +32,7 @@ module.exports = function(app) {
       dob: "2018-02-25T23:40:26.663Z",
       driversLicense: "ja555123",
       status: "registered",
+        votingStatus: "approved",
       emailVerified: true,
       role: "administrator",
       address: {
@@ -49,6 +51,7 @@ module.exports = function(app) {
         dob: "2018-02-26T23:40:26.663Z",
         driversLicense: "jc555123",
         status: "registered",
+        votingStatus: "approved",
         emailVerified: true,
         role: "manager",
         address: {

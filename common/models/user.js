@@ -13,6 +13,7 @@ module.exports = function(User) {
   User.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
   User.validate('status', statusValidator, {message: 'Invalid status'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
+  User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting status'})
 };
 
 function statusValidator(err) {
@@ -20,6 +21,14 @@ function statusValidator(err) {
   else if (this.status === "unregistered") true;
   else err();
 };
+function votingStatusValidator(err) {
+  if (this.votingStatus === "idle") true;
+  else if (this.votingStatus === "requesting") true;
+  else if (this.votingStatus === "approved") true;
+  else if (this.votingStatus === "denied") true;
+  else err();
+};
+
 
 function roleValidator(err) {
   if (this.role == "voter") true;
