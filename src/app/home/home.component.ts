@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -9,28 +8,17 @@ import { UserService } from '../_services/user.service';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  users: User[] = [];
 
-  private userStatus: 'voter' | 'manager' | 'administrator';
+  userStatus: 'voter' | 'manager' | 'administrator';
   queryString: string;
 
-  constructor(private userService: UserService) {
+  constructor() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userStatus = this.currentUser.role;
-    // this.userStatus = 'manager';
-    // this.userStatus = 'administrator';
   }
 
   ngOnInit() {
-    this.loadAllUsers();
   }
-
-  private loadAllUsers() {
-    this.userService.getAll().subscribe(users => {
-      this.users = users;
-    });
-  }
-
 
 }
 

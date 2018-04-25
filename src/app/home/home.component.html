@@ -1,3 +1,11 @@
+<!-- Debugging Hack -->
+<div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+  <button class="btn btn-default" (click)="userStatus = 'voter'">Voter</button>
+  <button class="btn btn-default" (click)="userStatus = 'manager'">Manager</button>
+  <button class="btn btn-default" (click)="userStatus = 'administrator'">Admin</button>
+  <br><br><br>
+</div>
+
 <div *ngIf="userStatus === 'voter'">
   <app-home-voter [currentUser]="currentUser"></app-home-voter>
 </div>
