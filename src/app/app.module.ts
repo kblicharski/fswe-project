@@ -20,7 +20,7 @@ import { BallotComponent } from './ballot/ballot.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SettingsComponent } from './settings/settings.component';
-import { UserInfoComponent } from './user-info/user-info.component';
+import { UserInfoComponent } from './home/user-info/user-info.component';
 import { FilterPipe } from './filter-user.pipe';
 import { HomeVoterComponent } from './home/home-voter/home-voter.component';
 import { HomeManagerComponent } from './home/home-manager/home-manager.component';

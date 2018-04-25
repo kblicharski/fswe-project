@@ -11,7 +11,7 @@
     <br>
     <h2>Users Awaiting Verification:</h2>
     <div *ngFor="let user of unregisteredUsers | slice:0:5 | FilterPipe:queryString">
-      <app-user-info [user]="user"></app-user-info>
+      <app-user-info [user]="user" (onAllow)="verifyUser(user)" (onDeny)="denyUser(user)"></app-user-info>
     </div>
   </div>
   <div *ngIf="adminMode === 'editing'">

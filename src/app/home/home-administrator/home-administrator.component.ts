@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 
@@ -23,6 +23,14 @@ export class HomeAdministratorComponent implements OnInit {
     this.userService.getAllUnregistered().subscribe(users => {
       this.unregisteredUsers = users;
     });
+  }
+
+  verifyUser(user) {
+    console.log(`verifying user ${user.username}`);
+  }
+
+  denyUser(user) {
+    console.log(`denying user ${user.username}`);
   }
 
 }
