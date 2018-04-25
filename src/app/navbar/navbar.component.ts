@@ -13,8 +13,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      console.log(event);
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
       }
