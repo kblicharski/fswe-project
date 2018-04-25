@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
+import { UserService } from '../../_services/user.service';
 
 @Component({
   selector: 'app-home-manager',
@@ -8,12 +9,19 @@ import { User } from '../../_models/user';
 })
 export class HomeManagerComponent implements OnInit {
   @Input() currentUser: User;
-  @Input() users: User[];
+  requestingUsers: User[];
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
+    this.loadAllUsers();
+  }
+
+  private loadAllUsers() {
+    this.userService.getAllUnregistered().subscribe(users => {
+      this.requestingUsers = users;
+    });
   }
 
 }

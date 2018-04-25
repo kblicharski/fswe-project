@@ -6,8 +6,6 @@ import 'rxjs/add/operator/map';
 export class AuthenticationService {
 
   private apiUrl = 'http://localhost:3000/api';
-  // jonSmith!
-  // jonSmith
 
   constructor(private http: HttpClient) {
   }
@@ -24,10 +22,8 @@ export class AuthenticationService {
         // if (response && response.token) {
         if (response) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log('success!');
           localStorage.setItem('currentUser', JSON.stringify(response.user));
         }
-        console.table(response);
         return response.user;
       });
   }

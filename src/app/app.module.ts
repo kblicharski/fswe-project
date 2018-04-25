@@ -26,6 +26,7 @@ import { HomeVoterComponent } from './home/home-voter/home-voter.component';
 import { HomeManagerComponent } from './home/home-manager/home-manager.component';
 import { HomeAdministratorComponent } from './home/home-administrator/home-administrator.component';
 import { SpinnerComponent } from './home/spinner/spinner.component';
+import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SpinnerComponent } from './home/spinner/spinner.component';
     HomeManagerComponent,
     HomeAdministratorComponent,
     SpinnerComponent,
+    VerifyVotersComponent,
   ],
   imports: [
     BrowserModule,

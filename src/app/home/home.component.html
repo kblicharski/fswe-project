@@ -3,9 +3,9 @@
 </div>
 
 <div *ngIf="userStatus === 'manager'">
-  <app-home-manager [currentUser]="currentUser" [users]="users"></app-home-manager>
+  <app-home-manager [currentUser]="currentUser"></app-home-manager>
 </div>
 
 <div *ngIf="userStatus === 'administrator'">
-  <app-home-administrator [currentUser]="currentUser" [users]="users"></app-home-administrator>
+  <app-home-administrator [currentUser]="currentUser"></app-home-administrator>
 </div>
