@@ -10,7 +10,7 @@ import { UserService } from '../_services/user.service';
 export class HomeComponent implements OnInit {
   currentUser: User;
   users: User[] = [];
-  private votingStatus: boolean;
+
   private userStatus: 'voter' | 'manager' | 'administrator';
   queryString: string;
 
@@ -31,16 +31,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSubmitVoteRequest() {
-    this.votingStatus = true;
-  }
 
-  ongoingCurrentElection() {
-    return true;
-  }
-
-  userCanVote() {
-    return this.votingStatus;
-  }
 }
 
