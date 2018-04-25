@@ -11,7 +11,7 @@ module.exports = function(User) {
   User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
   User.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message : {with: 'User name is in wrong format'}});
   User.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
-  User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
+  //User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting registrationStatus'})
 };
@@ -19,6 +19,7 @@ module.exports = function(User) {
 function registrationStatusValidator(err) {
   if (this.registrationStatus === "registered") true;
   else if (this.registrationStatus === "unregistered") true;
+  else if (this.registrationStatus === "denied") true;
   else err();
 };
 function votingStatusValidator(err) {
