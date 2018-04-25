@@ -22,17 +22,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('on init');
     this.loadAllUsers();
-    console.table(this.users);
   }
 
   private loadAllUsers() {
-    console.log('loading users');
     this.userService.getAll().subscribe(users => {
       this.users = users;
-      console.log('fetched users');
-      console.table(this.users);
     });
   }
 
