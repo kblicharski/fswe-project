@@ -26,7 +26,7 @@
         "nullable": "Y"
       }
     },
-    "primaryCity": {
+    "city": {
       "type": "string",
       "required": false,
       "length": 65535,

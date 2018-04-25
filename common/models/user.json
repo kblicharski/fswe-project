@@ -19,7 +19,6 @@
       "type": "string",
       "required": true
     },
-
     "dob": {
       "type": "date",
       "required": true
@@ -28,7 +27,7 @@
       "type": "string",
       "required": true
     },
-    "status": {
+    "registrationStatus": {
       "type": "string",
       "required": true
     },
@@ -46,7 +45,8 @@
     },
     "role": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "voter"
     },
     "votingStatus": {
       "type": "string",

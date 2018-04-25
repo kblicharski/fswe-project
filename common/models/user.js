@@ -7,18 +7,18 @@ var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&
 
 module.exports = function(User) {
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
-  User.validatesFormatOf('password', {with: strongPassword , message : {with: 'Password is in wrong format'}});
+  //User.validatesFormatOf('password', {with: strongPassword , message : {with: 'Password is in wrong format'}});
   User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
   User.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message : {with: 'User name is in wrong format'}});
   User.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
-  User.validate('status', statusValidator, {message: 'Invalid status'});
+  User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid status'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting status'})
 };
 
-function statusValidator(err) {
-  if (this.status === "registered") true;
-  else if (this.status === "unregistered") true;
+function registrationStatusValidator(err) {
+  if (this.registrationStatus === "registered") true;
+  else if (this.registrationStatus === "unregistered") true;
   else err();
 };
 function votingStatusValidator(err) {
