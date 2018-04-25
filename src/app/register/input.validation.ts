@@ -1,5 +1,5 @@
 
-import {
+/*import {
   ReactiveFormsModule,
   NG_VALIDATORS,
   FormsModule,
@@ -42,4 +42,4 @@ export class EmailValidator implements Validator {
       }
     };
   }
-}
+}*/
