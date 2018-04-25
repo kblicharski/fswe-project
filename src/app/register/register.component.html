@@ -3,75 +3,196 @@
   <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
       <label for="firstName">First Name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+      <input id="firstName"
+             type="text"
+             class="form-control"
+             name="firstName"
+             [(ngModel)]="model.firstName"
+             #firstName="ngModel"
+             required
+             pattern="[A-Za-z]*"
+      />
+      <div *ngIf="firstName.touched && !firstName.valid" class="help-block">
+        <div *ngIf="firstName.errors.required"> First name is required. </div>
+        <div *ngIf="firstName.errors.pattern"> First name must consist of letters only. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
       <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+      <input id="lastName"
+             type="text"
+             class="form-control"
+             name="lastName"
+             [(ngModel)]="model.lastName"
+             #lastName="ngModel"
+             required
+             pattern="[A-Za-z\-]*"
+      />
+      <div *ngIf="lastName.touched && !lastName.valid" class="help-block">
+        <div *ngIf="lastName.errors.required"> Last name is required. </div>
+        <div *ngIf="firstName.errors.pattern"> Last name must consist of letters and dashes only. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+      <input id="username"
+             type="text"
+             class="form-control"
+             name="username"
+             [(ngModel)]="model.username"
+             #username="ngModel"
+             required
+             pattern = "^[a-zA-Z0-9]+$"
+      />
+      <div *ngIf="username.touched && !username.valid" class="help-block">
+        <div *ngIf="username.errors.required"> Username is required. </div>
+        <div *ngIf="username.errors.pattern"> Username must consist of letters and numbers only. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
       <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      <input id="password"
+             type="password"
+             class="form-control"
+             name="password"
+             [(ngModel)]="model.password"
+             #password="ngModel"
+             required
+             minlength="6"
+             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])"
+      />
+      <div *ngIf="password.touched && !password.valid" class="help-block">
+        <div *ngIf="password.errors.required"> Password is required. </div>
+        <div *ngIf="password.errors.minlength"> Password must be 6 characters long. </div>
+        <div *ngIf="password.errors.pattern"> Password must contain a capital letter, lowercase letter, number and special character. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
       <label for="email">E-mail</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !email.valid" class="help-block">Valid e-mail is required</div>
+      <input id="email"
+             type="email"
+             class="form-control"
+             name="email"
+             [(ngModel)]="model.email"
+             #email="ngModel"
+             required
+             pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"
+      />
+      <div *ngIf="email.touched && !email.valid" class="help-block">
+        <div *ngIf="email.errors.required"> E-mail is required. </div>
+        <div *ngIf="email.errors.pattern"> Please enter a valid e-mail. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ssn.valid }">
       <label for="ssn">SSN</label>
-      <input type="ssn" class="form-control" name="ssn" [(ngModel)]="model.ssn" #ssn="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !ssn.valid" class="help-block">Last 5 digits of ssn is required</div>
+      <input id="ssn"
+             type="ssn"
+             class="form-control"
+             name="ssn"
+             [(ngModel)]="model.ssn"
+             #ssn="ngModel"
+             required
+             minlength="5"
+             maxlength="5"
+             pattern="[0-9]*"
+      />
+      <div *ngIf="ssn.touched && !ssn.valid" class="help-block">
+        <div *ngIf="ssn.errors.required"> Last 5 digits of ssn is required. </div>
+        <div *ngIf="ssn.errors.minlength"> Please include 5 digits of ssn.</div>
+        <div *ngIf="ssn.errors.maxlength"> Please include 5 digits of ssn.</div>
+        <div *ngIf="ssn.errors.pattern"> Only include numbers in your entry. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !dob.valid }">
     <label for="dob">DOB</label>
-    <input type="dob" class="form-control" name="dob" [(ngModel)]="model.dob" #dob="ngModel"
-           required/>
-    <div *ngIf="f.submitted && !dob.valid" class="help-block">Properly formatted date of birth is required</div>
+    <input id="dob"
+           type="date"
+           class="form-control"
+           name="dob"
+           [(ngModel)]="model.dob"
+           #dob="ngModel"
+           required
+    />
+    <div *ngIf="dob.touched && !dob.valid" class="help-block">Properly formatted date of birth is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !driversLicense.valid }">
       <label for="driversLicense">Driver's License Num.</label>
-      <input type="driversLicense" class="form-control" name="driversLicense" [(ngModel)]="model.driversLicense" #driversLicense="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !driversLicense.valid" class="help-block">Driver's License Number is required</div>
+      <input id="driversLicense"
+             type="driversLicense"
+             class="form-control"
+             name="driversLicense"
+             [(ngModel)]="model.driversLicense"
+             #driversLicense="ngModel"
+             required
+             minlength="9"
+             maxlength="9"
+             pattern="[a-zA-Z0-9]+"
+      />
+      <div *ngIf="driversLicense.touched && !driversLicense.valid" class="help-block">
+        <div *ngIf="driversLicense.errors.required"> Drivers license number is required. </div>
+        <div *ngIf="driversLicense.errors.minlength"> Drivers license must be 9 characters long.</div>
+        <div *ngIf="driversLicense.errors.maxlength"> Drivers license must be 9 characters long.</div>
+        <div *ngIf="driversLicense.errors.pattern"> Drivers license consists of letters and numbers.</div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
       <label for="address">Street Address</label>
-      <input type="address" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !address.valid" class="help-block">Properly formatted street address is required</div>
+      <input id="address"
+             type="address"
+             class="form-control"
+             name="address"
+             [(ngModel)]="model.address"
+             #address="ngModel"
+             required
+      />
+      <div *ngIf="address.touched && !address.valid" class="help-block"> Street address is required </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
       <label for="city">City</label>
-      <input type="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+      <input id="city"
+             type="city"
+             class="form-control"
+             name="city"
+             [(ngModel)]="model.city"
+             #city="ngModel"
+             required
+      />
+      <div *ngIf="city.touched && !city.valid" class="help-block">City is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !state.valid }">
       <label for="state">State</label>
-      <input type="state" class="form-control" name="state" [(ngModel)]="model.state" #state="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !state.valid" class="help-block">State of residence (ex. IA) is required</div>
+      <input id="state"
+             type="state"
+             class="form-control"
+             name="state"
+             [(ngModel)]="model.state"
+             #state="ngModel"
+             required
+             pattern="^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$"
+      />
+      <div *ngIf="state.touched && !state.valid" class="help-block">
+        <div *ngIf="state.errors.required"> State is required. </div>
+        <div *ngIf="state.errors.pattern"> State is not in the correct format. </div>
+      </div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zip.valid }">
       <label for="zip">Zip Code</label>
-      <input type="zip" class="form-control" name="zip" [(ngModel)]="model.zip" #zip="ngModel"
-             required/>
-      <div *ngIf="f.submitted && !zip.valid" class="help-block">Zip code is required</div>
+      <input id="zip"
+             type="zip"
+             class="form-control"
+             name="zip" [(ngModel)]="model.zip"
+             #zip="ngModel"
+             required
+             minlength="5"
+             maxlength="5"
+             pattern="[0-9]*"
+      />
+      <div *ngIf="zip.touched && !zip.valid" class="help-block">
+        <div *ngIf="zip.errors.required"> Zip code is required. </div>
+        <div *ngIf="zip.errors.minlength"> Zip code should be 5 digits. </div>
+        <div *ngIf="zip.errors.maxlength"> Zip code should be 5 digits. </div>
+        <div *ngIf="zip.errors.pattern"> Zip code consists of 5 numbers.</div>
+      </div>
     </div>
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">Register</button>
