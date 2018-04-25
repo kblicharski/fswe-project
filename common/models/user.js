@@ -3,7 +3,7 @@
 
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
 
-var strongPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})");
+var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
 
 module.exports = function(User) {
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
@@ -31,8 +31,8 @@ function votingStatusValidator(err) {
 
 
 function roleValidator(err) {
-  if (this.role == "voter") true;
-  else if (this.role == "administrator") true;
-  else if (this.role == "manager") true
+  if (this.role === "voter") true;
+  else if (this.role === "administrator") true;
+  else if (this.role === "manager") true
   else err();
 }

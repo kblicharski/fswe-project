@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AlertService } from '../_services/alert.service';
 import { UserService } from '../_services/user.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -11,7 +12,11 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  model: any = {};
+  model: any = {
+    status: 'unregistered',
+    role: 'voter',
+    address: {}
+  };
   loading = false;
 
   constructor(
@@ -22,14 +27,25 @@ export class RegisterComponent {
 
   register() {
     this.loading = true;
+    this.model.dob = new Date(this.model.dob).toISOString();
     this.userService.create(this.model)
       .subscribe(
-        data => {
-          this.alertService.success('Registration successful', true);
+        (data: HttpResponse) => {
+          this.alertService.success('Registration successful!', true);
           this.router.navigate(['login']);
         },
-        error => {
-          this.alertService.error(error);
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          const errorMessages = error.error.error.details.messages;
+          let errorMessage = '';
+          console.log(errorMessages);
+          for (const key in errorMessages) {
+            if (errorMessages.hasOwnProperty(key)) {
+              errorMessage += errorMessages[key][0] + ' ';
+              console.log(errorMessage);
+            }
+          }
+          this.alertService.error(errorMessage);
           this.loading = false;
         });
   }
