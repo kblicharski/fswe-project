@@ -27,10 +27,28 @@ export class HomeAdministratorComponent implements OnInit {
 
   verifyUser(user) {
     console.log(`verifying user ${user.username}`);
+    user.registrationStatus = 'registered';
+    this.userService.update(user).subscribe(
+      (data) => {
+        this.loadAllUsers();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   denyUser(user) {
     console.log(`denying user ${user.username}`);
+    user.registrationStatus = 'denied';
+    this.userService.update(user).subscribe(
+      (data) => {
+        this.loadAllUsers();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

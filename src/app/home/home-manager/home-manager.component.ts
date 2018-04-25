@@ -19,9 +19,33 @@ export class HomeManagerComponent implements OnInit {
   }
 
   private loadAllUsers() {
-    this.userService.getAllUnregistered().subscribe(users => {
+    this.userService.getAllRequesting().subscribe(users => {
       this.requestingUsers = users;
     });
+  }
+
+  approveVoteRequest(user: User) {
+    user.votingStatus = 'approved';
+    this.userService.update(user).subscribe(
+      (data) => {
+        this.loadAllUsers();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  denyVoteRequest(user: User) {
+    user.votingStatus = 'denied';
+    this.userService.update(user).subscribe(
+      (data) => {
+        this.loadAllUsers();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

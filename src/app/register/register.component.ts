@@ -13,8 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterComponent {
   model: any = {
-    registrationStatus: 'unregistered',
-    role: 'voter',
     address: {}
   };
   loading = false;

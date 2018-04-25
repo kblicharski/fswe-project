@@ -5,8 +5,8 @@
   <input type="search" class="form-control" [(ngModel)]="queryString">
   <br>
   <h2>Users Queued to Vote:</h2>
-  <div *ngFor="let user of unregisteredUsers | slice:0:5 | FilterPipe:queryString">
-    <app-user-info [user]="user"></app-user-info>
+  <div *ngFor="let user of requestingUsers | slice:0:5 | FilterPipe:queryString">
+    <app-user-info [user]="user" (onAllow)="approveVoteRequest(user)" (onDeny)="denyVoteRequest(user)"></app-user-info>
   </div>
 </div>
 <br><br>
