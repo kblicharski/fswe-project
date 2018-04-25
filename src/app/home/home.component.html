@@ -1,51 +1,11 @@
 <div *ngIf="userStatus === 'voter'">
-  <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-    <h1>Hello, {{currentUser.firstName}}.</h1>
-    <br>
-    <div *ngIf="ongoingCurrentElection()">
-      <h2>{{ 'Precinct Name' }}</h2>
-      <div *ngIf="!userCanVote()">
-        <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
-      </div>
-      <div *ngIf="userCanVote()">
-        <!-- for ballot of ballots -->
-        <!-- app-ballot [ballot]=ballot -->
-        <app-ballot></app-ballot>
-        <app-ballot></app-ballot>
-      </div>
-    </div>
-    <div *ngIf="!ongoingCurrentElection()">
-      <p>There are no currently ongoing elections.</p>
-    </div>
-    <br><br>
-    <p></p>
-  </div>
+  <app-home-voter [currentUser]="currentUser"></app-home-voter>
 </div>
-
 
 <div *ngIf="userStatus === 'manager'">
-  <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-    <h1>Hello, {{currentUser.firstName}}.</h1>
-    <br>
-    <h2>Search Users</h2>
-    <input type="search" class="form-control" [(ngModel)]="queryString">
-    <br>
-    <h2>Users Queued to Vote:</h2>
-    <div *ngFor="let user of users | slice:0:5 | FilterPipe:queryString">
-      <app-user-info [user]="user"></app-user-info>
-    </div>
-  </div>
-  <br><br>
+  <app-home-manager [currentUser]="currentUser" [users]="users"></app-home-manager>
 </div>
 
-
 <div *ngIf="userStatus === 'administrator'">
-  <div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-    <h1>Hello, {{currentUser.firstName}}.</h1>
-    <br>
-    <button class="btn btn-primary">User Management</button>
-    <button class="btn btn-primary">Election Management</button>
-    <button class="btn btn-primary">View Audit Trail</button>
-    <br><br>
-  </div>
+  <app-home-administrator [currentUser]="currentUser" [users]="users"></app-home-administrator>
 </div>

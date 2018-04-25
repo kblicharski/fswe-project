@@ -22,6 +22,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { FilterPipe } from './filter-user.pipe';
+import { HomeVoterComponent } from './home/home-voter/home-voter.component';
+import { HomeManagerComponent } from './home/home-manager/home-manager.component';
+import { HomeAdministratorComponent } from './home/home-administrator/home-administrator.component';
+import { SpinnerComponent } from './home/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { FilterPipe } from './filter-user.pipe';
     SettingsComponent,
     UserInfoComponent,
     FilterPipe,
+    HomeVoterComponent,
+    HomeManagerComponent,
+    HomeAdministratorComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
