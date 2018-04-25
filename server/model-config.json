@@ -25,7 +25,7 @@
     "dataSource": "mysqlDS",
     "public": true
   },
-  "zipCodeDatabase": {
+  "zipCodes": {
     "dataSource": "mysqlDS",
     "public": true
   },

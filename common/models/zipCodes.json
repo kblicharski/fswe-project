@@ -1,5 +1,5 @@
 {
-  "name": "zipCodeDatabase",
+  "name": "zipCodes",
   "settings": {
     "strict": false,
     "forceId": "auto",
@@ -7,11 +7,11 @@
     "idInjection": false,
     "mysql": {
       "schema": "fswe",
-      "table": "zipCodeDatabase"
+      "table": "zipCodes"
     }
   },
   "properties": {
-    "zip": {
+    "zipCode": {
       "type": "number",
       "required": false,
       "length": null,
@@ -26,7 +26,7 @@
         "nullable": "Y"
       }
     },
-    "city": {
+    "primaryCity": {
       "type": "string",
       "required": false,
       "length": 65535,
@@ -80,6 +80,18 @@
       "mysql": {
         "columnName": "latitude",
         "dataType": "double",
+        "dataLength": null,
+        "dataPrecision": 22,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "precincts": {
+      "type": "array",
+      "required": true,
+      "mysql": {
+        "columnName": "precincts",
+        "dataType": "string",
         "dataLength": null,
         "dataPrecision": 22,
         "dataScale": null,
