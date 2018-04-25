@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          // TODO: Change error handling when other things can be sent.
           this.alertService.error('Invalid username or password.');
           this.loading = false;
         });

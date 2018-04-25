@@ -30,7 +30,7 @@ export class RegisterComponent {
     this.model.dob = new Date(this.model.dob).toISOString();
     this.userService.create(this.model)
       .subscribe(
-        (data: HttpResponse) => {
+        (data) => {
           this.alertService.success('Registration successful!', true);
           this.router.navigate(['login']);
         },
