@@ -23,6 +23,25 @@ module.exports = function(app) {
         zipCode: "52245"
       }
     },{
+        email: "tom.smith@gmail.com",
+        username: "tomSmith",
+        password:"tomSmith!",
+        firstName: "Tom",
+        lastName: "Smith",
+        ssn: "55555",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "js555123",
+        registrationStatus: "unregistered",
+        emailVerified: true,
+        votingStatus: "requesting",
+        role: "voter",
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "IA",
+          zipCode: "52245"
+        }
+      }, {
       email: "jon.Adams@gmail.com",
       username: "jonAdams",
       password: "jonAdams!",
@@ -31,7 +50,7 @@ module.exports = function(app) {
       ssn: "66666",
       dob: "2018-02-25T23:40:26.663Z",
       driversLicense: "ja555123",
-      registrationStatus: "registered",
+      registrationStatus: "unregistered",
         votingStatus: "approved",
       emailVerified: true,
       role: "administrator",
@@ -41,6 +60,25 @@ module.exports = function(app) {
         state: "IA",
         zipCode: "52245"
       }
+      },{
+        email: "jane.smith@gmail.com",
+        username: "janeSmith",
+        password:"janeSmith!",
+        firstName: "Jone",
+        lastName: "Smith",
+        ssn: "55555",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "js555123",
+        registrationStatus: "unregistered",
+        emailVerified: true,
+        votingStatus: "requesting",
+        role: "voter",
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "IA",
+          zipCode: "52245"
+        }
       },{
         email: "jon.Clancy@gmail.com",
         username: "jonClancy",
