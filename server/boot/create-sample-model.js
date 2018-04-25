@@ -7,11 +7,14 @@ module.exports = function(app) {
       email: "jon.smith@gmail.com",
       username: "jonSmith",
       password: "jonSmith!",
+        firstName: "Jon",
+        lastName: "Smith",
       ssn: "55555",
       dob: "2018-02-24T23:40:26.663Z",
       driversLicense: "js555123",
       status: "unregistered",
       emailVerified: true,
+        votingStatus: "idle",
       role: "voter",
       address: {
         street: "University Avenue",
@@ -23,10 +26,13 @@ module.exports = function(app) {
       email: "jon.Adams@gmail.com",
       username: "jonAdams",
       password: "jonAdams!",
+        firstName: "Jon",
+        lastName: "Adams",
       ssn: "66666",
       dob: "2018-02-25T23:40:26.663Z",
       driversLicense: "ja555123",
       status: "registered",
+        votingStatus: "approved",
       emailVerified: true,
       role: "administrator",
       address: {
@@ -39,10 +45,13 @@ module.exports = function(app) {
         email: "jon.Clancy@gmail.com",
         username: "jonClancy",
         password: "jonClancy!",
+        firstName: "Jon",
+        lastName: "Clancy",
         ssn: "77777",
         dob: "2018-02-26T23:40:26.663Z",
         driversLicense: "jc555123",
         status: "registered",
+        votingStatus: "approved",
         emailVerified: true,
         role: "manager",
         address: {
@@ -72,6 +81,24 @@ module.exports = function(app) {
       console.log('Vote models created: \n', vote);
     });
   });
+  app.dataSources.mysqlDS.automigrate('candidate', function(err) {
+    if (err) throw err;
+
+    app.models.candidate.create([{
+      name: "John Smith",
+      party:  "Democrat",
+      dob: new Date(1965,5,20)
+
+    },{
+      name: "John Adams",
+      party:  "Republican",
+      dob: new Date(1964,5,20)
+    }], function(err, vote) {
+      if (err) throw err;
+
+      console.log('Candidate models created: \n', vote);
+    });
+  });
   app.dataSources.mysqlDS.automigrate('ballot', function(err) {
     if (err) throw err;
 
@@ -81,7 +108,8 @@ module.exports = function(app) {
       managers: ["Suzy Collins"],
       locations: ["Iowa City"],
       start: new Date(2018,5,20),
-      end: new Date(2018,6,20)
+      end: new Date(2018,6,20),
+      description: "Iowa City Election"
 
   }], function(err, vote) {
       if (err) throw err;

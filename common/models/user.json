@@ -11,6 +11,15 @@
       "type": "string",
       "required": true
     },
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+
     "dob": {
       "type": "date",
       "required": true
@@ -38,6 +47,11 @@
     "role": {
       "type": "string",
       "required": true
+    },
+    "votingStatus": {
+      "type": "string",
+      "required": true,
+      "default": "idle"
     }
   },
   "validations": [],

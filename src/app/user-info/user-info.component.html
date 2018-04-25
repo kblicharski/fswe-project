@@ -1,0 +1,10 @@
+<ul class="list-group">
+  <li class="list-group-item">Name: {{ user.lastName }}, {{ user.firstName }}</li>
+  <li class="list-group-item">Email: {{ user.email }}</li>
+  <li class="list-group-item">DOB: {{ user.dob }}</li>
+  <li class="list-group-item">SSN: {{ user.ssn }}</li>
+  <li class="list-group-item">Driver's License: {{ user.driversLicense }}</li>
+  <button class="btn btn-primary" (click)="onAllowUser()">Allow</button>
+  <button class="btn btn-danger" (click)="onDenyUser()">Deny</button>
+</ul>
+<br>
