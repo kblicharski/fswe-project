@@ -14,8 +14,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { UserService } from './_services/user.service';
-import { BackendProvider } from './_interceptors/backend.interceptor';
+// import { BackendProvider } from './_interceptors/backend.interceptor';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { BallotComponent } from './ballot/ballot.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { FilterPipe } from './filter-user.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     PageNotFoundComponent,
     AlertComponent,
     ForgotPasswordComponent,
+    BallotComponent,
+    FooterComponent,
+    NavbarComponent,
+    SettingsComponent,
+    UserInfoComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +50,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AlertService,
     AuthenticationService,
     UserService,
-    BackendProvider
+    // BackendProvider
   ],
   bootstrap: [AppComponent]
 })
