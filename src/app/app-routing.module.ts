@@ -13,8 +13,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'settings', component: SettingsComponent},
-  {path: '404', component: PageNotFoundComponent},
-  {path: '**', redirectTo: '/404'}
+  // {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(appRoutes);
