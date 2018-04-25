@@ -8,7 +8,8 @@ export interface User {
   ssn: string;
   dob: Date;
   driversLicense: string;
-  registrationStatus: 'registered' | 'unregistered';
+  registrationStatus: 'registered' | 'unregistered' | 'denied';
+  votingStatus: 'idle' | 'requesting' | 'approved' | 'denied';
   email: string;
   address: Address;
   role: 'voter' | 'manager' | 'administrator';
