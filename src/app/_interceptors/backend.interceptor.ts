@@ -21,7 +21,7 @@
 //       if (request.url.endsWith('/api/users') && request.method === 'GET') {
 //         // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
 //         if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-//           return of(new HttpResponse({status: 200, body: users}));
+//           return of(new HttpResponse({registrationStatus: 200, body: users}));
 //         } else {
 //           // return 401 not authorised if token is null or invalid
 //           return Observable.throw('Unauthorised');
@@ -40,7 +40,7 @@
 //           });
 //           const user = matchedUsers.length ? matchedUsers[0] : null;
 //
-//           return of(new HttpResponse({status: 200, body: user}));
+//           return of(new HttpResponse({registrationStatus: 200, body: user}));
 //         } else {
 //           // return 401 not authorised if token is null or invalid
 //           return Observable.throw('Unauthorised');
@@ -66,7 +66,7 @@
 //         localStorage.setItem('users', JSON.stringify(users));
 //
 //         // respond 200 OK
-//         return of(new HttpResponse({status: 200}));
+//         return of(new HttpResponse({registrationStatus: 200}));
 //       }
 //
 //       // delete user
@@ -87,7 +87,7 @@
 //           }
 //
 //           // respond 200 OK
-//           return of(new HttpResponse({status: 200}));
+//           return of(new HttpResponse({registrationStatus: 200}));
 //         } else {
 //           // return 401 not authorised if token is null or invalid
 //           return Observable.throw('Unauthorised');

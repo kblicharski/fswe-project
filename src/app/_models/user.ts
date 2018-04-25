@@ -8,7 +8,7 @@ export interface User {
   ssn: string;
   dob: Date;
   driversLicense: string;
-  status: 'registered' | 'unregistered';
+  registrationStatus: 'registered' | 'unregistered';
   email: string;
   address: Address;
   role: 'voter' | 'manager' | 'administrator';

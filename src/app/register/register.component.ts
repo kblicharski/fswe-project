@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AlertService } from '../_services/alert.service';
 import { UserService } from '../_services/user.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class RegisterComponent {
   model: any = {
-    status: 'unregistered',
+    registrationStatus: 'unregistered',
     role: 'voter',
     address: {}
   };
