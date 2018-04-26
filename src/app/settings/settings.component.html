@@ -1,3 +1,61 @@
-<p>
-  settings works!
-</p>
+<div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+  <h2>Change Password</h2>
+  <form name="form" (ngSubmit)="f.form.valid && onChangePassword()" #f="ngForm" novalidate>
+    <div class="form-group row">
+      <!-- Old Password -->
+      <div class="col-xs-12 col-sm-6">
+        <label for="oldPassword">Old Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="oldPassword"
+          name="oldPassword"
+          [(ngModel)]="model.oldPassword"
+          #oldPassword="ngModel"
+          required
+        />
+        <div *ngIf="oldPassword.touched && !oldPassword.valid" class="alert alert-danger help-block">
+          <div *ngIf="oldPassword.errors.required">
+            Your old password is required.
+          </div>
+        </div>
+      </div>
+      <!-- New Password -->
+      <div class="col-xs-12 col-sm-6">
+        <label for="newPassword">New Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="newPassword"
+          name="newPassword"
+          [(ngModel)]="model.newPassword"
+          #newPassword="ngModel"
+          required
+          minlength="6"
+          pattern="^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{6,}$"
+        />
+        <div *ngIf="newPassword.touched && !newPassword.valid" class="alert alert-danger help-block">
+          <div *ngIf="newPassword.errors.required">
+            A new password is required.
+          </div>
+          <div *ngIf="newPassword.errors.minlength">
+            Your new password must be {{ newPassword.errors.minlength.requiredLength }} characters long.
+          </div>
+          <div *ngIf="newPassword.errors.pattern">
+            Your new password must contain at least one capital letter, lowercase letter, number, and special character.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-12 col-sm-6">
+        <button type="submit" [disabled]="loading || f.invalid" class="btn btn-primary">Reset Password</button>
+        <img *ngIf="loading"
+             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <a [routerLink]="['']" class="btn btn-link my-float-right">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

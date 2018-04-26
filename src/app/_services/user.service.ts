@@ -48,4 +48,9 @@ export class UserService {
     return this.http.get<User[]>(url);
   }
 
+  changePassword(id: number, data: { oldPassword: string, newPassword: string }): Observable<Object> {
+    const url = `${this.apiUrl}/users/${id}/changePassword`;
+    return this.http.post<Object>(url, data);
+  }
+
 }
