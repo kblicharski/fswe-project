@@ -1,40 +1,44 @@
 {
-	"_meta": {
-		"sources": [
-			"loopback/common/models",
-			"loopback/server/models",
-			"../common/models",
-			"./models"
-		],
-		"mixins": [
-			"loopback/common/mixins",
-			"loopback/server/mixins",
-			"../common/mixins",
-			"./mixins"
-		]
-	},
-	"vote": {
-		"dataSource": "mysqlDS",
-		"public": true
-	},
-	"accessToken": {
-		"dataSource": "mysqlDS",
-		"public": true
-	},
-	"user": {
-		"dataSource": "mysqlDS",
-		"public": true
-	},
-	"ballot": {
-		"dataSource": "mysqlDS",
-		"public": true
-	},
-	"candidate": {
-		"dataSource": "mysqlDS",
-		"public": true
-	},
-	"zipCodes": {
-		"dataSource": "mysqlDS",
-		"public": true
-	}
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "vote": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "accessToken": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "user": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "election": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "candidate": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "zipCodes": {
+    "dataSource": "mysqlDS",
+    "public": true
+  },
+  "office": {
+    "dataSource": "mysqlDS",
+    "public": true
+  }
 }

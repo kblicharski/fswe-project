@@ -1,7 +1,5 @@
 'use strict';
 
-var loopback = require('loopback');
-var app = module.exports = loopback();
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
 var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
 

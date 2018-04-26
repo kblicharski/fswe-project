@@ -1,28 +1,22 @@
 {
-  "name": "candidate",
-  "plural": "candidates",
+  "name": "office",
+  "plural": "offices",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "party": {
-      "type": "string",
-      "required": true
+    "description": {
+      "type": "string"
     },
-    "dob": {
-      "type": "date",
+    "candidates": {
+      "type": ["number"],
       "required": true
-    },
-    "voteCount": {
-      "type": "number",
-      "required": true,
-      "default": 0
     }
   },
   "validations": [],
