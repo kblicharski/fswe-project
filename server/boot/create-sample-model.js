@@ -64,7 +64,7 @@ module.exports = function(app) {
         email: "jane.smith@gmail.com",
         username: "janeSmith",
         password:"janeSmith!",
-        firstName: "Jone",
+        firstName: "Jane",
         lastName: "Smith",
         ssn: "55555",
         dob: "2018-02-24T23:40:26.663Z",
