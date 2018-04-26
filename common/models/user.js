@@ -14,6 +14,26 @@ module.exports = function(User) {
   //User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting registrationStatus'})
+  User.getEmail = function(id, cb ) {
+    User.findById(id, function (err, instance){
+      const request = require('request');
+      const id = instance.id;
+      request('http://localhost:3000/api/users/'+id+'?filter=%7B%22fields%22%3A%7B%22email%22%3Atrue%7D%7D', { json: true }, (err, res, body) => {
+        if (err) {
+          return console.log(err);
+        }
+        cb(null, body.email);
+      });
+    })
+  };
+  User.remoteMethod(
+    'getEmail',
+      {
+        http: {path: '/getEmail', verb: 'get'},
+        accepts: {arg: 'id', type: 'string', http: { source: 'query' } },
+        returns: {arg: 'email', type: 'string'}
+      }
+  );
 };
 
 function registrationStatusValidator(err) {

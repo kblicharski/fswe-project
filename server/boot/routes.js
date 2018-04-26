@@ -2,7 +2,7 @@ var dsConfig = require('../datasources.json');
 var path = require('path');
 
 module.exports = function(app) {
-  var Voter = app.models.voter;
+  var User = app.models.user;
 
   //login page
   app.get('/', function(req, res) {
@@ -12,7 +12,6 @@ module.exports = function(app) {
       password: credentials.pass
     });
   });
-
   //verified
   app.get('/verified', function(req, res) {
     res.render('verified');
@@ -20,7 +19,7 @@ module.exports = function(app) {
 
   //log a user in
   app.post('/login', function(req, res) {
-    Voter.login({
+    User.login({
       username: req.body.username,
       password: req.body.password
     }, 'user', function(err, token) {
@@ -55,7 +54,7 @@ module.exports = function(app) {
   //log a user out
   app.get('/logout', function(req, res, next) {
     if (!req.accessToken) return res.sendStatus(401);
-    Voter.logout(req.accessToken.id, function(err) {
+    User.logout(req.accessToken.id, function(err) {
       if (err) return next(err);
       res.redirect('/');
     });
