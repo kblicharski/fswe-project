@@ -6,13 +6,7 @@
   <button class="btn btn-primary" (click)="adminMode = 'auditing'">View Audit Trail</button>
   <br><br>
   <div *ngIf="adminMode === 'verification'">
-    <h2>Search Unverified Users</h2>
-    <input type="search" class="form-control" [(ngModel)]="queryString">
-    <br>
-    <h2>Users Awaiting Verification:</h2>
-    <div *ngFor="let user of unregisteredUsers | slice:0:5 | FilterPipe:queryString">
-      <app-user-info [user]="user" (onAllow)="verifyUser(user)" (onDeny)="denyUser(user)"></app-user-info>
-    </div>
+    <app-verify-voters></app-verify-voters>
   </div>
   <div *ngIf="adminMode === 'editing'">
     <p>Editing</p>
