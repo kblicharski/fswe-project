@@ -1,11 +1,12 @@
 'use strict';
 
-
+var loopback = require('loopback');
+var app = module.exports = loopback();
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
-
 var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
 
 module.exports = function(User) {
+
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
   //User.validatesFormatOf('password', {with: strongPassword , message : {with: 'Password is in wrong format'}});
   User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
@@ -26,6 +27,32 @@ module.exports = function(User) {
       });
     })
   };
+  User.updatePassword = function(id, oldPassword, newPassword, cb) {
+    var newErrMsg, newErr;
+    try {
+      user.hasPassword(oldPassword, function (err, isMatch) {
+        if (isMatch) {
+          user.updateAttribute('password',User.hashPassword(newPassword), function (err, instance) {
+            if (err) {
+              cb(err);
+            } else {
+              cb(null, true);
+            }
+          });
+        }else {
+          newErrMsg = 'User specified wrong current password !';
+          newErr = new Error(newErrMsg);
+          newErr.statusCode = 401;
+          newErr.code = 'LOGIN_FAILED_PWD';
+          return cb(newErr);
+        }
+
+      });
+    }catch (err) {
+        console.log(err);
+        cb(err);
+      }
+  };
   User.remoteMethod(
     'getEmail',
       {
@@ -34,6 +61,18 @@ module.exports = function(User) {
         returns: {arg: 'email', type: 'string'}
       }
   );
+  User.remoteMethod(
+    'changePassword',
+    {
+      accepts: [
+        {arg: 'id', type: 'number', required: true},
+        {arg: 'oldPassword', type: 'string', required: true},
+        {arg: 'newPassword', type: 'string', required: true}
+      ],
+      http: {path: '/:id/changePassword', verb: 'post'},
+      returns: {arg: 'passwordChange', type: 'boolean'}
+    }
+  )
 };
 
 function registrationStatusValidator(err) {
