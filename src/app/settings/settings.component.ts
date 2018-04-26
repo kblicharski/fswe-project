@@ -11,7 +11,7 @@ import { User } from '../_models/user';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent {
-  model: { oldPassword: string, newPassword: string } = {};
+  model: { oldPassword: string, newPassword: string } = {oldPassword: '', newPassword: ''};
   loading = false;
 
   constructor(
