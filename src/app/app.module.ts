@@ -23,7 +23,7 @@ import { FilterPipe } from './_pipes/filter-user.pipe';
 import { HomeVoterComponent } from './home/home-voter/home-voter.component';
 import { HomeManagerComponent } from './home/home-manager/home-manager.component';
 import { HomeAdministratorComponent } from './home/home-administrator/home-administrator.component';
-import { SpinnerComponent } from './home/spinner/spinner.component';
+import { SpinnerComponent } from './utility/spinner/spinner.component';
 import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 import { ElectionManagementComponent } from './home/home-administrator/election-management/election-management.component';
 import { VoterGuard } from './_guards/voter.guard';

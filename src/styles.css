@@ -17,3 +17,7 @@ a {
     float: right !important;
   }
 }
+
+.btn.btn-primary {
+  margin: 5px;
+}
