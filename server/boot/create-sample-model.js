@@ -113,8 +113,8 @@ module.exports = function(app) {
     if (err) throw err;
 
     app.models.vote.create([{
-      ballotNumber: 1,
-      candidate:  "John Adams",
+      electionId: 1,
+      votesCast:  {"ballotId": 1, "candidateId": 1},
       voter: 1,
       time: new Date(2018,5,20)
 
@@ -170,7 +170,28 @@ module.exports = function(app) {
       end: new Date(2018,6,20),
       description: "Iowa City Election"
 
-  }], function(err, election) {
+  },{
+      offices:  [1],
+      managers: [4],
+      precincts: ['200'],
+      locations: ["Iowa City"],
+      type: 'state',
+      start: new Date(2018,5,20),
+      end: new Date(2018,6,20),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
+      precincts: ['200'],
+      locations: ["USA"],
+      type: 'national',
+      start: new Date(2018,5,20),
+      end: new Date(2018,6,20),
+      description: "Presidential Election"
+
+      }
+    ], function(err, election) {
       if (err) throw err;
 
       console.log('Elections models created: \n', election);
