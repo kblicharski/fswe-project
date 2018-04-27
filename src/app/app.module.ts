@@ -26,6 +26,9 @@ import { HomeAdministratorComponent } from './home/home-administrator/home-admin
 import { SpinnerComponent } from './home/spinner/spinner.component';
 import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 import { ElectionManagementComponent } from './home/home-administrator/election-management/election-management.component';
+import { VoterGuard } from './_guards/voter.guard';
+import { ManagerGuard } from './_guards/manager.guard';
+import { AdminGuard } from './_guards/admin.guard';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
   ],
   providers: [
     AuthGuard,
+    VoterGuard,
+    ManagerGuard,
+    AdminGuard,
     AlertService,
     AuthenticationService,
     UserService,

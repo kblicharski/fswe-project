@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 
 @Component({
@@ -7,10 +7,11 @@ import { User } from '../../_models/user';
   styleUrls: ['./home-voter.component.css']
 })
 export class HomeVoterComponent implements OnInit {
-  @Input() currentUser: User;
+  currentUser: User;
   private votingStatus: boolean;
 
   constructor() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

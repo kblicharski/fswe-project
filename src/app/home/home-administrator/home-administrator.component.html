@@ -4,14 +4,17 @@
   <button class="btn btn-primary" (click)="adminMode = 'verification'">Voter Verification</button>
   <button class="btn btn-primary" (click)="adminMode = 'editing'">Election Management</button>
   <button class="btn btn-primary" (click)="adminMode = 'auditing'">View Audit Trail</button>
+  <br>
   <hr>
-  <div *ngIf="adminMode === 'verification'">
-    <app-verify-voters></app-verify-voters>
-  </div>
-  <div *ngIf="adminMode === 'editing'">
-    <p>Editing</p>
-  </div>
-  <div *ngIf="adminMode === 'auditing'">
-    <p>Auditing</p>
-  </div>
+  <br>
+  <router-outlet></router-outlet>
+  <!--<div *ngIf="adminMode === 'verification'">-->
+    <!--<app-verify-voters></app-verify-voters>-->
+  <!--</div>-->
+  <!--<div *ngIf="adminMode === 'editing'">-->
+    <!--<p>Editing</p>-->
+  <!--</div>-->
+  <!--<div *ngIf="adminMode === 'auditing'">-->
+    <!--<p>Auditing</p>-->
+  <!--</div>-->
 </div>

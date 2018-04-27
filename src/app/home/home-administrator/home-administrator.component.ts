@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 
 @Component({
@@ -7,11 +7,12 @@ import { User } from '../../_models/user';
   styleUrls: ['./home-administrator.component.css']
 })
 export class HomeAdministratorComponent implements OnInit {
-  @Input() currentUser: User;
+  currentUser: User;
 
   adminMode: 'verification' | 'editing' | 'auditing';
 
   constructor() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

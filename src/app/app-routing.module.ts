@@ -5,9 +5,30 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SettingsComponent } from './settings/settings.component';
+import { HomeVoterComponent } from './home/home-voter/home-voter.component';
+import { HomeManagerComponent } from './home/home-manager/home-manager.component';
+import { HomeAdministratorComponent } from './home/home-administrator/home-administrator.component';
+import { AdminGuard } from './_guards/admin.guard';
+import { ManagerGuard } from './_guards/manager.guard';
+import { ElectionManagementComponent } from './home/home-administrator/election-management/election-management.component';
+import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {
+    path: '', component: HomeComponent, canActivate: [AuthGuard],
+    children: [
+      {path: 'voter', component: HomeVoterComponent, canActivate: [AdminGuard]},
+      {path: 'manager', component: HomeManagerComponent, canActivate: [ManagerGuard]},
+      {
+        path: 'administrator', component: HomeAdministratorComponent, canActivate: [AdminGuard],
+        children:
+          [
+            {path: 'manage', component: ElectionManagementComponent},
+            {path: 'verify', component: VerifyVotersComponent},
+          ]
+      }
+    ]
+  },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},

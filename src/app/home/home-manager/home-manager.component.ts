@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 
@@ -8,10 +8,11 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./home-manager.component.css']
 })
 export class HomeManagerComponent implements OnInit {
-  @Input() currentUser: User;
+  currentUser: User;
   requestingUsers: User[];
 
   constructor(private userService: UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
