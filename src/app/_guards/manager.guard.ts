@@ -15,7 +15,7 @@ export class ManagerGuard implements CanActivate {
     if (currentUser.role === 'manager') {
       return true;
     }
-    this.router.navigate(['']);
+    this.router.navigate(['404']);
     return false;
   }
 }

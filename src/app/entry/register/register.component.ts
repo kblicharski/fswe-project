@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AlertService } from '../_services/alert.service';
-import { UserService } from '../_services/user.service';
+import { AlertService } from '../../_services/alert.service';
+import { UserService } from '../../_services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 

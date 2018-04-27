@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './entry/register/register.component';
+import { LoginComponent } from './entry/login/login.component';
 import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './utility/alert/alert.component';
 import { UserService } from './_services/user.service';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { BallotComponent } from './ballot/ballot.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { ForgotPasswordComponent } from './entry/forgot-password/forgot-password.component';
+import { BallotComponent } from './home/ballot/ballot.component';
+import { FooterComponent } from './utility/footer/footer.component';
+import { NavbarComponent } from './utility/navbar/navbar.component';
 import { SettingsComponent } from './home/settings/settings.component';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { FilterPipe } from './_pipes/filter-user.pipe';
@@ -29,7 +29,7 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
 import { VoterGuard } from './_guards/voter.guard';
 import { ManagerGuard } from './_guards/manager.guard';
 import { AdminGuard } from './_guards/admin.guard';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [

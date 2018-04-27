@@ -15,7 +15,7 @@ export class VoterGuard implements CanActivate {
     if (currentUser.role === 'voter') {
       return true;
     }
-    this.router.navigate(['']);
+    this.router.navigate(['404']);
     return false;
   }
 }
