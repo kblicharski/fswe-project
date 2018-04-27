@@ -14,6 +14,7 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
 import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 import { VoterGuard } from './_guards/voter.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
+import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
 
 const appRoutes: Routes = [
   {
@@ -26,8 +27,9 @@ const appRoutes: Routes = [
         path: 'administrator', component: HomeAdministratorComponent, canActivate: [AdminGuard],
         children:
           [
-            {path: 'manage', component: ElectionManagementComponent},
             {path: 'verify', component: VerifyVotersComponent},
+            {path: 'manage', component: ElectionManagementComponent},
+            {path: 'audit', component: AuditTrailComponent},
           ]
       },
     ],

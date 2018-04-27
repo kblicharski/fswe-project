@@ -30,6 +30,7 @@ import { VoterGuard } from './_guards/voter.guard';
 import { ManagerGuard } from './_guards/manager.guard';
 import { AdminGuard } from './_guards/admin.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
+import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.c
     VerifyVotersComponent,
     ElectionManagementComponent,
     PageNotFoundComponent,
+    AuditTrailComponent,
   ],
   imports: [
     BrowserModule,
