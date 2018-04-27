@@ -8,9 +8,7 @@ import { User } from '../_models/user';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-
   userStatus: 'voter' | 'manager' | 'administrator';
-  queryString: string;
 
   constructor() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
