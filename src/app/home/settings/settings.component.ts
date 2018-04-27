@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { UserService } from '../../_services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertService } from '../_services/alert.service';
+import { AlertService } from '../../_services/alert.service';
 import { Router } from '@angular/router';
-import { User } from '../_models/user';
+import { User } from '../../_models/user';
 
 @Component({
   selector: 'app-settings',

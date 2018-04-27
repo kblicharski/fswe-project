@@ -17,7 +17,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BallotComponent } from './ballot/ballot.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from './home/settings/settings.component';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { FilterPipe } from './_pipes/filter-user.pipe';
 import { HomeVoterComponent } from './home/home-voter/home-voter.component';
@@ -29,6 +29,7 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
 import { VoterGuard } from './_guards/voter.guard';
 import { ManagerGuard } from './_guards/manager.guard';
 import { AdminGuard } from './_guards/admin.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AdminGuard } from './_guards/admin.guard';
     SpinnerComponent,
     VerifyVotersComponent,
     ElectionManagementComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
