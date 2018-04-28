@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeVoterComponent } from './home-voter.component';
 import { SpinnerComponent } from '../../utility/spinner/spinner.component';
+import { ElectionService } from '../../_services/election.service';
+import { UserService } from '../../_services/user.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeVoterComponent', () => {
   let component: HomeVoterComponent;
@@ -9,7 +12,9 @@ describe('HomeVoterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeVoterComponent, SpinnerComponent]
+      declarations: [HomeVoterComponent, SpinnerComponent],
+      imports: [HttpClientTestingModule],
+      providers: [UserService, ElectionService]
     })
       .compileComponents();
   }));

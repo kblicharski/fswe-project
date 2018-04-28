@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,18 @@ import { User } from '../_models/user';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  userStatus: 'voter' | 'manager' | 'administrator';
 
-  constructor() {
+  constructor(
+    private router: Router,
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.userStatus = this.currentUser.role;
   }
 
   ngOnInit() {
+  }
+
+  onSettingsPage() {
+    return this.router.url === '/settings';
   }
 
 }
