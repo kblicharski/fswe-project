@@ -29,36 +29,53 @@ export class HomeVoterComponent implements OnInit {
   }
 
   private loadAllElections() {
-    this.loading = true;
     // const precinctId = this.currentUser.precinctId;
     const precinctId = 200;
-    this.userService.getElections(precinctId, this.currentUser.id)
-      .subscribe(
-        elections => {
-          this.elections = elections;
-          this.localElections = elections.filter((election) => election.type === 'local');
-          this.stateElections = elections.filter((election) => election.type === 'state');
-          this.nationalElections = elections.filter((election) => election.type === 'national');
+    this.userService.getElectionIds(precinctId, this.currentUser.id).subscribe(
+      (electionIds: { ids: number[] }) => {
+        for (const id of electionIds.ids) {
+          this.electionService.getElection(id).subscribe(
+            (election: Election) => {
+              this.elections.push(election);
+              switch (election.type) {
+                case 'local':
+                  this.localElections.push(election);
+                  break;
+                case 'state':
+                  this.stateElections.push(election);
+                  break;
+                case 'national':
+                  this.nationalElections.push(election);
+                  break;
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
           this.loading = false;
-        });
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onSubmitVoteRequest() {
     this.currentUser.votingStatus = 'requesting';
     this.userService.update(this.currentUser).subscribe(
       (data) => {
-        console.log('patched user');
-        console.log(data);
+        localStorage.setItem('currentUser', JSON.stringify(data));
       },
       (error) => {
-        console.log('failed to patch user');
         console.log(error);
       }
     );
   }
 
   ongoingCurrentElections() {
-    return this.elections.length > 0;
+    return !this.loading || this.elections.length > 0;
   }
 
   userIsApproved() {

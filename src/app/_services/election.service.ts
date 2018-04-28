@@ -37,6 +37,11 @@ export class ElectionService {
     return this.http.delete<Election>(url);
   }
 
+  getElection(electionId: number): Observable<Election> {
+    const url = `${this.apiUrl}/elections/${electionId}`;
+    return this.http.get<Election>(url);
+  }
+
   getOffice(officeId: number): Observable<Office> {
     const url = `${this.apiUrl}/offices/${officeId}`;
     return this.http.get<Office>(url);

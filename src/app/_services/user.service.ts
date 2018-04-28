@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models/user';
 import { Observable } from 'rxjs/Observable';
-import { Election } from '../_models/election';
 
 @Injectable()
 export class UserService {
@@ -54,9 +53,9 @@ export class UserService {
     return this.http.post<Object>(url, data);
   }
 
-  getElections(precinctId: number, userId: number): Observable<Election[]> {
+  getElectionIds(precinctId: number, userId: number): Observable<{ ids: number[] }> {
     const url = `${this.apiUrl}/users/${precinctId}/${userId}/getElections`;
-    return this.http.get<Election[]>(url);
+    return this.http.get<{ ids: number[] }>(url);
   }
 
 }

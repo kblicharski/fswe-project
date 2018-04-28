@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Office } from '../../../_models/office';
 import { ElectionService } from '../../../_services/election.service';
+import { Candidate } from '../../../_models/candidate';
 
 @Component({
   selector: 'app-office',
@@ -10,7 +11,7 @@ import { ElectionService } from '../../../_services/election.service';
 export class OfficeComponent implements OnInit {
   @Input() officeId: number;
   office: Office;
-  candidateIds: number[] = [];
+  candidates: Candidate[] = [];
 
   constructor(
     private electionService: ElectionService
@@ -21,16 +22,21 @@ export class OfficeComponent implements OnInit {
     this.electionService.getOffice(this.officeId).subscribe(
       (office: Office) => {
         this.office = office;
-        this.candidateIds = office.candidates;
+        for (const id of office.candidates) {
+          this.electionService.getCandidate(id).subscribe(
+            (candidate: Candidate) => {
+              this.candidates.push(candidate);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       },
       (error) => {
         console.log(error);
       }
     );
-    // console.log(this.officeId);
-    // for (const candidate of this.officeId.candidates) {
-    //   console.log(candidate);
-    // }
   }
 
 }
