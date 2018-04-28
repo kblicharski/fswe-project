@@ -52,7 +52,6 @@ module.exports = function(User) {
               filterOut.push(body[i].electionId);
             }
           }
-          console.log(filterOut);
         });
         const filteredEIDs = []
         for (var i in electionIds) {
@@ -104,7 +103,7 @@ module.exports = function(User) {
         return cb(newErr);
       }
       try {
-        User.login({username: username, password: password},function(err,isMatch) {
+        user.login({username: username, password: password},function(err,isMatch) {
           if(isMatch) {
             newErrMsg = 'Login Success';
             newErr = new Error(newErrMsg);
@@ -142,8 +141,8 @@ module.exports = function(User) {
       }
       const newPassword = retVal;
       const emailAddress = body.email;
-      User.app.User.update
-      User.app.models.User.updateAttribute('newPassword',User.hashPassword(newPassword), function (err, instance) {
+      user.up
+      user.updateAttribute('newPassword',User.hashPassword(newPassword), function (err, instance) {
         if (err) {
           cb(err);
         } else {
@@ -214,7 +213,7 @@ module.exports = function(User) {
         {arg: 'precinctId', type: 'number', required: true},
         {arg: 'userId', type: 'number', required: true}
       ],
-      http: {path: '/:precinctId/:userId/getElections', verb: 'post'},
+      http: {path: '/:precinctId/:userId/getElections', verb: 'get'},
       returns: {arg: 'ids', type: 'array'}
     }
   );
