@@ -207,13 +207,13 @@ module.exports = function(User) {
       }
   );
   User.remoteMethod(
-    'getElectionIds',
+    'getElections',
     {
       accepts: [
         {arg: 'precinctId', type: 'number', required: true},
         {arg: 'userId', type: 'number', required: true}
       ],
-      http: {path: '/:precinctId/:userId/getElectionIds', verb: 'get'},
+      http: {path: '/:precinctId/:userId/getElections', verb: 'get'},
       returns: {arg: 'ids', type: 'array'}
     }
   );
