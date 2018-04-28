@@ -1,4 +1,4 @@
-<button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button>
+<button class="btn btn-primary" mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button>
 
 <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
   <mat-step [stepControl]="firstFormGroup">
@@ -8,7 +8,7 @@
         <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button class="btn btn-primary" mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
