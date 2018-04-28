@@ -32,8 +32,9 @@ import { AdminGuard } from './_guards/admin.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
 import { ElectionService } from './_services/election.service';
-import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [

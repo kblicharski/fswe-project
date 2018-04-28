@@ -7,16 +7,17 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./election-management.component.css']
 })
 export class ElectionManagementComponent implements OnInit {
-  public myForm: FormGroup; // our form model
-  //public myForm2: FormGroup;
   constructor(private _fb: FormBuilder) { }
 
+  electionFormGroup: FormGroup;
+  officeFormGroup: FormGroup;
+
   ngOnInit() {
-    // we will initialize our form here
-    this.myForm = this._fb.group({
-      races: this._fb.array([
-        this.initRace()
-      ])
+    this.electionFormGroup = this._fb.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.officeFormGroup = this._fb.group({
+      secondCtrl: ['', Validators.required]
     });
   }
 
@@ -26,25 +27,25 @@ export class ElectionManagementComponent implements OnInit {
       office: ['', Validators.required],
       description: ['', Validators.required],
       // add list of candidates
-      candidates: this._fb.array([
-        this.initCandidate()
-      ])
+      // candidates: this._fb.array([
+      //  this.initCandidate()
+      // ])
     });
   }
 
   addRace() {
     // add address to the list
-    const control = <FormArray>this.myForm.controls['races'];
+    const control = <FormArray>this.officeFormGroup.controls['races'];
     control.push(this.initRace());
   }
 
   removeRace(i: number) {
     // remove address from the list
-    const control = <FormArray>this.myForm.controls['races'];
+    const control = <FormArray>this.officeFormGroup.controls['races'];
     control.removeAt(i);
   }
 
-  initCandidate() {
+  /* initCandidate() {
     return this._fb.group({
       name: ['', Validators.required],
       party: ['', Validators.required]
@@ -59,6 +60,6 @@ export class ElectionManagementComponent implements OnInit {
   removeCandidate(i: number) {
     const control = <FormArray>this.myForm.controls['candidates'];
     control.removeAt(i);
-  }
+  }*/
 
 }

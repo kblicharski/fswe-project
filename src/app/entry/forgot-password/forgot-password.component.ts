@@ -1,20 +1,57 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
 import { Router } from '@angular/router';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit{
   model: any = {};
   loading = false;
 
   constructor(
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private _fb: FormBuilder
   ) {
+  }
+  electionFormGroup: FormGroup;
+  officeFormGroup: FormGroup;
+
+  ngOnInit() {
+    this.electionFormGroup = this._fb.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.officeFormGroup = this._fb.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
+
+  initRace() {
+    // initialize our address
+    return this._fb.group({
+      office: ['', Validators.required],
+      description: ['', Validators.required],
+      // add list of candidates
+      // candidates: this._fb.array([
+      //  this.initCandidate()
+      // ])
+    });
+  }
+
+  addRace() {
+    // add address to the list
+    const control = <FormArray>this.officeFormGroup.controls['races'];
+    control.push(this.initRace());
+  }
+
+  removeRace(i: number) {
+    // remove address from the list
+    const control = <FormArray>this.officeFormGroup.controls['races'];
+    control.removeAt(i);
   }
 
   resetPassword() {
