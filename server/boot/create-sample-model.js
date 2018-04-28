@@ -183,6 +183,26 @@ module.exports = function(app) {
     },{
       offices:  [1],
       managers: [4],
+      precincts: [201],
+      locations: ["Iowa City"],
+      type: 'local',
+      start: new Date(2017,5,20),
+      end: new Date(2017,6,20),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
+      precincts: [201],
+      locations: ["Iowa City"],
+      type: 'national',
+      start: new Date(2017,10,20),
+      end: new Date(2017,10,21),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
       precincts: [200],
       locations: ["USA"],
       type: 'national',

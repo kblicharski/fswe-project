@@ -2,7 +2,8 @@
 
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
 var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
-
+var loopback = require('loopback');
+var app = module.exports = loopback();
 module.exports = function(User) {
 
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
@@ -67,7 +68,7 @@ module.exports = function(User) {
     try {
       user.hasPassword(oldPassword, function (err, isMatch) {
         if (isMatch) {
-          user.updateAttribute('password',User.hashPassword(newPassword), function (err, instance) {
+          user.updateAttribute('password', User.hashPassword(newPassword), function (err, instance) {
             if (err) {
               cb(err);
             } else {
@@ -139,27 +140,27 @@ module.exports = function(User) {
       for (var i = 0, n = charset.length; i < length; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));
       }
-      const newPassword = retVal;
-      const emailAddress = body.email;
-      user.up
-      user.updateAttribute('newPassword',User.hashPassword(newPassword), function (err, instance) {
+      var newPassword = retVal;
+      var emailAddress = body.email;
+
+      const request = require('request');
+      request('http://localhost:3000/api/users/'+ id, {method: 'PATCH', body: '{"password",'+ User.hashPassword(newPassword)+ '}'}, (err, res, body) => {
         if (err) {
-          cb(err);
-        } else {
-          cb(null, true);
+          console.log(err);
+          return cb(null, 400);
+        }else {
+
+          var html = '<p>Your password has been reset to:</p>\n' +
+            '<p>' + newPassword + '</p>';
+          try {
+            User.sendMail(emailAddress, html, 'Your new password');
+            return cb(null, 200);
+          } catch (err) {
+            console.log(err);
+            cb(err);
+          }
         }
       });
-      const html = '<p>Your password has been reset to:</p>\n' +
-        '<p>'+ newPassword + '</p>';
-      try {
-        User.sendMail(emailAddress, html, 'Your new password');
-        return cb(null,200);
-      }catch (err) {
-        console.log(err);
-        cb(err);
-      }
-
-
     });
   };
   User.sendMail = function(toEmail, html, subject) {
@@ -171,7 +172,6 @@ module.exports = function(User) {
       subject: subject,
       html: html
     }, function(err, mail) {
-      console.log('email sent!');
       if(err) return err;
     });
   };

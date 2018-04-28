@@ -29,7 +29,8 @@
     },
     "registrationStatus": {
       "type": "string",
-      "required": true
+      "required": true,
+      "defualt": "unregistered"
     },
     "email": {
       "type": "string",
@@ -55,7 +56,8 @@
     },
     "precinctId": {
       "type": "number",
-      "required": true
+      "required": true,
+      "defualt": -1
     }
   },
   "validations": [],
