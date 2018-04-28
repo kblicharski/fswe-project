@@ -30,7 +30,7 @@
     "registrationStatus": {
       "type": "string",
       "required": true,
-      "defualt": "unregistered"
+      "default": "unregistered"
     },
     "email": {
       "type": "string",
