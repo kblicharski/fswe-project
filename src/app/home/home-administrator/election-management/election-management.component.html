@@ -1,3 +1,75 @@
-<p>
-  election-management works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Election Precinct 101</h4>
+      </div>
+      <form [formGroup]="myForm" novalidate>
+        <!--races-->
+        <div formArrayName="races">
+          <div *ngFor="let race of myForm.controls.races.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Race {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.controls.races.controls.length > 1" (click)="removeRace(i)"></span>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <div class="form-group col-xs-6">
+                <label>Office</label>
+                <input type="text" class="form-control" formControlName="office">
+                <small [hidden]="myForm.controls.races.controls[i].controls.office.valid" class="text-danger">
+                  Office is required
+                </small>
+              </div>
+              <div class="form-group col-xs-6">
+                <label>Description</label>
+                <input type="text" class="form-control" formControlName="description">
+                <small [hidden]="myForm.controls.races.controls[i].controls.description.valid" class="text-danger">
+                  Description is required
+                </small>
+              </div>
+              <div>
+                <div formArrayName="candidates">
+                  <div *ngFor="let candidate of myForm.controls.candidates.controls; let i=index" class="panel panel-default">
+                    <div class="panel-heading">
+                      <span>Candidate {{i + 1}}</span>
+                      <span class="glyphicon glyphicon-remove pull-right" *ngIf="myForm.candidates.races.controls.length > 1" (click)="removeCandidate(i)"></span>
+                    </div>
+                    <div class="panel-body" [formGroupName]="i">
+                      <div class="form-group col-xs-6">
+                        <label>Office</label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <small [hidden]="myForm.controls.candidates.controls[i].controls.name.valid" class="text-danger">
+                          Name is required
+                        </small>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label>Description</label>
+                        <input type="text" class="form-control" formControlName="description">
+                        <small [hidden]="myForm.controls.candidates.controls[i].controls.party.valid" class="text-danger">
+                          Party is required
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="margin-20">
+                  <button type="button" (click)="addCandidate()" style="cursor: default">
+                    Add another candidate +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="margin-20">
+          <button type="button" (click)="addRace()" style="cursor: default">
+            Add another race +
+          </button>
+        </div>
+        <div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

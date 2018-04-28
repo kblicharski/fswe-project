@@ -9,7 +9,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './alert/alert.component';
 import { UserService } from './_services/user.service';
@@ -53,6 +53,7 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,
