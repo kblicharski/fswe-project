@@ -164,7 +164,7 @@ module.exports = function(app) {
     app.models.election.create([{
       offices:  [1],
       managers: [4],
-      precincts: ['200'],
+      precincts: [200,201],
       locations: ["Iowa City"],
       start: new Date(2018,5,20),
       end: new Date(2018,6,20),
@@ -173,7 +173,7 @@ module.exports = function(app) {
   },{
       offices:  [1],
       managers: [4],
-      precincts: ['200'],
+      precincts: [200],
       locations: ["Iowa City"],
       type: 'state',
       start: new Date(2018,5,20),
@@ -183,7 +183,7 @@ module.exports = function(app) {
     },{
       offices:  [1],
       managers: [4],
-      precincts: ['200'],
+      precincts: [200],
       locations: ["USA"],
       type: 'national',
       start: new Date(2018,5,20),

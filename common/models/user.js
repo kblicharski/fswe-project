@@ -25,6 +25,44 @@ module.exports = function(User) {
       });
     })
   };
+  User.getElections = function(pid,eid, cb ) {
+
+      const request = require('request');
+      var precinctId = pid;
+      var filterOut = [];
+      var electionIds = [];
+      request('http://localhost:3000/api/elections?filter=%7B%22fields%22%3A%7B%22id%22%3A%20true%2C%20%22precincts%22%3Atrue%7D%7D', { json: true }, (err, res, body) => {
+        if (err) {
+          return console.log(err);
+        }
+
+
+        for (var i in body) {
+            if((body[i].precincts).includes(precinctId)) {
+              electionIds.push(body[i].id);
+            }
+        }
+        request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%201%7D%7D', { json: true }, (err, res, body) => {
+          if (err) {
+            return console.log(err);
+          }
+
+          for (var i in body) {
+            if((body[i].voter) === eid) {
+              filterOut.push(body[i].electionId);
+            }
+          }
+          console.log(filterOut);
+        });
+        const filteredEIDs = []
+        for (var i in electionIds) {
+          if(filterOut.includes(electionIds[i]) === false) {
+            filteredEIDs.push(electionIds[i]);
+          }
+        }
+        cb(null, filteredEIDs);
+      });
+  };
   User.updatePassword = function(id, oldPassword, newPassword, cb) {
     var newErrMsg, newErr;
     try {
@@ -60,6 +98,17 @@ module.exports = function(User) {
       }
   );
   User.remoteMethod(
+    'getElections',
+    {
+      accepts: [
+        {arg: 'precinctId', type: 'number', required: true},
+        {arg: 'userId', type: 'number', required: true}
+      ],
+      http: {path: '/:precinctId/:userId/getElections', verb: 'post'},
+      returns: {arg: 'ids', type: 'array'}
+    }
+  );
+  User.remoteMethod(
     'changePassword',
     {
       accepts: [
@@ -72,7 +121,14 @@ module.exports = function(User) {
     }
   )
 };
-
+function includes(k) {
+  for(var i=0; i < this.length; i++){
+    if( this[i] === k || ( this[i] !== this[i] && k !== k ) ){
+      return true;
+    }
+  }
+  return false;
+}
 function registrationStatusValidator(err) {
   if (this.registrationStatus === "registered") true;
   else if (this.registrationStatus === "unregistered") true;
