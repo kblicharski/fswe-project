@@ -20,15 +20,6 @@ export class VerifyVotersComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  private loadAllUsers() {
-    this.userService.getAllUnregistered().subscribe(users => {
-      this.unregisteredUsers = users;
-      this.loadedInitially = true;
-      this.loading = false;
-      this.cdf.detectChanges();
-    });
-  }
-
   verifyUser(user) {
     user.registrationStatus = 'registered';
     this.userService.update(user).subscribe(
@@ -61,6 +52,15 @@ export class VerifyVotersComponent implements OnInit {
     setTimeout(() => {
       this.loadAllUsers();
     }, 600);
+  }
+
+  private loadAllUsers() {
+    this.userService.getAllUnregistered().subscribe(users => {
+      this.unregisteredUsers = users;
+      this.loadedInitially = true;
+      this.loading = false;
+      this.cdf.detectChanges();
+    });
   }
 
 }

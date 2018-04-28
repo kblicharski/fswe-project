@@ -8,9 +8,9 @@ describe('ElectionManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ElectionManagementComponent ]
+      declarations: [ElectionManagementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

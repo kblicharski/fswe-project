@@ -8,9 +8,9 @@ describe('AuditTrailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuditTrailComponent ]
+      declarations: [AuditTrailComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

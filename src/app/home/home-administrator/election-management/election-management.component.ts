@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ElectionManagementComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -9,9 +9,9 @@ describe('HomeVoterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeVoterComponent, SpinnerComponent ]
+      declarations: [HomeVoterComponent, SpinnerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

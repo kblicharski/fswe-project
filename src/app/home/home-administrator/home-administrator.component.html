@@ -1,11 +1,9 @@
-<div class="col-xs-12 col-sm-10 offset-sm-1">
-  <h1>Hello, {{ currentUser.firstName }}.</h1>
-  <br>
-  <button class="btn btn-primary" (click)="onNavigateTo('verify')">Voter Verification</button>
-  <button class="btn btn-primary" (click)="onNavigateTo('manage')">Election Management</button>
-  <button class="btn btn-primary" (click)="onNavigateTo('audit')">View Audit Trail</button>
-  <br>
-  <hr>
-  <br>
-  <router-outlet></router-outlet>
-</div>
+<h1>Hello, {{ currentUser.firstName }}.</h1>
+<br>
+<button class="btn btn-primary" (click)="onNavigateTo('verify')">Voter Verification</button>
+<button class="btn btn-primary" (click)="onNavigateTo('manage')">Election Management</button>
+<button class="btn btn-primary" (click)="onNavigateTo('audit')">View Audit Trail</button>
+<br>
+<hr>
+<br>
+<router-outlet></router-outlet>

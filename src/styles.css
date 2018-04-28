@@ -18,6 +18,6 @@ a {
   }
 }
 
-.btn.btn-primary {
-  margin: 5px;
+.jumbotron {
+  min-height: 100vh;
 }

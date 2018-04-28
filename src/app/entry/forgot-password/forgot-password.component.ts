@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AlertService } from '../../_services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,7 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ForgotPasswordComponent {
   model: any = {};
-  formSubmitted = false;
+  loading = false;
+
+  constructor(
+    private router: Router,
+    private alertService: AlertService
+  ) {
+  }
 
   resetPassword() {
     // this.emailService.resetPassword(this.model.username)
@@ -16,7 +24,14 @@ export class ForgotPasswordComponent {
     // This email should have a link to reset the user's password.
     // They then click this dynamically generated link, enter their new password, and it
     // edits their entry in the DB. These should be secure, random links.
-    this.formSubmitted = true;
+    this.loading = true;
+    setTimeout(
+      () => {
+        this.loading = false;
+        this.alertService.success('We have sent an email to the address associated with that username.', true);
+        this.router.navigate(['/login']);
+      }, 500
+    );
   }
 
 }

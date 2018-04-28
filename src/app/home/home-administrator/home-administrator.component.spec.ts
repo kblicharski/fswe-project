@@ -8,9 +8,9 @@ describe('HomeAdministratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeAdministratorComponent ]
+      declarations: [HomeAdministratorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
