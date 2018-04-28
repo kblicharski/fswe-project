@@ -183,7 +183,7 @@ module.exports = function(app) {
     },{
       offices:  [1],
       managers: [4],
-      precincts: [201],
+      precincts: [200],
       locations: ["Iowa City"],
       type: 'local',
       start: new Date(2017,5,20),
@@ -193,7 +193,7 @@ module.exports = function(app) {
     },{
       offices:  [1],
       managers: [4],
-      precincts: [201],
+      precincts: [200],
       locations: ["Iowa City"],
       type: 'national',
       start: new Date(2017,10,20),

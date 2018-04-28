@@ -3,7 +3,7 @@
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
 var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
 var loopback = require('loopback');
-var app = module.exports = loopback();
+
 module.exports = function(User) {
 
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
@@ -128,6 +128,7 @@ module.exports = function(User) {
 
   };
   User.resetPassword = function(id, cb) {
+    var newErrMsg, newErr;
     const request = require('request');
     request('http://localhost:3000/api/users/getEmail?id='+id, {json: true}, (err, res, body) => {
       if (err) {
@@ -144,10 +145,13 @@ module.exports = function(User) {
       var emailAddress = body.email;
 
       const request = require('request');
-      request('http://localhost:3000/api/users/'+ id, {method: 'PATCH', body: '{"password",'+ User.hashPassword(newPassword)+ '}'}, (err, res, body) => {
+      request('http://localhost:3000/api/users/'+ id, {method: 'PATCH', body: '{"password":"'+ User.hashPassword(newPassword)+ '"}'}, (err, res, body) => {
         if (err) {
-          console.log(err);
-          return cb(null, 400);
+          newErrMsg = 'Patch Failed';
+          newErr = new Error(newErrMsg);
+          newErr.statusCode = 401;
+          newErr.code = 'PATCH_FAIL';
+          return cb(newErr);
         }else {
 
           var html = '<p>Your password has been reset to:</p>\n' +
