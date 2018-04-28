@@ -30,7 +30,7 @@ module.exports = function(zipCode) {
       accepts: [
         {arg: 'zipCode', type: 'string', required: true},
       ],
-      http: {path: '/:zip/getPrecinct', verb: 'get'},
+      http: {path: '/:zipCode/getPrecinct', verb: 'get'},
       returns: {arg: 'precinctId', type: 'number'}
     }
   );
