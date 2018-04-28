@@ -10,12 +10,12 @@ import { ElectionService } from '../../_services/election.service';
   styleUrls: ['./home-voter.component.css']
 })
 export class HomeVoterComponent implements OnInit {
-  private currentUser: User;
   loading = true;
   elections: Election[] = [];
   localElections: Election[] = [];
   stateElections: Election[] = [];
   nationalElections: Election[] = [];
+  private currentUser: User;
 
   constructor(
     private userService: UserService,
@@ -26,6 +26,30 @@ export class HomeVoterComponent implements OnInit {
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.loadAllElections();
+  }
+
+  onSubmitVoteRequest() {
+    this.currentUser.votingStatus = 'requesting';
+    this.userService.update(this.currentUser).subscribe(
+      (data) => {
+        localStorage.setItem('currentUser', JSON.stringify(data));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  ongoingCurrentElections() {
+    return !this.loading || this.elections.length > 0;
+  }
+
+  userIsApproved() {
+    return this.currentUser.votingStatus === 'approved';
+  }
+
+  userIsRequesting() {
+    return this.currentUser.votingStatus === 'requesting';
   }
 
   private loadAllElections() {
@@ -60,30 +84,6 @@ export class HomeVoterComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  onSubmitVoteRequest() {
-    this.currentUser.votingStatus = 'requesting';
-    this.userService.update(this.currentUser).subscribe(
-      (data) => {
-        localStorage.setItem('currentUser', JSON.stringify(data));
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  ongoingCurrentElections() {
-    return !this.loading || this.elections.length > 0;
-  }
-
-  userIsApproved() {
-    return this.currentUser.votingStatus === 'approved';
-  }
-
-  userIsRequesting() {
-    return this.currentUser.votingStatus === 'requesting';
   }
 
 }
