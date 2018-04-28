@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           // TODO: Change error handling when other things can be sent.
+          console.log(error);
           this.alertService.error('Invalid username or password.');
           this.loading = false;
         });

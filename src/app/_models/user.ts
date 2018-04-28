@@ -13,4 +13,6 @@ export interface User {
   email: string;
   address: Address;
   role: 'voter' | 'manager' | 'administrator';
+  precinctId: number;
+  emailVerified: boolean;
 }
