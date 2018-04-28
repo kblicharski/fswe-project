@@ -19,6 +19,11 @@ module.exports = function(app) {
 
   //log a user in
   app.post('/login', function(req, res) {
+
+    if (req.body.registrationStatus === "unregistered") {
+      return Error("Users is unregistered");
+    }
+
     User.login({
       username: req.body.username,
       password: req.body.password
