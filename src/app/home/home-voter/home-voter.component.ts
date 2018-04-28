@@ -30,7 +30,9 @@ export class HomeVoterComponent implements OnInit {
 
   private loadAllElections() {
     this.loading = true;
-    this.userService.getElections(this.currentUser.precinctId, this.currentUser.id)
+    // const precinctId = this.currentUser.precinctId;
+    const precinctId = 200;
+    this.userService.getElections(precinctId, this.currentUser.id)
       .subscribe(
         elections => {
           this.elections = elections;

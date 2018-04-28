@@ -124,10 +124,10 @@ module.exports = function(app) {
       console.log('Vote models created: \n', vote);
     });
   });
-  app.dataSources.mysqlDS.automigrate('officeId', function(err) {
+  app.dataSources.mysqlDS.automigrate('office', function(err) {
     if (err) throw err;
 
-    app.models.officeId.create([{
+    app.models.office.create([{
       title: "Iowa City Election",
       candidates:  [1,2],
       description: "2018 Iowa City Mayor's Elections",
