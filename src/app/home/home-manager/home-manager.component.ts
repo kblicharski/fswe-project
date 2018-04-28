@@ -19,12 +19,6 @@ export class HomeManagerComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  private loadAllUsers() {
-    this.userService.getAllRequesting().subscribe(users => {
-      this.requestingUsers = users;
-    });
-  }
-
   approveVoteRequest(user: User) {
     user.votingStatus = 'approved';
     this.userService.update(user).subscribe(
@@ -47,6 +41,12 @@ export class HomeManagerComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  private loadAllUsers() {
+    this.userService.getAllRequesting().subscribe(users => {
+      this.requestingUsers = users;
+    });
   }
 
 }

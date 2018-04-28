@@ -32,12 +32,12 @@ const appRoutes: Routes = [
             {path: 'audit', component: AuditTrailComponent},
           ]
       },
+      {path: 'settings', component: SettingsComponent}
     ],
   },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/404'}
 ];

@@ -1,21 +1,19 @@
-<div class="col-xs-12 col-sm-10 offset-sm-1">
-  <h1>Hello, {{currentUser.firstName}}.</h1>
-  <br>
-  <div *ngIf="ongoingCurrentElection()">
-    <h2>{{ 'Precinct Name' }}</h2>
-    <div *ngIf="!userCanVote()">
-      <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
-    </div>
-    <div *ngIf="userCanVote()">
-      <!-- for ballot of ballots -->
-      <!-- app-ballot [ballot]=ballot -->
-      <!--<app-ballot></app-ballot>-->
-      <!--<app-ballot></app-ballot>-->
-      <app-spinner></app-spinner>
-    </div>
+<h1>Hello, {{currentUser.firstName}}.</h1>
+<br>
+<div *ngIf="ongoingCurrentElection()">
+  <h2>{{ 'Precinct Name' }}</h2>
+  <div *ngIf="!userCanVote()">
+    <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
   </div>
-  <div *ngIf="!ongoingCurrentElection()">
-    <p>There are no currently ongoing elections.</p>
+  <div *ngIf="userCanVote()">
+    <!-- for ballot of ballots -->
+    <!-- app-ballot [ballot]=ballot -->
+    <!--<app-ballot></app-ballot>-->
+    <!--<app-ballot></app-ballot>-->
+    <app-spinner></app-spinner>
   </div>
-  <br><br>
 </div>
+<div *ngIf="!ongoingCurrentElection()">
+  <p>There are no currently ongoing elections.</p>
+</div>
+<br><br>
