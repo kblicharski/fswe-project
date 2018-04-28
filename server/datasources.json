@@ -7,5 +7,18 @@
     "name": "mysqlDS",
     "connector": "mysql",
     "user": "fswe_user"
+  },
+  "emailDS": {
+    "connector": "mail",
+    "transports": [{
+      "type": "SMTP",
+      "host": "smtp.gmail.com",
+      "secure": true,
+      "port": 465,
+      "auth": {
+        "user": "fswe.team@gmail.com",
+        "pass": "fswe_user"
+      }
+    }]
   }
 }

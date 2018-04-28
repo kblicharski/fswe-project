@@ -1,0 +1,29 @@
+<div *ngIf="office">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ office.title }}</h5>
+      <p class="card-text">{{ office.description }}</p>
+      <form>
+        <fieldset class="form-group">
+          <div class="row">
+            <div class="col-sm-11">
+              <div *ngFor="let candidate of candidates">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="radio" id="radio1" value="option1">
+                  <label class="form-check-label" for="radio1">
+                    {{ candidate.name }}, {{ candidate.party }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Vote</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

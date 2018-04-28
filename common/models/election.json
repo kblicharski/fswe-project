@@ -1,0 +1,45 @@
+{
+  "name": "election",
+  "plural": "elections",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+
+    "managers": {
+      "type": ["number"],
+      "required": true
+    },
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date",
+      "required": true
+    },
+    "precincts": {
+      "type": ["number"],
+      "required": true
+    },
+    "offices" : {
+      "type": ["number"],
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true,
+      "default": "local"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

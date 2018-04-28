@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeManagerComponent } from './home-manager.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from '../../_pipes/filter-user.pipe';
+import { UserInfoComponent } from '../user-info/user-info.component';
+import { UserService } from '../../_services/user.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeManagerComponent', () => {
   let component: HomeManagerComponent;
@@ -8,9 +13,11 @@ describe('HomeManagerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeManagerComponent ]
+      declarations: [HomeManagerComponent, FilterPipe, UserInfoComponent],
+      imports: [FormsModule, HttpClientTestingModule],
+      providers: [UserService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

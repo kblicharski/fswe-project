@@ -16,6 +16,7 @@ module.exports = function(app) {
       emailVerified: true,
         votingStatus: "idle",
       role: "voter",
+        precinctId: 1,
       address: {
         street: "University Avenue",
         city: "Iowa City",
@@ -34,6 +35,7 @@ module.exports = function(app) {
         registrationStatus: "unregistered",
         emailVerified: true,
         votingStatus: "requesting",
+        precinctId: 1,
         role: "voter",
         address: {
           street: "University Avenue",
@@ -54,6 +56,7 @@ module.exports = function(app) {
         votingStatus: "approved",
       emailVerified: true,
       role: "administrator",
+        precinctId: 1,
       address: {
         street: "University Avenue",
         city: "Iowa City",
@@ -64,7 +67,7 @@ module.exports = function(app) {
         email: "jane.smith@gmail.com",
         username: "janeSmith",
         password:"janeSmith!",
-        firstName: "Jone",
+        firstName: "Jane",
         lastName: "Smith",
         ssn: "55555",
         dob: "2018-02-24T23:40:26.663Z",
@@ -73,6 +76,7 @@ module.exports = function(app) {
         emailVerified: true,
         votingStatus: "requesting",
         role: "voter",
+        precinctId: 1,
         address: {
           street: "University Avenue",
           city: "Iowa City",
@@ -92,24 +96,25 @@ module.exports = function(app) {
         votingStatus: "approved",
         emailVerified: true,
         role: "manager",
+        precinctId: 1,
         address: {
           street: "University Avenue",
           city: "Iowa City",
           state: "IA",
           zipCode: "52245"
         }
-    }], function(err, voters) {
+    }], function(err, users) {
       if (err) throw err;
 
-      console.log('User models created: \n', voters);
+      console.log('User models created: \n', users);
     });
   });
   app.dataSources.mysqlDS.automigrate('vote', function(err) {
     if (err) throw err;
 
     app.models.vote.create([{
-      ballotNumber: 1,
-      candidate:  "John Adams",
+      electionId: 1,
+      votesCast:  {"ballotId": 1, "candidateId": 1},
       voter: 1,
       time: new Date(2018,5,20)
 
@@ -119,40 +124,97 @@ module.exports = function(app) {
       console.log('Vote models created: \n', vote);
     });
   });
+  app.dataSources.mysqlDS.automigrate('office', function(err) {
+    if (err) throw err;
+
+    app.models.office.create([{
+      title: "Iowa City Election",
+      candidates:  [1,2],
+      description: "2018 Iowa City Mayor's Elections",
+
+    }], function(err, office) {
+      if (err) throw err;
+
+      console.log('Office models created: \n', office);
+    });
+  });
   app.dataSources.mysqlDS.automigrate('candidate', function(err) {
     if (err) throw err;
 
     app.models.candidate.create([{
       name: "John Smith",
       party:  "Democrat",
-      dob: new Date(1965,5,20)
+      dob: new Date(1965,5,20),
+
 
     },{
       name: "John Adams",
       party:  "Republican",
-      dob: new Date(1964,5,20)
-    }], function(err, vote) {
+      dob: new Date(1964,5,20),
+
+    }], function(err, candidate) {
       if (err) throw err;
 
-      console.log('Candidate models created: \n', vote);
+      console.log('Candidate models created: \n', candidate);
     });
   });
-  app.dataSources.mysqlDS.automigrate('ballot', function(err) {
+  app.dataSources.mysqlDS.automigrate('election', function(err) {
     if (err) throw err;
 
-    app.models.ballot.create([{
-      ballotNumber: 1,
-      candidates:  ["John Adams", "John Smith"],
-      managers: ["Suzy Collins"],
+    app.models.election.create([{
+      offices:  [1],
+      managers: [4],
+      precincts: [200,201],
       locations: ["Iowa City"],
       start: new Date(2018,5,20),
       end: new Date(2018,6,20),
       description: "Iowa City Election"
 
-  }], function(err, vote) {
+  },{
+      offices:  [1],
+      managers: [4],
+      precincts: [200],
+      locations: ["Iowa City"],
+      type: 'state',
+      start: new Date(2018,5,20),
+      end: new Date(2018,6,20),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
+      precincts: [200],
+      locations: ["Iowa City"],
+      type: 'local',
+      start: new Date(2017,5,20),
+      end: new Date(2017,6,20),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
+      precincts: [200],
+      locations: ["Iowa City"],
+      type: 'national',
+      start: new Date(2017,10,20),
+      end: new Date(2017,10,21),
+      description: "Iowa Election"
+
+    },{
+      offices:  [1],
+      managers: [4],
+      precincts: [200],
+      locations: ["USA"],
+      type: 'national',
+      start: new Date(2018,5,20),
+      end: new Date(2018,6,20),
+      description: "Presidential Election"
+
+      }
+    ], function(err, election) {
       if (err) throw err;
 
-      console.log('Ballot models created: \n', vote);
+      console.log('Elections models created: \n', election);
     });
   });
   app.dataSources.mysqlDS.automigrate('accessToken', function(err) {

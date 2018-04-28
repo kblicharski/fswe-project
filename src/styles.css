@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -10,4 +11,14 @@ a {
 
 .help-block {
   font-size: 12px;
+}
+
+@media (min-width: 550px) {
+  .my-float-right {
+    float: right !important;
+  }
+}
+
+.jumbotron {
+  min-height: 100vh;
 }

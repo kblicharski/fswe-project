@@ -1,21 +1,62 @@
-<div class="col-xs-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
-  <h1>Hello, {{currentUser.firstName}}.</h1>
-  <br>
-  <div *ngIf="ongoingCurrentElection()">
-    <h2>{{ 'Precinct Name' }}</h2>
-    <div *ngIf="!userCanVote()">
+<div *ngIf="ongoingCurrentElections()">
+  <div *ngIf="!userIsRequesting()">
+    <div *ngIf="!userIsApproved()">
       <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
     </div>
-    <div *ngIf="userCanVote()">
-      <!-- for ballot of ballots -->
-      <!-- app-ballot [ballot]=ballot -->
-      <!--<app-ballot></app-ballot>-->
-      <!--<app-ballot></app-ballot>-->
-      <app-spinner></app-spinner>
+    <div *ngIf="userIsApproved()">
+      <div class="row">
+        <!-- Local Elections -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <div *ngIf="localElections.length > 0">
+            <!--<h2>Local Elections:</h2>-->
+            <!--<hr>-->
+            <div *ngFor="let election of localElections">
+              <h4>{{ election.description }}</h4>
+              <div *ngFor="let officeId of election.offices">
+                <app-office [officeId]="officeId"></app-office>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- State Elections -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <div *ngIf="stateElections.length > 0">
+            <!--<h2>State Elections:</h2>-->
+            <!--<hr>-->
+            <div *ngFor="let election of stateElections">
+              <h4>{{ election.description }}</h4>
+              <div *ngFor="let officeId of election.offices">
+                <app-office [officeId]="officeId"></app-office>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- National Elections -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <div *ngIf="nationalElections.length > 0">
+            <!--<h2>National Elections:</h2>-->
+            <!--<hr>-->
+            <div *ngFor="let election of nationalElections">
+              <h4>{{ election.description }}</h4>
+              <div *ngFor="let officeId of election.offices">
+                <app-office [officeId]="officeId"></app-office>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div *ngIf="!ongoingCurrentElection()">
-    <p>There are no currently ongoing elections.</p>
+  <div *ngIf="userIsRequesting()">
+    <app-spinner></app-spinner>
   </div>
-  <br><br>
+</div>
+<div *ngIf="!loading && !ongoingCurrentElections()">
+  <p>There are no currently ongoing elections.</p>
 </div>

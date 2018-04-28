@@ -7,12 +7,12 @@
     "validateUpsert": true
   },
   "properties": {
-    "ballotNumber": {
+    "electionId": {
       "type": "number",
       "required": true
     },
-    "candidate": {
-      "type": "string",
+    "votesCast": {
+      "type": "json",
       "required": true
     },
     "voter": {

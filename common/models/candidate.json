@@ -18,6 +18,11 @@
     "dob": {
       "type": "date",
       "required": true
+    },
+    "voteCount": {
+      "type": "number",
+      "required": true,
+      "default": 0
     }
   },
   "validations": [],

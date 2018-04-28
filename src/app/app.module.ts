@@ -3,29 +3,37 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './entry/register/register.component';
+import { LoginComponent } from './entry/login/login.component';
 import { AuthenticationService } from './_services/authentication.service';
 import { AlertService } from './_services/alert.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './alert/alert.component';
+import { AlertComponent } from './utility/alert/alert.component';
 import { UserService } from './_services/user.service';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { BallotComponent } from './ballot/ballot.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SettingsComponent } from './settings/settings.component';
+import { ForgotPasswordComponent } from './entry/forgot-password/forgot-password.component';
+import { OfficeComponent } from './home/home-voter/office/office.component';
+import { FooterComponent } from './utility/footer/footer.component';
+import { NavbarComponent } from './utility/navbar/navbar.component';
+import { SettingsComponent } from './home/settings/settings.component';
 import { UserInfoComponent } from './home/user-info/user-info.component';
 import { FilterPipe } from './_pipes/filter-user.pipe';
 import { HomeVoterComponent } from './home/home-voter/home-voter.component';
 import { HomeManagerComponent } from './home/home-manager/home-manager.component';
 import { HomeAdministratorComponent } from './home/home-administrator/home-administrator.component';
-import { SpinnerComponent } from './home/spinner/spinner.component';
+import { SpinnerComponent } from './utility/spinner/spinner.component';
 import { VerifyVotersComponent } from './home/home-administrator/verify-voters/verify-voters.component';
 import { ElectionManagementComponent } from './home/home-administrator/election-management/election-management.component';
+import { VoterGuard } from './_guards/voter.guard';
+import { ManagerGuard } from './_guards/manager.guard';
+import { AdminGuard } from './_guards/admin.guard';
+import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
+import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
+import { ElectionService } from './_services/election.service';
+import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,6 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
     LoginComponent,
     AlertComponent,
     ForgotPasswordComponent,
-    BallotComponent,
     FooterComponent,
     NavbarComponent,
     SettingsComponent,
@@ -47,19 +54,30 @@ import { ElectionManagementComponent } from './home/home-administrator/election-
     SpinnerComponent,
     VerifyVotersComponent,
     ElectionManagementComponent,
+    PageNotFoundComponent,
+    AuditTrailComponent,
+    OfficeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    MatStepperModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,
+    VoterGuard,
+    ManagerGuard,
+    AdminGuard,
     AlertService,
     AuthenticationService,
     UserService,
+    ElectionService
   ],
   bootstrap: [AppComponent]
 })

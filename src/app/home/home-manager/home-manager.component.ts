@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 
@@ -8,7 +8,6 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./home-manager.component.css']
 })
 export class HomeManagerComponent implements OnInit {
-  @Input() currentUser: User;
   requestingUsers: User[];
 
   constructor(private userService: UserService) {
@@ -16,12 +15,6 @@ export class HomeManagerComponent implements OnInit {
 
   ngOnInit() {
     this.loadAllUsers();
-  }
-
-  private loadAllUsers() {
-    this.userService.getAllRequesting().subscribe(users => {
-      this.requestingUsers = users;
-    });
   }
 
   approveVoteRequest(user: User) {
@@ -46,6 +39,12 @@ export class HomeManagerComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  private loadAllUsers() {
+    this.userService.getAllRequesting().subscribe(users => {
+      this.requestingUsers = users;
+    });
   }
 
 }

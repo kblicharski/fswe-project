@@ -8,6 +8,7 @@ import { User } from '../../_models/user';
 })
 export class UserInfoComponent implements OnInit {
   @Input() user: User;
+  @Input() type: 'administrator' | 'manager';
   @Output() onAllow: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDeny: EventEmitter<any> = new EventEmitter<any>();
 
