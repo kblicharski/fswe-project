@@ -128,7 +128,6 @@ module.exports = function(User) {
 
   };
   User.resetPassword = function(id, cb) {
-    var newErrMsg, newErr;
     const request = require('request');
     request('http://localhost:3000/api/users/getEmail?id='+id, {json: true}, (err, res, body) => {
       if (err) {
@@ -144,14 +143,13 @@ module.exports = function(User) {
       var newPassword = retVal;
       var emailAddress = body.email;
 
-      user.updateAttributes('password',newPassword,function(err,cb) {
+      user.updateAttributes('password', User.hashPassword(newPassword), function (err, instance) {
         if (err) {
-          newErrMsg = 'Patch Failed';
-          newErr = new Error(newErrMsg);
-          newErr.statusCode = 401;
-          newErr.code = 'PATCH_FAIL';
-          return cb(newErr);
-        }else {
+          cb(err);
+        } else {
+          cb(null, true);
+        }
+      });
 
           var html = '<p>Your password has been reset to:</p>\n' +
             '<p>' + newPassword + '</p>';
@@ -162,8 +160,6 @@ module.exports = function(User) {
             console.log(err);
             cb(err);
           }
-        }
-      });
     });
   };
   User.sendMail = function(toEmail, html, subject) {
