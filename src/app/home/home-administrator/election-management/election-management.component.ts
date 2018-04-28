@@ -7,7 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./election-management.component.css']
 })
 export class ElectionManagementComponent implements OnInit {
-  isLinear = false;
+  displayMode: 'create' | 'edit';
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
