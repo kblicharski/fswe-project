@@ -89,6 +89,45 @@ module.exports = function(User) {
         cb(err);
       }
   };
+  User.loginUser = function(username, password, cb) {
+    var newErrMsg, newErr;
+    const request = require('request');
+    request('http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%20%22'+username+'%22%7D%7D', {json: true}, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
+      if(body[0].registrationStatus === "unregistered") {
+        newErrMsg = 'User is unregistered';
+        newErr = new Error(newErrMsg);
+        newErr.statusCode = 401;
+        newErr.code = 'LOGIN_FAILED_PWD';
+        return cb(newErr);
+      }
+      try {
+        User.login({username: username, password: password},function(err,isMatch) {
+          if(isMatch) {
+            newErrMsg = 'Login Success';
+            newErr = new Error(newErrMsg);
+            newErr.statusCode = 200;
+            return cb(null, 200);
+          }else {
+            newErrMsg = 'User specified wrong current password !';
+            newErr = new Error(newErrMsg);
+            newErr.statusCode = 402;
+            newErr.code = 'LOGIN_FAILED_PWD';
+            return cb(newErr);
+          }
+        });
+      }catch (err) {
+        console.log(err);
+        cb(err);
+      }
+
+
+    });
+
+  };
+
   User.remoteMethod(
     'getEmail',
       {
@@ -119,16 +158,20 @@ module.exports = function(User) {
       http: {path: '/:id/changePassword', verb: 'post'},
       returns: {arg: 'passwordChange', type: 'boolean'}
     }
-  )
-};
-function includes(k) {
-  for(var i=0; i < this.length; i++){
-    if( this[i] === k || ( this[i] !== this[i] && k !== k ) ){
-      return true;
+  );
+  User.remoteMethod(
+    'loginUser',
+    {
+      accepts: [
+        {arg: 'username', type: 'string', http: {source: 'query'} },
+        {arg: 'password', type: 'string', http: {source: 'query'} }
+      ],
+      http: {path: '/loginUser', verb: 'post'},
+      returns: {arg: 'status', type: 'string'}
     }
-  }
-  return false;
-}
+  );
+};
+
 function registrationStatusValidator(err) {
   if (this.registrationStatus === "registered") true;
   else if (this.registrationStatus === "unregistered") true;
