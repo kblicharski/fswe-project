@@ -5,6 +5,7 @@ import { SpinnerComponent } from '../../utility/spinner/spinner.component';
 import { ElectionService } from '../../_services/election.service';
 import { UserService } from '../../_services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { OfficeComponent } from './office/office.component';
 
 describe('HomeVoterComponent', () => {
   let component: HomeVoterComponent;
@@ -12,7 +13,7 @@ describe('HomeVoterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeVoterComponent, SpinnerComponent],
+      declarations: [HomeVoterComponent, SpinnerComponent, OfficeComponent],
       imports: [HttpClientTestingModule],
       providers: [UserService, ElectionService]
     })

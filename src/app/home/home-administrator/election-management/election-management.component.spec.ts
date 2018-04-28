@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElectionManagementComponent } from './election-management.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ElectionManagementComponent', () => {
   let component: ElectionManagementComponent;
@@ -10,7 +12,14 @@ describe('ElectionManagementComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ElectionManagementComponent],
-      imports: [FormsModule]
+      imports: [
+        FormsModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        BrowserAnimationsModule
+      ]
     })
       .compileComponents();
   }));
