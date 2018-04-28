@@ -40,5 +40,9 @@
   "office": {
     "dataSource": "mysqlDS",
     "public": true
+  },
+  "Email": {
+    "dataSource": "emailDS",
+    "public": true
   }
 }

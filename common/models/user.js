@@ -10,7 +10,7 @@ module.exports = function(User) {
   User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
   User.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message : {with: 'User name is in wrong format'}});
   User.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
-  //User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
+  User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting registrationStatus'})
   User.getEmail = function(id, cb ) {
@@ -111,7 +111,7 @@ module.exports = function(User) {
             newErr.statusCode = 200;
             return cb(null, 200);
           }else {
-            newErrMsg = 'User specified wrong current password !';
+            newErrMsg = 'User specified wrong current password';
             newErr = new Error(newErrMsg);
             newErr.statusCode = 402;
             newErr.code = 'LOGIN_FAILED_PWD';
@@ -127,7 +127,78 @@ module.exports = function(User) {
     });
 
   };
+  User.resetPassword = function(id, cb) {
+    const request = require('request');
+    request('http://localhost:3000/api/users/getEmail?id='+id, {json: true}, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
 
+      var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+      for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+      }
+      const newPassword = retVal;
+      const emailAddress = body.email;
+      User.app.User.update
+      User.app.models.User.updateAttribute('newPassword',User.hashPassword(newPassword), function (err, instance) {
+        if (err) {
+          cb(err);
+        } else {
+          cb(null, true);
+        }
+      });
+      const html = '<p>Your password has been reset to:</p>\n' +
+        '<p>'+ newPassword + '</p>';
+      try {
+        User.sendMail(emailAddress, html, 'Your new password');
+        return cb(null,200);
+      }catch (err) {
+        console.log(err);
+        cb(err);
+      }
+
+
+    });
+  };
+  User.sendMail = function(toEmail, html, subject) {
+
+    // send email using Email model of Loopback
+    User.app.models.Email.send({
+      to: toEmail,
+      from: 'no-reply@email.com',
+      subject: subject,
+      html: html
+    }, function(err, mail) {
+      console.log('email sent!');
+      if(err) return err;
+    });
+  };
+  User.remoteMethod(
+    'resetPassword',
+    {
+      accepts: [
+        {arg: 'id', type: 'string', required: true},
+      ],
+      http: {path: '/:id/resetPassword', verb: 'get'},
+      returns: {arg: 'status', type: 'string'}
+    }
+  );
+  User.remoteMethod(
+    'sendMail',
+    {
+      http: {path: '/sendEmail', verb: 'get'},
+      accepts: [
+        {arg: 'toEmail', type: 'string', http: { source: 'query' } },
+        {arg: 'html', type: 'string', http: { source: 'query' } },
+        {arg: 'subject', type: 'string', http: { source: 'query' } }
+        ],
+      returns: {arg: 'status', type: 'string'}
+    }
+
+  );
   User.remoteMethod(
     'getEmail',
       {
