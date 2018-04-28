@@ -17,8 +17,6 @@ export class NavbarComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       this.homeLink = '/' + user.role;
-      console.log('user found');
-      console.log(this.homeLink);
 
     } else {
       this.homeLink = '/login';

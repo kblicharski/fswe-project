@@ -1,19 +1,47 @@
-<h1>Hello, {{currentUser.firstName}}.</h1>
-<br>
-<div *ngIf="ongoingCurrentElection()">
-  <h2>{{ 'Precinct Name' }}</h2>
-  <div *ngIf="!userCanVote()">
-    <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+<div *ngIf="ongoingCurrentElections()">
+  <div *ngIf="!userIsRequesting()">
+    <div *ngIf="!userIsApproved()">
+      <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+    </div>
+    <div *ngIf="userIsApproved()">
+      <!-- Local Elections -->
+      <div *ngIf="localElections.length > 0">
+        <h2>Local Elections:</h2>
+        <div *ngFor="let election of localElections">
+          <h3>{{ election.description }}</h3>
+          <div *ngFor="let officeId of election.offices">
+            <app-office [officeId]="officeId"></app-office>
+          </div>
+        </div>
+      </div>
+
+      <!-- State Elections -->
+      <div *ngIf="stateElections.length > 0">
+        <h2>State Elections:</h2>
+        <div *ngFor="let election of stateElections">
+          <h3>{{ election.description }}</h3>
+          <div *ngFor="let officeId of election.offices">
+            <app-office [officeId]="officeId"></app-office>
+          </div>
+        </div>
+      </div>
+
+      <!-- National Elections -->
+      <div *ngIf="nationalElections.length > 0">
+        <h2>National Elections:</h2>
+        <div *ngFor="let election of nationalElections">
+          <h3>{{ election.description }}</h3>
+          <div *ngFor="let officeId of election.offices">
+            <app-office [officeId]="officeId"></app-office>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div *ngIf="userCanVote()">
-    <!-- for ballot of ballots -->
-    <!-- app-ballot [ballot]=ballot -->
-    <!--<app-ballot></app-ballot>-->
-    <!--<app-ballot></app-ballot>-->
+  <div *ngIf="userIsRequesting()">
     <app-spinner></app-spinner>
   </div>
 </div>
-<div *ngIf="!ongoingCurrentElection()">
+<div *ngIf="!loading && !ongoingCurrentElections()">
   <p>There are no currently ongoing elections.</p>
 </div>
-<br><br>

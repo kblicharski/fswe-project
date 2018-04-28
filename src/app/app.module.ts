@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './utility/alert/alert.component';
 import { UserService } from './_services/user.service';
 import { ForgotPasswordComponent } from './entry/forgot-password/forgot-password.component';
-import { BallotComponent } from './home/ballot/ballot.component';
+import { OfficeComponent } from './home/home-voter/office/office.component';
 import { FooterComponent } from './utility/footer/footer.component';
 import { NavbarComponent } from './utility/navbar/navbar.component';
 import { SettingsComponent } from './home/settings/settings.component';
@@ -31,6 +31,7 @@ import { ManagerGuard } from './_guards/manager.guard';
 import { AdminGuard } from './_guards/admin.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
+import { ElectionService } from './_services/election.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,6 @@ import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit
     LoginComponent,
     AlertComponent,
     ForgotPasswordComponent,
-    BallotComponent,
     FooterComponent,
     NavbarComponent,
     SettingsComponent,
@@ -54,6 +54,7 @@ import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit
     ElectionManagementComponent,
     PageNotFoundComponent,
     AuditTrailComponent,
+    OfficeComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +70,7 @@ import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit
     AlertService,
     AuthenticationService,
     UserService,
+    ElectionService
   ],
   bootstrap: [AppComponent]
 })

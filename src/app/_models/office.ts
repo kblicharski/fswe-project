@@ -1,7 +1,6 @@
-import { Candidate } from './candidate';
-
 export interface Office {
+  id: number;
   title: string;
   description: string;
-  candidates: Candidate[];
+  candidates: number[];
 }

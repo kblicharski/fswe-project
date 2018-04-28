@@ -8,11 +8,9 @@ import { UserService } from '../../_services/user.service';
   styleUrls: ['./home-manager.component.css']
 })
 export class HomeManagerComponent implements OnInit {
-  currentUser: User;
   requestingUsers: User[];
 
   constructor(private userService: UserService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

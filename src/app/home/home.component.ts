@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,24 @@ import { User } from '../_models/user';
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  userStatus: 'voter' | 'manager' | 'administrator';
+  private currentUrl: string;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.userStatus = this.currentUser.role;
   }
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+      }
+    });
+  }
+
+  onSettingsPage() {
+    return this.currentUrl === '/settings';
   }
 
 }
