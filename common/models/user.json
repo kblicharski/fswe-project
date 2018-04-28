@@ -57,7 +57,7 @@
     "precinctId": {
       "type": "number",
       "required": true,
-      "defualt": -1
+      "default": 200
     }
   },
   "validations": [],

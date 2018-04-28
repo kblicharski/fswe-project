@@ -144,8 +144,7 @@ module.exports = function(User) {
       var newPassword = retVal;
       var emailAddress = body.email;
 
-      const request = require('request');
-      request('http://localhost:3000/api/users/'+ id, {method: 'PATCH', body: '{"password":"'+ User.hashPassword(newPassword)+ '"}'}, (err, res, body) => {
+      user.updateAttributes('password',newPassword,function(err,cb) {
         if (err) {
           newErrMsg = 'Patch Failed';
           newErr = new Error(newErrMsg);
