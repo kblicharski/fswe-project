@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Election } from '../_models/election';
 import { Office } from '../_models/office';
 import { Candidate } from '../_models/candidate';
