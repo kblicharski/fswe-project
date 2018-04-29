@@ -233,4 +233,16 @@ module.exports = function(app) {
       console.log('Access Token models created: \n', accessToken);
     });
   });
+  app.dataSources.mysqlDS.automigrate('audit', function(err) {
+    if (err) throw err;
+
+    app.models.audit.create([{
+      action: "System created",
+      time: new Date()
+    }], function(err, audit) {
+      if (err) throw err;
+
+      console.log('Audit models created: \n', audit);
+    });
+  });
 };

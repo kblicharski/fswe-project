@@ -130,11 +130,16 @@ module.exports = function(User) {
   };
   User.resetPassword = function(id, cb) {
     var x = new XMLHttpRequest();
+    x.open("POST","http://localhost:3000/api/audits", true);
+
     const request = require('request');
     request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
+      const content = '{"action":"(200) '+body.username +' reset password","time":"'+ new Date()+ '"}';
+      console.log(content);
+      x.send(content);
 
       var length = 8,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
