@@ -16,7 +16,7 @@ module.exports = function(app) {
       emailVerified: true,
         votingStatus: "idle",
       role: "voter",
-        precinctId: 1,
+        precinctId: 200,
       address: {
         street: "University Avenue",
         city: "Iowa City",
@@ -166,8 +166,8 @@ module.exports = function(app) {
       managers: [4],
       precincts: [200,201],
       locations: ["Iowa City"],
-      start: new Date(2018,5,20),
-      end: new Date(2018,6,20),
+      start: new Date(2018,3,20),
+      end: new Date(2018,10,20),
       description: "Iowa City Election"
 
   },{
@@ -176,7 +176,7 @@ module.exports = function(app) {
       precincts: [200],
       locations: ["Iowa City"],
       type: 'state',
-      start: new Date(2018,5,20),
+      start: new Date(2018,4,20),
       end: new Date(2018,6,20),
       description: "Iowa Election"
 

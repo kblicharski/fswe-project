@@ -27,12 +27,12 @@ module.exports = function(User) {
     })
   };
   User.getElections = function(pid,eid, cb ) {
-
+      var currentTime = new Date();
       const request = require('request');
       var precinctId = pid;
       var filterOut = [];
       var electionIds = [];
-      request('http://localhost:3000/api/elections?filter=%7B%22fields%22%3A%7B%22id%22%3A%20true%2C%20%22precincts%22%3Atrue%7D%7D', { json: true }, (err, res, body) => {
+      request('http://localhost:3000/api/elections?filter=%7B%20%22where%22%3A%20%7B%20%22and%22%3A%20%5B%7B%20%22start%22%3A%20%7B%20%22lt%22%3A%20%22'+currentTime+'%22%20%7D%7D%2C%20%7B%20%22end%22%3A%20%7B%20%22gt%22%3A%20%22'+currentTime+'%22%20%7D%7D%5D%7D%7D', { json: true }, (err, res, body) => {
         if (err) {
           return console.log(err);
         }
@@ -142,15 +142,8 @@ module.exports = function(User) {
       }
       var newPassword = retVal;
       var emailAddress = body.email;
-
-      user.updateAttributes('password', User.hashPassword(newPassword), function (err, instance) {
-        if (err) {
-          cb(err);
-        } else {
-          cb(null, true);
-        }
-      });
-
+      try {
+        User.updateAttribute('password',User.hashPassword(newPassword),function(err, cb) {
           var html = '<p>Your password has been reset to:</p>\n' +
             '<p>' + newPassword + '</p>';
           try {
@@ -160,6 +153,13 @@ module.exports = function(User) {
             console.log(err);
             cb(err);
           }
+        });
+
+      } catch(err) {
+        console.log(err);
+        cb(err);
+      }
+
     });
   };
   User.sendMail = function(toEmail, html, subject) {
