@@ -73,6 +73,8 @@ module.exports = function(User) {
             if (err) {
               cb(err);
             } else {
+              const content = {"action": id + " has changed their password", "time": new Date()};
+              User.app.models.audit.create(content);
               cb(null, true);
             }
           });
@@ -97,10 +99,18 @@ module.exports = function(User) {
       if (err) {
         return console.log(err);
       }
-      if(body[0].registrationStatus === "unregistered") {
-        newErrMsg = 'User is unregistered';
+      try {
+        if(body[0].registrationStatus === "unregistered") {
+          newErrMsg = 'User is unregistered';
+          newErr = new Error(newErrMsg);
+          newErr.statusCode = 401;
+          newErr.code = 'LOGIN_FAILED_PWD';
+          return cb(newErr);
+        }
+      } catch (err) {
+        newErrMsg = 'Error invalid user';
         newErr = new Error(newErrMsg);
-        newErr.statusCode = 401;
+        newErr.statusCode = 402;
         newErr.code = 'LOGIN_FAILED_PWD';
         return cb(newErr);
       }
@@ -110,6 +120,8 @@ module.exports = function(User) {
             newErrMsg = 'Login Success';
             newErr = new Error(newErrMsg);
             newErr.statusCode = 200;
+            const content = {"action": body[0].username + " logged in", "time": new Date()};
+            User.app.models.audit.create(content);
             return cb(null, 200);
           }else {
             newErrMsg = 'User specified wrong current password';
@@ -129,17 +141,14 @@ module.exports = function(User) {
 
   };
   User.resetPassword = function(id, cb) {
-    var x = new XMLHttpRequest();
-    x.open("POST","http://localhost:3000/api/audits", true);
-
     const request = require('request');
     request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
-      const content = '{"action":"(200) '+body.username +' reset password","time":"'+ new Date()+ '"}';
-      console.log(content);
-      x.send(content);
+      const content = {"action": body.username + " reset his password", "time": new Date()};
+      User.app.models.audit.create(content);
+
 
       var length = 8,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
@@ -184,7 +193,7 @@ module.exports = function(User) {
       var emailAddress = body.email;
       try {
         User.findById(id, function(err, user) {
-          if (err) return err
+          if (err) return err;
           user.updateAttribute('registrationStatus', regStatus, function (err, user) {
             if (err) {
               console.log(err);
@@ -198,7 +207,9 @@ module.exports = function(User) {
                 console.log(err);
                 return cb(null, 400);
               }
-            }
+            };
+            const content = {"action": body.username + "'s registration status has been changed to "+ regStatus, "time": new Date()};
+            User.app.models.audit.create(content);
             return cb(null,200);
           });
         });

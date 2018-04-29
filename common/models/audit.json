@@ -9,11 +9,11 @@
   "properties": {
     "action": {
       "type": "string",
-      "required":true
+      "required":false
     },
     "time": {
       "type": "date",
-      "required": true
+      "required": false
     }
   },
   "validations": [],
