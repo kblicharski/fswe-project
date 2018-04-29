@@ -3,6 +3,7 @@
 //contains one lower-case, one upper-case, one special character, and minimum of 6 characters
 var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\\w!@#$%^&*]{6,}$");
 var loopback = require('loopback');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 module.exports = function(User) {
 
@@ -128,8 +129,9 @@ module.exports = function(User) {
 
   };
   User.resetPassword = function(id, cb) {
+    var x = new XMLHttpRequest();
     const request = require('request');
-    request('http://localhost:3000/api/users/getEmail?id='+id, {json: true}, (err, res, body) => {
+    request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
@@ -143,22 +145,63 @@ module.exports = function(User) {
       var newPassword = retVal;
       var emailAddress = body.email;
       try {
-        User.updateAttribute('password',User.hashPassword(newPassword),function(err, cb) {
+        User.findById(id, function(err, user) {
+          if (err) return err
+          user.updateAttribute('password', User.hashPassword(newPassword), function(err, user) {
+            if (err) return cb(null,404);
+          });
           var html = '<p>Your password has been reset to:</p>\n' +
             '<p>' + newPassword + '</p>';
-          try {
-            User.sendMail(emailAddress, html, 'Your new password');
-            return cb(null, 200);
-          } catch (err) {
-            console.log(err);
-            cb(err);
-          }
-        });
 
+          User.sendMail(emailAddress, html, 'Your new password'), function(err, user) {
+            if(err) {
+              console.log(err);
+              return cb(null, 400);
+            }
+          }
+
+
+        });
       } catch(err) {
         console.log(err);
         cb(err);
       }
+      return cb(null, 200);
+
+    });
+  };
+  User.changeRegistrationStatus = function(id,regStatus, cb) {
+    const request = require('request');
+    request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
+      var emailAddress = body.email;
+      try {
+        User.findById(id, function(err, user) {
+          if (err) return err
+          user.updateAttribute('registrationStatus', regStatus, function (err, user) {
+            if (err) {
+              console.log(err);
+              return cb(null, 404);
+            }
+            var html = '<p>Your voting status has been set to:</p>\n' +
+              '<p>' + regStatus + '</p>';
+
+            User.sendMail(emailAddress, html, 'Voting Status has Changed'), function (err, user) {
+              if (err) {
+                console.log(err);
+                return cb(null, 400);
+              }
+            }
+            return cb(null,200);
+          });
+        });
+      } catch(err) {
+        console.log(err);
+        return cb(err);
+      }
+
 
     });
   };
@@ -167,7 +210,7 @@ module.exports = function(User) {
     // send email using Email model of Loopback
     User.app.models.Email.send({
       to: toEmail,
-      from: 'no-reply@email.com',
+      from: 'no-reply@gmail.com',
       subject: subject,
       html: html
     }, function(err, mail) {
@@ -239,6 +282,18 @@ module.exports = function(User) {
       returns: {arg: 'status', type: 'string'}
     }
   );
+  User.remoteMethod(
+    'changeRegistrationStatus',
+    {
+      accepts: [
+        {arg: 'id', type: 'string', required:true },
+        {arg: 'status', type: 'string', http: {source: 'query'} }
+      ],
+      http: {path: '/:id/changeRegistrationStatus', verb: 'post'},
+      returns: {arg: 'status', type: 'string'}
+    }
+  );
+
 };
 
 function registrationStatusValidator(err) {

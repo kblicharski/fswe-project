@@ -37,6 +37,8 @@
     "popper.js": "^1.14.3",
     "request": "^2.85.0",
     "rxjs": "^6.0.0",
+    "w3c-xmlhttprequest": "^2.1.2",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
