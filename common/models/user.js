@@ -104,7 +104,7 @@ module.exports = function(User) {
         return cb(newErr);
       }
       try {
-        user.login({username: username, password: password},function(err,isMatch) {
+        User.login({username: username, password: password},function(err,isMatch) {
           if(isMatch) {
             newErrMsg = 'Login Success';
             newErr = new Error(newErrMsg);
