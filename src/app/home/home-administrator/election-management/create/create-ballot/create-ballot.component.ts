@@ -40,8 +40,11 @@ export class CreateBallotComponent implements OnInit {
   }
 
   onCreateBallot() {
-    this.ballot.candidates = this.selectedValue;
-    console.log(this.ballot);
+    const ids = [];
+    for (const val of this.selectedValue) {
+      ids.push(val.id);
+    }
+    this.ballot.candidates = ids;
     this.electionService.createOffice(this.ballot).subscribe(
       (data) => {
         const audit = {
