@@ -40,7 +40,7 @@ module.exports = function (app) {
         driversLicense: "kc5551231",
         registrationStatus: "registered",
         emailVerified: true,
-        votingStatus: "idle",
+        votingStatus: "approved",
         role: "voter",
         precinctId: 200,
         address: {
@@ -66,7 +66,7 @@ module.exports = function (app) {
         driversLicense: "lz5551231",
         registrationStatus: "registered",
         emailVerified: true,
-        votingStatus: "idle",
+        votingStatus: "approved",
         role: "voter",
         precinctId: 200,
         address: {
@@ -92,7 +92,7 @@ module.exports = function (app) {
         driversLicense: "lz5551231",
         registrationStatus: "registered",
         emailVerified: true,
-        votingStatus: "idle",
+        votingStatus: "approved",
         role: "voter",
         precinctId: 200,
         address: {
@@ -119,7 +119,7 @@ module.exports = function (app) {
         driversLicense: "lz5551231",
         registrationStatus: "registered",
         emailVerified: true,
-        votingStatus: "idle",
+        votingStatus: "approved",
         role: "voter",
         precinctId: 200,
         address: {
