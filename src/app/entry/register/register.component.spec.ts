@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../_services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AlertService } from '../../_services/alert.service';
+import {AuditService} from '../../_services/audit.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -15,7 +16,7 @@ describe('RegisterComponent', () => {
     TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
-      providers: [UserService, AlertService]
+      providers: [UserService, AlertService, AuditService]
     })
       .compileComponents();
   }));

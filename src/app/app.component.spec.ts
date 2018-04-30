@@ -5,6 +5,9 @@ import { NavbarComponent } from './utility/navbar/navbar.component';
 import { FooterComponent } from './utility/footer/footer.component';
 import { AlertComponent } from './utility/alert/alert.component';
 import { AlertService } from './_services/alert.service';
+import {AuthenticationService} from './_services/authentication.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AuditService} from './_services/audit.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,8 +18,8 @@ describe('AppComponent', () => {
         FooterComponent,
         AlertComponent
       ],
-      imports: [RouterTestingModule],
-      providers: [AlertService]
+      imports: [RouterTestingModule, RouterTestingModule, HttpClientTestingModule],
+      providers: [AlertService, AuthenticationService, AuditService]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserInfoComponent } from './user-info.component';
+import {UserService} from '../../_services/user.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {Router} from '@angular/router';
+import {HttpClient, HttpHandler} from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AuditService} from '../../_services/audit.service';
 
 describe('UserInfoComponent', () => {
   let component: UserInfoComponent;
@@ -8,7 +14,9 @@ describe('UserInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UserInfoComponent]
+      declarations: [UserInfoComponent],
+      providers: [UserService, AuditService],
+      imports: [RouterTestingModule, HttpClientTestingModule]
     })
       .compileComponents();
   }));
