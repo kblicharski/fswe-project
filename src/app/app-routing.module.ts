@@ -15,10 +15,20 @@ import { VerifyVotersComponent } from './home/home-administrator/verify-voters/v
 import { VoterGuard } from './_guards/voter.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
-import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
-import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
-import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
+import { CreateElectionComponent } from './home/home-administrator/election-management/create/create-election/create-election.component';
+import { EditUserComponent } from './home/home-administrator/election-management/edit/edit-users/edit-user/edit-user.component';
 import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
+import { CreateBallotComponent } from './home/home-administrator/election-management/create/create-ballot/create-ballot.component';
+import { CreateCandidateComponent } from './home/home-administrator/election-management/create/create-candidate/create-candidate.component';
+import { EditElectionsComponent } from './home/home-administrator/election-management/edit/edit-elections/edit-elections.component';
+import { EditBallotsComponent } from './home/home-administrator/election-management/edit/edit-ballots/edit-ballots.component';
+import { EditCandidatesComponent } from './home/home-administrator/election-management/edit/edit-candidates/edit-candidates.component';
+import { CreateComponent } from './home/home-administrator/election-management/create/create.component';
+import { EditComponent } from './home/home-administrator/election-management/edit/edit.component';
+import { EditUsersComponent } from './home/home-administrator/election-management/edit/edit-users/edit-users.component';
+import { EditElectionComponent } from './home/home-administrator/election-management/edit/edit-elections/edit-election/edit-election.component';
+import { EditBallotComponent } from './home/home-administrator/election-management/edit/edit-ballots/edit-ballot/edit-ballot.component';
+import { EditCandidateComponent } from './home/home-administrator/election-management/edit/edit-candidates/edit-candidate/edit-candidate.component';
 
 const appRoutes: Routes = [
   {
@@ -35,9 +45,26 @@ const appRoutes: Routes = [
             {
               path: 'manage', component: ElectionManagementComponent,
               children: [
-                {path: 'create', component: CreateElectionComponent},
-                {path: 'edit', component: EditUsersComponent},
-                {path: 'edit/:id', component: EditUserComponent},
+                {
+                  path: 'create', component: CreateComponent, children: [
+                    {path: 'election', component: CreateElectionComponent},
+                    {path: 'ballot', component: CreateBallotComponent},
+                    {path: 'candidate', component: CreateCandidateComponent},
+                  ]
+                },
+                {
+                  path: 'edit', component: EditComponent, children: [
+                    {path: 'users', component: EditUsersComponent},
+                    {path: 'users/:id', component: EditUserComponent},
+                    {path: 'elections', component: EditElectionsComponent},
+                    {path: 'elections/:id', component: EditElectionComponent},
+                    {path: 'ballots', component: EditBallotsComponent},
+                    {path: 'ballots/:id', component: EditBallotComponent},
+                    {path: 'candidates', component: EditCandidatesComponent},
+                    {path: 'candidates/:id', component: EditCandidateComponent}
+                  ]
+                }
+
               ]
             },
             {path: 'audit', component: AuditTrailComponent},

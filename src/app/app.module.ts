@@ -35,13 +35,22 @@ import { ElectionService } from './_services/election.service';
 import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuditService } from './_services/audit.service';
-import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
-import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
-import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
+import { CreateElectionComponent } from './home/home-administrator/election-management/create/create-election/create-election.component';
+import { EditUsersComponent } from './home/home-administrator/election-management/edit/edit-users/edit-users.component';
+import { EditUserComponent } from './home/home-administrator/election-management/edit/edit-users/edit-user/edit-user.component';
 import { PairsPipe } from './_pipes/pairs.pipe';
 import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { CandidateComponent } from '../../../nested-test/src/app/candidate/candidate.component';
+import { EditBallotsComponent } from './home/home-administrator/election-management/edit/edit-ballots/edit-ballots.component';
+import { EditCandidatesComponent } from './home/home-administrator/election-management/edit/edit-candidates/edit-candidates.component';
+import { EditElectionsComponent } from './home/home-administrator/election-management/edit/edit-elections/edit-elections.component';
+import { CreateBallotComponent } from './home/home-administrator/election-management/create/create-ballot/create-ballot.component';
+import { CreateCandidateComponent } from './home/home-administrator/election-management/create/create-candidate/create-candidate.component';
+import { EditComponent } from './home/home-administrator/election-management/edit/edit.component';
+import { CreateComponent } from './home/home-administrator/election-management/create/create.component';
+import { EditBallotComponent } from './home/home-administrator/election-management/edit/edit-ballots/edit-ballot/edit-ballot.component';
+import { EditCandidateComponent } from './home/home-administrator/election-management/edit/edit-candidates/edit-candidate/edit-candidate.component';
+import { EditElectionComponent } from './home/home-administrator/election-management/edit/edit-elections/edit-election/edit-election.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +79,16 @@ import { CandidateComponent } from '../../../nested-test/src/app/candidate/candi
     EditUserComponent,
     PairsPipe,
     DemographicsComponent,
-    CandidateComponent,
+    EditBallotsComponent,
+    EditCandidatesComponent,
+    EditElectionsComponent,
+    CreateBallotComponent,
+    CreateCandidateComponent,
+    EditComponent,
+    CreateComponent,
+    EditBallotComponent,
+    EditCandidateComponent,
+    EditElectionComponent,
   ],
   imports: [
     BrowserModule,

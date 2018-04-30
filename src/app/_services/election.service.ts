@@ -62,4 +62,54 @@ export class ElectionService {
     return this.http.post<any>(url, {test: -1});
   }
 
+  getAllCandidates(): Observable<Candidate[]> {
+    const url = `${this.apiUrl}/candidates`;
+    return this.http.get<Candidate[]>(url);
+  }
+
+  getCandidateById(id: number): Observable<Candidate> {
+    const url = `${this.apiUrl}/candidates/${id}`;
+    return this.http.get<Candidate>(url);
+  }
+
+  createCandidate(candidate: Candidate): Observable<Candidate> {
+    const url = `${this.apiUrl}/candidates`;
+    return this.http.post<Candidate>(url, candidate);
+  }
+
+  updateCandidate(candidate: Candidate): Observable<Candidate> {
+    const url = `${this.apiUrl}/candidates/${candidate.id}`;
+    return this.http.patch<Candidate>(url, candidate);
+  }
+
+  deleteCandidate(id: number): Observable<Candidate> {
+    const url = `${this.apiUrl}/candidates/${id}`;
+    return this.http.delete<Candidate>(url);
+  }
+
+  getAllOffices(): Observable<Office[]> {
+    const url = `${this.apiUrl}/offices`;
+    return this.http.get<Office[]>(url);
+  }
+
+  getOfficeById(id: number): Observable<Office> {
+    const url = `${this.apiUrl}/offices/${id}`;
+    return this.http.get<Office>(url);
+  }
+
+  createOffice(office: Office): Observable<Office> {
+    const url = `${this.apiUrl}/offices`;
+    return this.http.post<Office>(url, office);
+  }
+
+  updateOffice(office: Office): Observable<Office> {
+    const url = `${this.apiUrl}/offices/${office.id}`;
+    return this.http.patch<Office>(url, office);
+  }
+
+  deleteOffice(id: number): Observable<Office> {
+    const url = `${this.apiUrl}/offices/${id}`;
+    return this.http.delete<Office>(url);
+  }
+
 }

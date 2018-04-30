@@ -29,7 +29,113 @@ module.exports = function (app) {
           party: "Republican",
           age: 21
         }
-      }, {
+      },{
+        email: "kate.clay@gmail.com",
+        username: "kateClay",
+        password: "kateClay!",
+        firstName: "Kate",
+        lastName: "Clay",
+        ssn: "33333",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "kc5551231",
+        registrationStatus: "registered",
+        emailVerified: true,
+        votingStatus: "approved",
+        role: "voter",
+        precinctId: 200,
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "F",
+          race: "Black",
+          party: "Democrat",
+          age: 43
+        }
+      },{
+        email: "li.zhang@gmail.com",
+        username: "liZhang",
+        password: "liZhang!",
+        firstName: "Li",
+        lastName: "Zhang",
+        ssn: "99999",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "lz5551231",
+        registrationStatus: "registered",
+        emailVerified: true,
+        votingStatus: "approved",
+        role: "voter",
+        precinctId: 200,
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "M",
+          race: "Asian",
+          party: "Democrat",
+          age: 25
+        }
+      },{
+        email: "charles.tea@gmail.com",
+        username: "charlesTea",
+        password: "charlesTea!",
+        firstName: "Charles",
+        lastName: "Tea",
+        ssn: "99999",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "lz5551231",
+        registrationStatus: "registered",
+        emailVerified: true,
+        votingStatus: "approved",
+        role: "voter",
+        precinctId: 200,
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "M",
+          race: "Hispanic",
+          party: "Democrat",
+          age: 63
+        }
+      },
+      {
+        email: "patricia.bloom@gmail.com",
+        username: "patriciaBloom",
+        password: "patriciaBloom!",
+        firstName: "Patricia",
+        lastName: "Bloom",
+        ssn: "99999",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "lz5551231",
+        registrationStatus: "registered",
+        emailVerified: true,
+        votingStatus: "approved",
+        role: "voter",
+        precinctId: 200,
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "F",
+          race: "White",
+          party: "Independent",
+          age: 81
+        }
+      },
+      {
         email: "tom.smith@gmail.com",
         username: "tomSmith",
         password: "tomSmith!",

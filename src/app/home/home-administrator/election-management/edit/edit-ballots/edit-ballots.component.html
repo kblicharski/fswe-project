@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12 col-sm-4">
+    <button class="btn btn-default my-btn" (click)="refreshBallots()">Refresh Ballots</button>
+    <img *ngIf="loading"
+         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+    <br>
+  </div>
+  <div class="col-12 col-sm-8">
+    <input type="search" class="form-control" [(ngModel)]="queryString">
+    <br>
+  </div>
+</div>
+<div *ngFor="let ballot of ballots | slice:0:10 | FilterPipe:queryString">
+  <div class="card">
+    <div class="card-body">
+      <span style="text-align: center">({{ ballot.id }}) {{ ballot.title }}, {{ ballot.description }}</span>
+      <button
+        class="btn btn-danger float-right"
+        style="margin-right: 10px"
+        (click)="onDeleteBallot(ballot)"
+      >Delete
+      </button>
+      <button
+        class="btn btn-primary float-right"
+        style="margin-right: 10px"
+        (click)="onEditBallot(ballot)"
+      >Edit
+      </button>
+    </div>
+  </div>
+</div>
