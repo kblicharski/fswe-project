@@ -1,3 +1,5 @@
-<p>
-  audit-trail works!
-</p>
+<div *ngIf="!loading">
+  <div *ngFor="let audit of audits">
+    <p>{{ audit.time | date:'medium' }}: {{ audit.action }}</p>
+  </div>
+</div>
