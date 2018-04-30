@@ -279,14 +279,14 @@ module.exports = function (app) {
 
     app.models.candidate.create([{
       name: "John Smith",
-      party: "Democrat",
-      dob: new Date(1965, 5, 20),
+      party: "Democrat"
+
 
 
     }, {
       name: "John Adams",
-      party: "Republican",
-      dob: new Date(1964, 5, 20),
+      party: "Republican"
+
 
     }], function (err, candidate) {
       if (err) throw err;
