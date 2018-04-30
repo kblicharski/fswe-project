@@ -1,14 +1,46 @@
-<h1>Hello, {{currentUser.firstName}}.</h1>
-<br>
-<h2>Search Users</h2>
-<input type="search" class="form-control" [(ngModel)]="queryString">
-<br>
-<h2>Users Queued to Vote:</h2>
-<div *ngFor="let user of requestingUsers | slice:0:5 | FilterPipe:queryString">
-  <app-user-info
-    [type]="'manager'"
-    [user]="user"
-    (onAllow)="approveVoteRequest(user)"
-    (onDeny)="denyVoteRequest(user)"
-  ></app-user-info>
+<div *ngIf="!loadingInitially && requestingUsers.length > 0">
+  <h3 style="margin-left: 10px">Hello, {{currentUser.firstName}}. Here are the users queued to vote:</h3>
+  <br>
+  <div class="row">
+    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+      <button class="btn btn-default my-btn" style="margin-left: 10px" (click)="refreshUsers()">Refresh Users</button>
+      <img *ngIf="loading"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+      <br><br>
+    </div>
+    <div class="col-12 col-sm-9 col-md-9 col-lg-9" style="margin-left: -10px">
+      <input type="search" class="form-control" [(ngModel)]="queryString">
+      <br>
+    </div>
+  </div>
+</div>
+<div *ngIf="!loadingInitially && requestingUsers.length === 0">
+  <h3 style="margin-left: 10px">Hello, {{currentUser.firstName}}. There are no users currently queued to vote.</h3>
+  <br>
+  <button class="btn btn-default my-btn" style="margin-left: 10px" (click)="refreshUsers()">Refresh Users</button>
+  <img *ngIf="loading"
+       src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+  <br><br>
+</div>
+<div *ngIf="!loading">
+  <div class="flexbox-container" *ngFor="let user of requestingUsers | pairs">
+    <!-- Column 1 -->
+    <div>
+      <app-user-info
+        [type]="'manager'"
+        [user]="user[0]"
+        (onAllow)="approveVoteRequest(user[0])"
+        (onDeny)="denyVoteRequest(user[0])"
+      ></app-user-info>
+    </div>
+    <!-- Column 2 -->
+    <div *ngIf="user[1]">
+      <app-user-info
+        [type]="'manager'"
+        [user]="user[1]"
+        (onAllow)="approveVoteRequest(user[1])"
+        (onDeny)="denyVoteRequest(user[1])"
+      ></app-user-info>
+    </div>
+  </div>
 </div>

@@ -9,6 +9,7 @@ import { UserService } from '../../../../_services/user.service';
 })
 export class EditUsersComponent implements OnInit {
   users: User[] = [];
+  private loading = false;
 
   constructor(
     private userService: UserService
@@ -23,11 +24,20 @@ export class EditUsersComponent implements OnInit {
     this.userService.getAll().subscribe(
       (data) => {
         this.users = data;
+        this.loading = false;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  refreshUsers() {
+    // Add delay to allow refresh icon to appear
+    this.loading = true;
+    setTimeout(() => {
+      this.getAllUsers();
+    }, 600);
   }
 
 }

@@ -1,66 +1,73 @@
 <div *ngIf="elections.length !== 0">
-    <div *ngIf="currentUser.votingStatus !== 'approved'">
-      <h3>Hello, {{currentUser.firstName}}. Please request to vote and your election manager will be with you
-        shortly.</h3>
-      <br>
-      <div *ngIf="currentUser.votingStatus !== 'requesting'">
-        <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+  <div *ngIf="currentUser.votingStatus !== 'approved'">
+    <h3>Hello, {{currentUser.firstName}}. Please request to vote and your election manager will be with you
+      shortly.</h3>
+    <br>
+    <div *ngIf="currentUser.votingStatus !== 'requesting'">
+      <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+    </div>
+    <div *ngIf="currentUser.votingStatus === 'requesting'">
+      <button class="btn btn-default my-btn" (click)="refreshUser()">Refresh Status</button>
+      <img *ngIf="userLoading"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+      <br><br>
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+  <div *ngIf="currentUser.votingStatus === 'approved'">
+    <h3 style="margin-left: -10px">Hello, {{currentUser.firstName}}. Here are the local, state, and national elections you are eligible to vote
+      in.</h3>
+    <br><br>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
+        <div *ngIf="localElections.length > 0">
+          <div *ngFor="let election of localElections">
+            <h4>{{ election.description }}</h4>
+            <div *ngFor="let officeId of election.offices">
+              <div class="mr-2">
+                <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                            [officeId]="officeId"></app-office>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
       </div>
-      <div *ngIf="currentUser.votingStatus === 'requesting'">
-        <app-spinner></app-spinner>
+
+      <!-- State Elections -->
+      <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
+        <div *ngIf="stateElections.length > 0">
+          <div *ngFor="let election of stateElections">
+            <h4>{{ election.description }}</h4>
+            <div *ngFor="let officeId of election.offices">
+              <div class="mr-2">
+                <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                            [officeId]="officeId"></app-office>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- National Elections -->
+      <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
+        <div *ngIf="nationalElections.length > 0">
+          <div *ngFor="let election of nationalElections">
+            <h4>{{ election.description }}</h4>
+            <div *ngFor="let officeId of election.offices">
+              <div class="mr-2">
+                <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                            [officeId]="officeId"></app-office>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div *ngIf="currentUser.votingStatus === 'approved'">
-      <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
-          <div *ngIf="localElections.length > 0">
-            <div *ngFor="let election of localElections">
-              <h4>{{ election.description }}</h4>
-              <div *ngFor="let officeId of election.offices">
-                <div class="mr-2">
-                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
-                              [officeId]="officeId"></app-office>
-                </div>
-                <br>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- State Elections -->
-        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
-          <div *ngIf="stateElections.length > 0">
-            <div *ngFor="let election of stateElections">
-              <h4>{{ election.description }}</h4>
-              <div *ngFor="let officeId of election.offices">
-                <div class="mr-2">
-                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
-                              [officeId]="officeId"></app-office>
-                </div>
-                <br>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- National Elections -->
-        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
-          <div *ngIf="nationalElections.length > 0">
-            <div *ngFor="let election of nationalElections">
-              <h4>{{ election.description }}</h4>
-              <div *ngFor="let officeId of election.offices">
-                <div class="mr-2">
-                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
-                              [officeId]="officeId"></app-office>
-                </div>
-                <br>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 </div>
 <div *ngIf="!loading && elections.length === 0">
-  <p>There are no currently more ongoing elections. Please check back later.</p>
+  <h3 style="margin-left: -10px">There are no more currently ongoing elections. Please check back later.</h3>
 </div>

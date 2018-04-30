@@ -23,7 +23,7 @@ const appRoutes: Routes = [
   {
     path: '', component: HomeComponent, canActivate: [AuthGuard],
     children: [
-      {path: '', pathMatch: 'full', redirectTo: '/404'},
+      {path: '', pathMatch: 'full', redirectTo: '/login'},
       {path: 'voter', component: HomeVoterComponent, canActivate: [VoterGuard]},
       {path: 'manager', component: HomeManagerComponent, canActivate: [ManagerGuard]},
       {

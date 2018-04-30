@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { Election } from '../../_models/election';
@@ -12,6 +12,7 @@ import { Vote } from '../../_models/vote';
 })
 export class HomeVoterComponent implements OnInit {
   loading = true;
+  userLoading = false;
   elections: Election[];
   localElections: Election[] = [];
   stateElections: Election[] = [];
@@ -21,7 +22,6 @@ export class HomeVoterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private electionService: ElectionService,
-    private cdf: ChangeDetectorRef
   ) {
   }
 
@@ -107,6 +107,22 @@ export class HomeVoterComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  refreshUser() {
+    this.userLoading = true;
+    setTimeout(
+      this.userService.getById(this.currentUser.id).subscribe(
+        (data) => {
+          console.log(data);
+          this.userLoading = false;
+          this.currentUser = data;
+          localStorage.setItem('currentUser', JSON.stringify(data));
+        },
+        (error) => {
+          console.log(error);
+        }
+      ), 600);
   }
 
 }

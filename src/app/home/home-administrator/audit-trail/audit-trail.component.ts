@@ -9,6 +9,7 @@ import { ElectionService } from '../../../_services/election.service';
 export class AuditTrailComponent implements OnInit {
   loading = true;
   audits: any = [];
+  notInitialLoad = false;
 
   constructor(
     private electionService: ElectionService
@@ -24,10 +25,20 @@ export class AuditTrailComponent implements OnInit {
       (data) => {
         this.audits = data;
         this.loading = false;
+        this.notInitialLoad = true;
       },
       (error) => {
         console.log(error);
       });
+  }
+
+
+  refreshAuditLogs() {
+    // Add delay to allow refresh icon to appear
+    this.loading = true;
+    setTimeout(() => {
+      this.getAllAuditLogs();
+    }, 600);
   }
 
 }

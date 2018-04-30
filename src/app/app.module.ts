@@ -38,6 +38,7 @@ import { AuditService } from './_services/audit.service';
 import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
 import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
 import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
+import { PairsPipe } from './_pipes/pairs.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EditUserComponent } from './home/home-administrator/election-management
     OfficeComponent,
     CreateElectionComponent,
     EditUsersComponent,
-    EditUserComponent
+    EditUserComponent,
+    PairsPipe
   ],
   imports: [
     BrowserModule,
