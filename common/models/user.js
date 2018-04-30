@@ -122,7 +122,7 @@ module.exports = function(User) {
             newErr.statusCode = 200;
             const content = {"action": body[0].username + " logged in", "time": new Date()};
             User.app.models.audit.create(content);
-            return cb(null, 200);
+            return cb(null,body[0]);
           }else {
             newErrMsg = 'User specified wrong current password';
             newErr = new Error(newErrMsg);
@@ -135,7 +135,6 @@ module.exports = function(User) {
         console.log(err);
         cb(err);
       }
-
 
     });
 
@@ -160,7 +159,7 @@ module.exports = function(User) {
       var emailAddress = body.email;
       try {
         User.findById(id, function(err, user) {
-          if (err) return err
+          if (err) return err;
           user.updateAttribute('password', User.hashPassword(newPassword), function(err, user) {
             if (err) return cb(null,404);
           });
