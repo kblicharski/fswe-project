@@ -186,8 +186,8 @@ module.exports = function(app) {
       precincts: [200],
       locations: ["Iowa City"],
       type: 'local',
-      start: new Date(2017,3,20),
-      end: new Date(2017,7,20),
+      start: new Date(2018,3,20),
+      end: new Date(2018,7,20),
       description: "Iowa Election"
 
     },{
@@ -196,8 +196,8 @@ module.exports = function(app) {
       precincts: [200],
       locations: ["Iowa City"],
       type: 'national',
-      start: new Date(2017,3,20),
-      end: new Date(2017,10,21),
+      start: new Date(2018,3,20),
+      end: new Date(2018,10,21),
       description: "Iowa Election"
 
     },{
