@@ -11,7 +11,7 @@ import { Office } from '../../../../../_models/office';
 })
 export class CreateBallotComponent implements OnInit {
   ballot: Office;
-  loading = true;
+  loading = false;
 
   constructor(
     private router: Router,

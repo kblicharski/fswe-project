@@ -1,7 +1,11 @@
-<button class="btn btn-primary" (click)="onNavigateTo('verify')">Voter Verification</button>
-<button class="btn btn-primary" (click)="onNavigateTo('manage')">Election Management</button>
-<button class="btn btn-primary" (click)="onNavigateTo('audit')">View Audit Trail</button>
-<br>
-<hr>
-<br>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary" (click)="onNavigateTo('verify')">Voter Verification</button>
+    <button class="btn btn-primary" (click)="onNavigateTo('manage')">Election Management</button>
+    <button class="btn btn-primary" (click)="onNavigateTo('audit')">View Audit Trail</button>
+    <br>
+    <hr>
+    <br>
+  </div>
+</div>
 <router-outlet></router-outlet>

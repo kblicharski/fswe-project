@@ -1,58 +1,63 @@
 <div *ngIf="!loading">
-  <div class="col-12 col-sm-10 col-md-10 offset-sm-1 offset-md-1">
-    <form name="form" (ngSubmit)="f.form.valid && onCreateElection()" #f="ngForm" novalidate>
-      <div class="panel-heading">
-        <span>Election</span>
-      </div>
-      <div class="panel-body">
-        <div class="form-group col-xs-6">
-          <label>Precinct ID</label>
-          <input type="text" class="form-control" formControlName="precinctID" required>
-          <small *ngIf="!f.controls.precinctId.valid && f.controls.precinctId.touched" class="help-block">Precinct ID is Required</small>
+  <div class="row">
+    <div class="col-12">
+      <form name="form" (ngSubmit)="f.form.valid && onCreateElection()" #f="ngForm" novalidate>
+        <div class="panel-heading">
+          <span>Election</span>
         </div>
-        <div class="form-group col-xs-6">
-          <label>Description</label>
-          <input type="text" class="form-control" formControlName="description" required>
-          <small *ngIf="!f.controls.description.valid && f.controls.description.touched" class="help-block">
-            Description is required
-          </small>
+        <div class="panel-body">
+          <div class="form-group col-xs-6">
+            <label>Precinct ID</label>
+            <input type="text" class="form-control" formControlName="precinctID" required>
+            <small *ngIf="!f.controls.precinctId.valid && f.controls.precinctId.touched" class="help-block">Precinct ID
+              is Required
+            </small>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>Description</label>
+            <input type="text" class="form-control" formControlName="description" required>
+            <small *ngIf="!f.controls.description.valid && f.controls.description.touched" class="help-block">
+              Description is required
+            </small>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>Start Date</label>
+            <input type="date" class="form-control" formControlName="start" required>
+            <small *ngIf="!f.controls.start.valid && f.controls.start.touched" class="help-block">
+              Start date is required
+            </small>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>End Date</label>
+            <input type="date" class="form-control" formControlName="end" required>
+            <small *ngIf="!f.controls.end.valid && f.controls.end.touched" class="help-block">
+              End date is required
+            </small>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>Type</label>
+            <input type="text" class="form-control" formControlName="type" required
+                   pattern="^local$ | ^national$ | ^state$">
+            <small *ngIf="!type.errors.required && f.controls.end.touched" class="help-block">
+              End date is required
+            </small>
+            <small *ngIf="!type.errors.pattern && f.controls.touched">
+              Entry must be local, state or national
+            </small>
+          </div>
         </div>
-        <div class="form-group col-xs-6">
-          <label>Start Date</label>
-          <input type="date" class="form-control" formControlName="start" required>
-          <small *ngIf="!f.controls.start.valid && f.controls.start.touched" class="help-block">
-            Start date is required
-          </small>
+        <div class="form-group row">
+          <div class="col-12 col-sm-6">
+            <button type="submit" [disabled]="loading || f.invalid" class="btn btn-primary my-btn">Update
+            </button>
+            <img *ngIf="loading"
+                 src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+          </div>
+          <div class="col-12 col-sm-6">
+            <a [routerLink]="['..']" class="btn btn-link my-float-right">Cancel</a>
+          </div>
         </div>
-        <div class="form-group col-xs-6">
-          <label>End Date</label>
-          <input type="date" class="form-control" formControlName="end" required>
-          <small *ngIf="!f.controls.end.valid && f.controls.end.touched" class="help-block">
-            End date is required
-          </small>
-        </div>
-        <div class="form-group col-xs-6">
-          <label>Type</label>
-          <input type="text" class="form-control" formControlName="type" required pattern="^local$ | ^national$ | ^state$">
-          <small *ngIf="!type.errors.required && f.controls.end.touched" class="help-block">
-            End date is required
-          </small>
-          <small *ngIf="!type.errors.pattern && f.controls.touched">
-            Entry must be local, state or national
-          </small>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-12 col-sm-6">
-          <button type="submit" [disabled]="loading || f.invalid" class="btn btn-primary my-btn">Update
-          </button>
-          <img *ngIf="loading"
-               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-        </div>
-        <div class="col-12 col-sm-6">
-          <a [routerLink]="['..']" class="btn btn-link my-float-right">Cancel</a>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

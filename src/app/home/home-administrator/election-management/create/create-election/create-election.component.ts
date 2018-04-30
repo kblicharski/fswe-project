@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuditService } from '../../../../../_services/audit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ElectionService } from '../../../../../_services/election.service';
-import { Office } from '../../../../../_models/office';
 import { Election } from '../../../../../_models/election';
 
 @Component({
@@ -12,7 +11,7 @@ import { Election } from '../../../../../_models/election';
 })
 export class CreateElectionComponent implements OnInit {
   election: Election;
-  loading = true;
+  loading = false;
 
   constructor(
     private router: Router,

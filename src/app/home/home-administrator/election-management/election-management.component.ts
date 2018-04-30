@@ -1,5 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-election-management',
@@ -7,7 +7,14 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./election-management.component.css']
 })
 export class ElectionManagementComponent implements OnInit {
-  constructor() { }
-  ngOnInit() {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+  }
+
+  onNavigateTo(path: string) {
+    this.router.navigate([path], {relativeTo: this.route});
+  }
 
 }

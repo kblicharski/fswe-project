@@ -11,7 +11,7 @@ import { Candidate } from '../../../../../_models/candidate';
 })
 export class CreateCandidateComponent implements OnInit {
   candidate: Candidate;
-  loading = true;
+  loading = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
