@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditUserComponent } from './edit-user.component';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ElectionService } from '../../../../../../_services/election.service';
+import { UserService } from '../../../../../../_services/user.service';
+import { AuditService } from '../../../../../../_services/audit.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EditUserComponent', () => {
   let component: EditUserComponent;
@@ -8,7 +14,10 @@ describe('EditUserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditUserComponent ]
+      declarations: [ EditUserComponent ],
+            imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
+            providers: [ElectionService, UserService, AuditService]
+
     })
     .compileComponents();
   }));

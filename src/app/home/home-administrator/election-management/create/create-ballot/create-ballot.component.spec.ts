@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateBallotComponent } from './create-ballot.component';
+import { FormsModule } from '@angular/forms';
+import { ElectionService } from '../../../../../_services/election.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreateBallotComponent', () => {
   let component: CreateBallotComponent;
@@ -8,7 +11,9 @@ describe('CreateBallotComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateBallotComponent ]
+      declarations: [ CreateBallotComponent ],
+      imports: [FormsModule, HttpClientTestingModule],
+      providers: [ElectionService]
     })
     .compileComponents();
   }));
