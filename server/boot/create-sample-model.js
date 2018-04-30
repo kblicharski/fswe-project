@@ -183,11 +183,38 @@ module.exports = function (app) {
         },
         demographics: {
           gender: "M",
-          race: "White",
+          race: "Native American",
           party: "Republican",
           age: 21
         }
       }, {
+        email: "nancy.jones@gmail.com",
+        username: "nancyJones",
+        password: "nancyJones!",
+        firstName: "Nancy",
+        lastName: "Jones",
+        ssn: "55555",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "js55512311",
+        registrationStatus: "unregistered",
+        emailVerified: true,
+        votingStatus: "requesting",
+        precinctId: 1,
+        role: "voter",
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "M",
+          race: "Latino",
+          party: "Republican",
+          age: 21
+        }
+      },
+      {
         email: "jon.Adams@gmail.com",
         username: "jonAdams",
         password: "jonAdams!",
