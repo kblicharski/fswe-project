@@ -1,3 +1,370 @@
-<p>
-  edit-candidate works!
-</p>
+<div *ngIf="!loading">
+  <div class="col-12 col-sm-10 col-md-10 offset-sm-1 offset-md-1">
+    <form name="form" (ngSubmit)="f.form.valid && onUpdateCandidate()" #f="ngForm" novalidate>
+      <!--&lt;!&ndash; Row 1 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; First Name &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="firstName">First Name</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="firstName"-->
+            <!--name="firstName"-->
+            <!--[(ngModel)]="user.firstName"-->
+            <!--#firstName="ngModel"-->
+            <!--pattern="[A-Za-z]*"-->
+          <!--/>-->
+          <!--<div *ngIf="firstName.touched && !firstName.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="firstName.errors.pattern">-->
+              <!--First name must consist of letters only.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Last Name &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="lastName">Last Name</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="lastName"-->
+            <!--name="lastName"-->
+            <!--[(ngModel)]="user.lastName"-->
+            <!--#lastName="ngModel"-->
+            <!--pattern="[A-Za-z\-]*"-->
+          <!--/>-->
+          <!--<div *ngIf="lastName.touched && !lastName.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="lastName.errors.pattern">-->
+              <!--Last name must consist of letters and dashes only.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 2 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; Username &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="username">Username</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="username"-->
+            <!--name="username"-->
+            <!--[(ngModel)]="user.username"-->
+            <!--#username="ngModel"-->
+            <!--pattern="^[a-zA-Z0-9]+$"-->
+          <!--/>-->
+          <!--<div *ngIf="username.touched && !username.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="username.errors.pattern">-->
+              <!--Username must consist of letters and numbers only.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Password &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="password">Password</label>-->
+          <!--<input-->
+            <!--type="password"-->
+            <!--class="form-control"-->
+            <!--id="password"-->
+            <!--name="password"-->
+            <!--[(ngModel)]="passwordValue"-->
+            <!--#password="ngModel"-->
+            <!--minlength="6"-->
+            <!--pattern="^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{6,}$"-->
+          <!--/>-->
+          <!--<div *ngIf="password.touched && !password.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="password.errors.minlength">-->
+              <!--Password must be {{ password.errors.minlength.requiredLength }} characters long.-->
+            <!--</div>-->
+            <!--<div *ngIf="password.errors.pattern">-->
+              <!--Password must contain at least one capital letter, lowercase letter, number, and special character.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 3 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; Email &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="email">Email</label>-->
+          <!--<input-->
+            <!--type="email"-->
+            <!--class="form-control"-->
+            <!--id="email"-->
+            <!--name="email"-->
+            <!--[(ngModel)]="user.email"-->
+            <!--#email="ngModel"-->
+            <!--pattern="[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"-->
+          <!--/>-->
+          <!--<div *ngIf="email.touched && !email.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="email.errors.pattern">-->
+              <!--Please enter a valid email.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Date of Birth &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="dob">Date of Birth</label>-->
+          <!--<input-->
+            <!--[ngModel]="user.dob | date:'yyyy-MM-dd'"-->
+            <!--(ngModelChange)="user.dob = $event"-->
+            <!--type="date"-->
+            <!--class="form-control"-->
+            <!--id="dob"-->
+            <!--name="dob"-->
+            <!--#dob="ngModel"-->
+          <!--/>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 4 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; Driver's License &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="driversLicense">Driver's License ID</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="driversLicense"-->
+            <!--name="driversLicense"-->
+            <!--[(ngModel)]="user.driversLicense"-->
+            <!--#driversLicense="ngModel"-->
+            <!--minlength="9"-->
+            <!--maxlength="9"-->
+            <!--pattern="[a-zA-Z0-9]+"-->
+          <!--/>-->
+          <!--<div *ngIf="driversLicense.touched && !driversLicense.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="driversLicense.errors.minlength">-->
+              <!--Driver's license must be {{ driversLicense.errors.minlength.requiredLength }} characters long.-->
+            <!--</div>-->
+            <!--<div *ngIf="driversLicense.errors.maxlength">-->
+              <!--Driver's license must be {{ driversLicense.errors.maxlength.requiredLength }} characters long.-->
+            <!--</div>-->
+            <!--<div *ngIf="driversLicense.errors.pattern">-->
+              <!--Driver's license consists of letters and numbers.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; SSN &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="ssn">Last Five Digits of SSN</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="ssn"-->
+            <!--name="ssn"-->
+            <!--[(ngModel)]="user.ssn"-->
+            <!--#ssn="ngModel"-->
+            <!--minlength="5"-->
+            <!--maxlength="5"-->
+            <!--pattern="[0-9]*"-->
+          <!--/>-->
+          <!--<div *ngIf="ssn.touched && !ssn.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="ssn.errors.minlength">-->
+              <!--Please include the last {{ ssn.errors.minlength.requiredLength }} digits of your social security number.-->
+            <!--</div>-->
+            <!--<div *ngIf="ssn.errors.maxlength">-->
+              <!--Please include the last {{ ssn.errors.maxLength.requiredLength }} digits of your social security number.-->
+            <!--</div>-->
+            <!--<div *ngIf="ssn.errors.pattern">-->
+              <!--Only include numbers in your entry.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 5 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; Street Address &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="address">Street Address</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="address"-->
+            <!--name="address"-->
+            <!--[(ngModel)]="user.address.street"-->
+            <!--#address="ngModel"-->
+          <!--/>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; City &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="city">City</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="city"-->
+            <!--name="city"-->
+            <!--[(ngModel)]="user.address.city"-->
+            <!--#city="ngModel"-->
+          <!--/>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 6 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; State &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="state">State</label>-->
+          <!--<select-->
+            <!--class="form-control"-->
+            <!--id="state"-->
+            <!--name="state"-->
+            <!--[(ngModel)]="user.address.state"-->
+            <!--#state="ngModel"-->
+          <!--&gt;-->
+            <!--<option value="Alabama">Alabama</option>-->
+            <!--<option value="Alaska">Alaska</option>-->
+            <!--<option value="Arizona">Arizona</option>-->
+            <!--<option value="Arkansas">Arkansas</option>-->
+            <!--<option value="California">California</option>-->
+            <!--<option value="Colorado">Colorado</option>-->
+            <!--<option value="Connecticut">Connecticut</option>-->
+            <!--<option value="Delaware">Delaware</option>-->
+            <!--<option value="District of Columbia">District of Columbia</option>-->
+            <!--<option value="Florida">Florida</option>-->
+            <!--<option value="Georgia">Georgia</option>-->
+            <!--<option value="Guam">Guam</option>-->
+            <!--<option value="Hawaii">Hawaii</option>-->
+            <!--<option value="Idaho">Idaho</option>-->
+            <!--<option value="Illinois">Illinois</option>-->
+            <!--<option value="Indiana">Indiana</option>-->
+            <!--<option value="Iowa">Iowa</option>-->
+            <!--<option value="Kansas">Kansas</option>-->
+            <!--<option value="Kentucky">Kentucky</option>-->
+            <!--<option value="Louisiana">Louisiana</option>-->
+            <!--<option value="Maine">Maine</option>-->
+            <!--<option value="Maryland">Maryland</option>-->
+            <!--<option value="Massachusetts">Massachusetts</option>-->
+            <!--<option value="Michigan">Michigan</option>-->
+            <!--<option value="Minnesota">Minnesota</option>-->
+            <!--<option value="Mississippi">Mississippi</option>-->
+            <!--<option value="Missouri">Missouri</option>-->
+            <!--<option value="Montana">Montana</option>-->
+            <!--<option value="Nebraska">Nebraska</option>-->
+            <!--<option value="Nevada">Nevada</option>-->
+            <!--<option value="New Hampshire">New Hampshire</option>-->
+            <!--<option value="New Jersey">New Jersey</option>-->
+            <!--<option value="New Mexico">New Mexico</option>-->
+            <!--<option value="New York">New York</option>-->
+            <!--<option value="North Carolina">North Carolina</option>-->
+            <!--<option value="North Dakota">North Dakota</option>-->
+            <!--<option value="Northern Marianas Islands">Northern Marianas Islands</option>-->
+            <!--<option value="Ohio">Ohio</option>-->
+            <!--<option value="Oklahoma">Oklahoma</option>-->
+            <!--<option value="Oregon">Oregon</option>-->
+            <!--<option value="Pennsylvania">Pennsylvania</option>-->
+            <!--<option value="Puerto Rico">Puerto Rico</option>-->
+            <!--<option value="Rhode Island">Rhode Island</option>-->
+            <!--<option value="South Carolina">South Carolina</option>-->
+            <!--<option value="South Dakota">South Dakota</option>-->
+            <!--<option value="Tennessee">Tennessee</option>-->
+            <!--<option value="Texas">Texas</option>-->
+            <!--<option value="Utah">Utah</option>-->
+            <!--<option value="Vermont">Vermont</option>-->
+            <!--<option value="Virginia">Virginia</option>-->
+            <!--<option value="Virgin Islands">Virgin Islands</option>-->
+            <!--<option value="Washington">Washington</option>-->
+            <!--<option value="West Virginia">West Virginia</option>-->
+            <!--<option value="Wisconsin">Wisconsin</option>-->
+            <!--<option value="Wyoming">Wyoming</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Zip Code &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-6">-->
+          <!--<label for="zipCode">Zip Code</label>-->
+          <!--<input-->
+            <!--type="text"-->
+            <!--class="form-control"-->
+            <!--id="zipCode"-->
+            <!--name="zipCode"-->
+            <!--[(ngModel)]="user.address.zipCode"-->
+            <!--#zipCode="ngModel"-->
+            <!--minlength="5"-->
+            <!--maxlength="5"-->
+            <!--pattern="[0-9]*"-->
+          <!--/>-->
+          <!--<div *ngIf="zipCode.touched && !zipCode.valid" class="alert alert-danger help-block">-->
+            <!--<div *ngIf="zipCode.errors.minlength">-->
+              <!--Zip code should be {{ zipCode.errors.minlength.requiredLength }} digits.-->
+            <!--</div>-->
+            <!--<div *ngIf="zipCode.errors.maxlength">-->
+              <!--Zip code should be {{ zipCode.errors.minlength.requiredLength }} digits.-->
+            <!--</div>-->
+            <!--<div *ngIf="zipCode.errors.pattern">-->
+              <!--Zip code consists of only numbers.-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; Row 7 &ndash;&gt;-->
+      <!--<div class="form-group row">-->
+        <!--&lt;!&ndash; Gender &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-4">-->
+          <!--<label for="gender">Gender</label>-->
+          <!--<select-->
+            <!--class="form-control"-->
+            <!--id="gender"-->
+            <!--name="gender"-->
+            <!--[(ngModel)]="user.demographics.gender"-->
+            <!--#gender="ngModel"-->
+          <!--&gt;-->
+            <!--<option value="M">M</option>-->
+            <!--<option value="F">F</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Party &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-4">-->
+          <!--<label for="party">Party</label>-->
+          <!--<select-->
+            <!--class="form-control"-->
+            <!--id="party"-->
+            <!--name="party"-->
+            <!--[(ngModel)]="user.demographics.party"-->
+            <!--#party="ngModel"-->
+          <!--&gt;-->
+            <!--<option value="Republican">Republican</option>-->
+            <!--<option value="Democrat">Democrat</option>-->
+            <!--<option value="Independent">Independent</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Race &ndash;&gt;-->
+        <!--<div class="col-12 col-sm-4">-->
+          <!--<label for="race">Race</label>-->
+          <!--<select-->
+            <!--class="form-control"-->
+            <!--id="race"-->
+            <!--name="race"-->
+            <!--[(ngModel)]="user.demographics.race"-->
+            <!--#race="ngModel"-->
+          <!--&gt;-->
+            <!--<option value="White">White</option>-->
+            <!--<option value="Black">Black</option>-->
+            <!--<option value="Asian">Asian</option>-->
+            <!--<option value="Hispanic">Hispanic</option>-->
+            <!--<option value="Latino">Latino</option>-->
+            <!--<option value="Native American">Native American</option>-->
+            <!--<option value="Pacific Islander">Pacific Islander</option>-->
+            <!--<option value="Other">Other</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <div class="form-group row">
+        <div class="col-12 col-sm-6">
+          <button type="submit" [disabled]="loading || f.invalid" class="btn btn-primary my-btn">Update
+          </button>
+          <img *ngIf="loading"
+               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        </div>
+        <div class="col-12 col-sm-6">
+          <a [routerLink]="['..']" class="btn btn-link my-float-right">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
