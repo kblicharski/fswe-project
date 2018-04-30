@@ -213,6 +213,32 @@ module.exports = function (app) {
           party: "Republican",
           age: 21
         }
+      },{
+        email: "jessica.jones@gmail.com",
+        username: "jessicaJones",
+        password: "jessicaJones!",
+        firstName: "Jessica",
+        lastName: "Jones",
+        ssn: "55555",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "js55512311",
+        registrationStatus: "unregistered",
+        emailVerified: true,
+        votingStatus: "requesting",
+        precinctId: 1,
+        role: "voter",
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "F",
+          race: "Hispanic",
+          party: "Democrat",
+          age: 19
+        }
       },
       {
         email: "jon.Adams@gmail.com",
