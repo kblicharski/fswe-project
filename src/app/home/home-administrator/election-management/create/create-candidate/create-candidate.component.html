@@ -1,3 +1,36 @@
-<p>
-  create-candidate works!
-</p>
+<div>
+  <form [formGroup]="myForm2" novalidate>
+    <div formArrayName="candidates">
+      <div *ngFor="let candidate of myForm2.controls.candidates.controls; let i=index" class="panel panel-default">
+        <div class="panel-heading">
+          <span>Candidate {{i + 1}}</span>
+          <button type="button" *ngIf="myForm2.controls.candidates.controls.length > 1" (click)="removeCandidate(i)">-</button>
+        </div>
+        <div class="panel-body" [formGroupName]="i">
+          <div class="form-group col-xs-6">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name">
+            <small *ngIf="!myForm2.controls.candidates.controls[i].controls.name.valid && myForm2.controls.candidates.controls[i].controls.name.touched" class="help-block">
+              Name is required
+            </small>
+          </div>
+          <div class="form-group col-xs-6">
+            <label>Party</label>
+            <input type="text" class="form-control" formControlName="party">
+            <small *ngIf="!myForm2.controls.candidates.controls[i].controls.party.valid && myForm2.controls.candidates.controls[i].controls.party.touched" class="help-block">
+              Party is required
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="margin-20">
+      <button type="button" (click)="addCandidate()" style="cursor: default">
+        Add another candidate +
+      </button>
+      <div class="margin-20">
+        <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm2.valid">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
