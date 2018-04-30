@@ -1,13 +1,45 @@
-<ul class="list-group">
-  <li class="list-group-item">Name: {{ user.lastName }}, {{ user.firstName }}</li>
-  <li class="list-group-item">Email: {{ user.email }}</li>
-  <li class="list-group-item">DOB: {{ user.dob | date }}</li>
-  <li class="list-group-item">SSN: {{ user.ssn }}</li>
-  <li class="list-group-item">Driver's License: {{ user.driversLicense }}</li>
-  <button class="btn btn-primary" (click)="onAllowUser()">Allow</button>
-  <button class="btn btn-danger" (click)="onDenyUser()">Deny</button>
-</ul>
-<br>
+<div *ngIf="type === 'manager'">
+  <ul class="list-group">
+    <li class="list-group-item">Name: {{ user.lastName }}, {{ user.firstName }}</li>
+    <li class="list-group-item">Username: {{ user.username }}</li>
+    <li class="list-group-item">Email: {{ user.email }}</li>
+    <li class="list-group-item">Address:
+      {{ user.address.street }},
+      {{ user.address.city}},
+      {{ user.address.state}},
+      {{ user.address.zipCode}}
+    </li>
+    <li class="list-group-item">Date of Birth: {{ user.dob | date }}</li>
+    <li class="list-group-item">SSN: {{ user.ssn }}</li>
+    <li class="list-group-item">Driver's License: {{ user.driversLicense }}</li>
+    <li class="list-group-item">Gender: {{ user.demographics.gender }}</li>
+    <li class="list-group-item">Race: {{ user.demographics.race }}</li>
+    <li class="list-group-item">Party: {{ user.demographics.party }}</li>
+    <button class="btn btn-primary" (click)="onAllowUser()">Allow</button>
+    <button class="btn btn-danger" (click)="onDenyUser()">Deny</button>
+  </ul>
+  <br>
+</div>
+<div *ngIf="type === 'administrator'">
+  <div class="card">
+    <div class="card-body">
+      <span style="text-align: center">({{ user.id }}) {{ user.username }}, {{ user.role }}</span>
+      <button
+        class="btn btn-danger float-right"
+        style="margin-right: 10px"
+        (click)="onDeleteUser()"
+      >Delete
+      </button>
+      <button
+        class="btn btn-primary float-right"
+        style="margin-right: 10px"
+        (click)="onEditUser()"
+      >Edit
+      </button>
+    </div>
+  </div>
+</div>
+
 <!--
 {
   id: number;
@@ -22,5 +54,13 @@
   email: string;
   address: Address;
   role: 'voter' | 'manager' | 'administrator';
+  precinctId: number;
+  emailVerified: boolean;
+  demographics: {
+    race: string,
+    gender: string,
+    party: string,
+    age: number
+  };
 }
 -->

@@ -44,6 +44,15 @@
         "zipCode": "string"
       }
     },
+    "demographics": {
+      "required": true,
+      "type": {
+        "race": "string",
+        "gender": "string",
+        "party": "string",
+        "age": "number"
+      }
+    },
     "role": {
       "type": "string",
       "required": true,

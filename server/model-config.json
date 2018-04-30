@@ -44,5 +44,9 @@
   "Email": {
     "dataSource": "emailDS",
     "public": true
+  },
+  "audit": {
+    "dataSource": "mysqlDS",
+    "public": true
   }
 }

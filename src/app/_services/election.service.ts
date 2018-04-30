@@ -52,4 +52,14 @@ export class ElectionService {
     return this.http.get<Candidate>(url);
   }
 
+  getAuditLogs(): Observable<any> {
+    const url = `${this.apiUrl}/audits`;
+    return this.http.get<any>(url);
+  }
+
+  incrementCandidateCount(candidateId: number, userId: number): Observable<any> {
+    const url = `${this.apiUrl}/candidates/${candidateId}/increment?uid=${userId}`;
+    return this.http.post<any>(url, {test: -1});
+  }
+
 }

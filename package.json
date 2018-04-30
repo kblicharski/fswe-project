@@ -23,6 +23,8 @@
     "@angular/platform-browser": "^6.0.0-rc.6",
     "@angular/platform-browser-dynamic": "^6.0.0-rc.6",
     "@angular/router": "^6.0.0-rc.6",
+    "@swimlane/ngx-charts": "^7.3.0",
+    "angular-bootstrap-md": "^6.0.1",
     "bootstrap": "^4.1.0",
     "core-js": "^2.5.5",
     "cors": "^2.8.4",
@@ -37,6 +39,8 @@
     "popper.js": "^1.14.3",
     "request": "^2.85.0",
     "rxjs": "^6.0.0",
+    "w3c-xmlhttprequest": "^2.1.2",
+    "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

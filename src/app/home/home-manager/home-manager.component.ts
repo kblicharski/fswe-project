@@ -9,8 +9,14 @@ import { UserService } from '../../_services/user.service';
 })
 export class HomeManagerComponent implements OnInit {
   requestingUsers: User[];
+  currentUser: User;
+  loading = true;
+  loadingInitially = true;
+  evenUsers: User[];
+  oddUsers: User[];
 
   constructor(private userService: UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
@@ -44,7 +50,19 @@ export class HomeManagerComponent implements OnInit {
   private loadAllUsers() {
     this.userService.getAllRequesting().subscribe(users => {
       this.requestingUsers = users;
+      this.evenUsers = users.filter((e, i) => i % 2 === 0);
+      this.oddUsers = users.filter((e, i) => i % 2 !== 0);
+      this.loading = false;
+      this.loadingInitially = false;
     });
+  }
+
+  refreshUsers() {
+    // Add delay to allow refresh icon to appear
+    this.loading = true;
+    setTimeout(() => {
+      this.loadAllUsers();
+    }, 600);
   }
 
 }

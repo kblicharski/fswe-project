@@ -22,3 +22,7 @@ a {
 .jumbotron {
   min-height: 100vh;
 }
+
+.my-btn {
+  margin-right: 10px;
+}

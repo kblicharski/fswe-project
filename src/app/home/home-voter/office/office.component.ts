@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Office } from '../../../_models/office';
 import { ElectionService } from '../../../_services/election.service';
 import { Candidate } from '../../../_models/candidate';
+import { Vote } from '../../../_models/vote';
+import { UserService } from '../../../_services/user.service';
 
 @Component({
   selector: 'app-office',
@@ -10,11 +12,17 @@ import { Candidate } from '../../../_models/candidate';
 })
 export class OfficeComponent implements OnInit {
   @Input() officeId: number;
+  @Input() electionId: number;
+  @Input() userId: number;
+  @Output() voted: EventEmitter<Vote> = new EventEmitter<Vote>();
   office: Office;
   candidates: Candidate[] = [];
 
+  private candidateId: number;
+
   constructor(
-    private electionService: ElectionService
+    private electionService: ElectionService,
+    private userService: UserService
   ) {
   }
 
@@ -39,4 +47,30 @@ export class OfficeComponent implements OnInit {
     );
   }
 
+  onVote() {
+    if (this.candidateId) {
+      const vote: Vote = {
+        electionId: this.electionId,
+        voter: this.userId,
+        time: new Date(Date.now()),
+        votesCast: {
+          candidateId: this.candidateId,
+          ballotId: this.officeId
+        }
+      };
+      this.userService.submitVote(vote).subscribe(
+        (data) => {
+          this.voted.emit(vote);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  updateSelection(selection: HTMLInputElement) {
+    const selectedCandidate = this.candidates.filter(c => c.name === selection.id)[0];
+    this.candidateId = selectedCandidate.id;
+  }
 }

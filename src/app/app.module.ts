@@ -32,9 +32,15 @@ import { AdminGuard } from './_guards/admin.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
 import { ElectionService } from './_services/election.service';
-import { MatFormFieldModule, MatInputModule} from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatStepperModule} from '@angular/material/stepper';
+import { AuditService } from './_services/audit.service';
+import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
+import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
+import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
+import { PairsPipe } from './_pipes/pairs.pipe';
+import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -57,7 +63,12 @@ import {MatStepperModule} from '@angular/material/stepper';
     ElectionManagementComponent,
     PageNotFoundComponent,
     AuditTrailComponent,
-    OfficeComponent
+    OfficeComponent,
+    CreateElectionComponent,
+    EditUsersComponent,
+    EditUserComponent,
+    PairsPipe,
+    DemographicsComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +79,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [
     AuthGuard,
@@ -78,7 +90,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     AlertService,
     AuthenticationService,
     UserService,
-    ElectionService
+    ElectionService,
+    AuditService
   ],
   bootstrap: [AppComponent]
 })

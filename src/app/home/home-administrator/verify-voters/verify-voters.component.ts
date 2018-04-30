@@ -21,11 +21,9 @@ export class VerifyVotersComponent implements OnInit {
   }
 
   verifyUser(user) {
-    user.registrationStatus = 'registered';
-    this.userService.update(user).subscribe(
+    this.userService.changeRegistrationStatus(user.id, 'registered').subscribe(
       (data) => {
         this.loadAllUsers();
-
       },
       (error) => {
         console.log(error);
@@ -34,11 +32,9 @@ export class VerifyVotersComponent implements OnInit {
   }
 
   denyUser(user) {
-    user.registrationStatus = 'denied';
-    this.userService.update(user).subscribe(
+    this.userService.changeRegistrationStatus(user.id, 'denied').subscribe(
       (data) => {
         this.loadAllUsers();
-
       },
       (error) => {
         console.log(error);

@@ -1,0 +1,23 @@
+{
+  "name": "audit",
+  "plural": "audits",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "action": {
+      "type": "string",
+      "required":false
+    },
+    "time": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

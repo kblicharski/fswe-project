@@ -1,35 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { AuditService } from './audit.service';
 
 @Injectable()
 export class AuthenticationService {
-
   private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private auditService: AuditService
+  ) {
   }
 
   login(username: string, password: string) {
+    const params = new HttpParams().set('username', username).set('password', password);
     return this.http.post<any>(
-      `${this.apiUrl}/users/login`,
+      `${this.apiUrl}/users/loginUser`,
       {username: username, password: password},
       {
-        params: new HttpParams().set('include', 'user')
+        params: params
       }).pipe(
       map(response => {
-        // login successful if there's a jwt token in the response
-        // if (response && response.token) {
         if (response) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(response.user));
+          localStorage.setItem('currentUser', JSON.stringify(response.status));
         }
-        return response.user;
+        return response.status;
       }));
   }
 
   logout() {
-    // remove user from local storage to log user out
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const audit = {
+      action: `${user.username} logged out`,
+      time: new Date(Date.now())
+    };
+    this.auditService.logAudit(audit).subscribe(
+      (data) => {
+        // console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     localStorage.removeItem('currentUser');
   }
 

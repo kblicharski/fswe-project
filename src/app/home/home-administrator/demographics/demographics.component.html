@@ -1,0 +1,54 @@
+<!-- Gender -->
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Gender</h1>
+    <ngx-charts-pie-chart
+      style="align-content: center"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="gender"
+      [legend]="showLegend"
+      [explodeSlices]="explodeSlices"
+      [labels]="showLabels"
+      [doughnut]="doughnut"
+      [gradient]="gradient"
+      (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </div>
+</div>
+
+<!-- Party -->
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Party</h1>
+    <ngx-charts-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="party"
+      [legend]="showLegend"
+      [explodeSlices]="explodeSlices"
+      [labels]="showLabels"
+      [doughnut]="doughnut"
+      [gradient]="gradient"
+      (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </div>
+</div>
+
+<!-- Race -->
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Race</h1>
+    <ngx-charts-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="race"
+      [legend]="showLegend"
+      [explodeSlices]="explodeSlices"
+      [labels]="showLabels"
+      [doughnut]="doughnut"
+      [gradient]="gradient"
+      (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+  </div>
+</div>
