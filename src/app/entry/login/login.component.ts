@@ -35,14 +35,22 @@ export class LoginComponent implements OnInit {
           const audit = {action: `Logged in user ${this.model.username}`, time: new Date(Date.now())};
           this.auditService.logAudit(audit);
           this.router.navigate([`${data.role}`]);
-          console.log(data);
         },
         error => {
-          console.log(error);
           if (error.error.error.statusCode === 402) {
             this.alertService.error('Incorrect username or password.');
+            const audit = {
+              action: `Failed to log in user ${this.model.username} due to: incorrect username or password.`,
+              time: new Date(Date.now())
+            };
+            this.auditService.logAudit(audit);
           } else if (error.error.error.statusCode === 401) {
             this.alertService.error('You have not been verified yet by your administrator.');
+            const audit = {
+              action: `Failed to log in user ${this.model.username} due to: unverified.`,
+              time: new Date(Date.now())
+            };
+            this.auditService.logAudit(audit);
           }
           this.loading = false;
         });

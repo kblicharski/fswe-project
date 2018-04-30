@@ -58,4 +58,14 @@ export class UserService {
     return this.http.get<{ ids: number[] }>(url);
   }
 
+  getIdByUsername(username: string): Observable<number> {
+    const url = `http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%22${username}%22%7D%7D`;
+    return this.http.get<Object>(url);
+  }
+
+  resetPassword(id: number): Observable<any> {
+    const url = `${this.apiUrl}/users/${id}/resetPassword`;
+    return this.http.post<Object>(url, id);
+  }
+
 }

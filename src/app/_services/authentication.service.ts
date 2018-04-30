@@ -11,17 +11,17 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
+    const params = new HttpParams().set('username', username).set('password', password);
+    console.log(params);
     return this.http.post<any>(
       `${this.apiUrl}/users/loginUser`,
       {username: username, password: password},
       {
-        params: new HttpParams().set('include', 'user')
+        params: params
       }).pipe(
       map(response => {
-        // login successful if there's a jwt token in the response
-        // if (response && response.token) {
+        console.log(response);
         if (response) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(response.user));
         }
         return response.user;
@@ -29,7 +29,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
   }
 
