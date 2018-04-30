@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateCandidateComponent } from './create-candidate.component';
 import {FormsModule} from '@angular/forms';
+import { ElectionService } from '../../../../../_services/election.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CreateCandidateComponent', () => {
   let component: CreateCandidateComponent;
@@ -10,7 +12,9 @@ describe('CreateCandidateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateCandidateComponent ],
-      imports: [FormsModule]
+      imports: [FormsModule, HttpClientTestingModule],
+            providers: [ElectionService]
+
     })
     .compileComponents();
   }));

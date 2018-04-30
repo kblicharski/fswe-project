@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DemographicsComponent } from './demographics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 describe('DemographicsComponent', () => {
   let component: DemographicsComponent;
@@ -8,7 +9,8 @@ describe('DemographicsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DemographicsComponent ]
+      declarations: [ DemographicsComponent ],
+      imports: [NgxChartsModule]
     })
     .compileComponents();
   }));
