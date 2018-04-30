@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuditService } from '../../../../../_services/audit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ElectionService } from '../../../../../_services/election.service';
-import { Office } from '../../../../../_models/office';
 
 @Component({
   selector: 'app-create-ballot',
@@ -10,8 +9,14 @@ import { Office } from '../../../../../_models/office';
   styleUrls: ['./create-ballot.component.css']
 })
 export class CreateBallotComponent implements OnInit {
-  ballot: Office;
-  loading = false;
+  ballot: any = {
+    title: '',
+    description: '',
+    candidates: []
+  };
+  loading = true;
+  candidates: any;
+  selectedValue = [];
 
   constructor(
     private router: Router,
@@ -22,9 +27,21 @@ export class CreateBallotComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.electionService.getAllCandidates().subscribe(
+      (data) => {
+        this.candidates = data;
+        console.log(data);
+        this.loading = false;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onCreateBallot() {
+    this.ballot.candidates = this.selectedValue;
+    console.log(this.ballot);
     this.electionService.createOffice(this.ballot).subscribe(
       (data) => {
         const audit = {
@@ -41,6 +58,20 @@ export class CreateBallotComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  change(e, type) {
+    if (e.target.checked) {
+      this.selectedValue.push(type);
+    } else {
+      const updateItem = this.selectedValue.find(this.findIndexToUpdate, type.id);
+      const index = this.selectedValue.indexOf(updateItem);
+      this.selectedValue.splice(index, 1);
+    }
+  }
+
+  findIndexToUpdate(val) {
+    return val.id === this;
   }
 
 }

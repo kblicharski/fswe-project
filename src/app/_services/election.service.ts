@@ -112,4 +112,14 @@ export class ElectionService {
     return this.http.delete<Office>(url);
   }
 
+  getAllCandidateIds(): Observable<number> {
+    const url = 'http://localhost:3000/api/candidates?filter=%7B%22fields%22%3A%7B%22id%22%3Atrue%7D%7D';
+    return this.http.get<number>(url);
+  }
+
+  getAllBallotIds(): Observable<number> {
+    const url = 'http://localhost:3000/api/offices?filter=%7B%22fields%22%3A%7B%22id%22%3Atrue%7D%7D';
+    return this.http.get<number>(url);
+  }
+
 }
