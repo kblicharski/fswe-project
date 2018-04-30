@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ElectionService } from '../../../../../_services/election.service';
 import { UserService } from '../../../../../_services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UserInfoComponent } from '../../../../user-info/user-info.component';
 
 describe('EditUsersComponent', () => {
   let component: EditUsersComponent;
@@ -14,7 +15,7 @@ describe('EditUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditUsersComponent, FilterPipe],
+      declarations: [EditUsersComponent, FilterPipe, UserInfoComponent],
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
       providers: [ElectionService, UserService]
 

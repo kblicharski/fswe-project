@@ -16,7 +16,7 @@ describe('EditElectionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [EditElectionComponent],
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
-            providers: [ElectionService, UserService, AuditService]
+      providers: [ElectionService, UserService, AuditService]
 
     })
       .compileComponents();

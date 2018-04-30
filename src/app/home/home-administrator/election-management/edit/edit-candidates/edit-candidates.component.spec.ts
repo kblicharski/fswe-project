@@ -7,6 +7,7 @@ import { FilterPipe } from '../../../../../_pipes/filter-user.pipe';
 import { ElectionService } from '../../../../../_services/election.service';
 import { UserService } from '../../../../../_services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuditService } from '../../../../../_services/audit.service';
 
 describe('EditCandidatesComponent', () => {
   let component: EditCandidatesComponent;
@@ -14,12 +15,12 @@ describe('EditCandidatesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCandidatesComponent, FilterPipe ],
-            imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
-            providers: [ElectionService, UserService]
+      declarations: [EditCandidatesComponent, FilterPipe],
+      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
+      providers: [ElectionService, UserService, AuditService]
 
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

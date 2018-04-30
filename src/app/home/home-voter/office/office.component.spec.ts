@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OfficeComponent } from './office.component';
 import { ElectionService } from '../../../_services/election.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UserService } from '../../../_services/user.service';
 
 describe('OfficeComponent', () => {
   let component: OfficeComponent;
@@ -12,7 +13,7 @@ describe('OfficeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [OfficeComponent],
       imports: [HttpClientTestingModule],
-      providers: [ElectionService]
+      providers: [ElectionService, UserService]
     }).compileComponents();
   }));
 

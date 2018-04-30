@@ -4,6 +4,8 @@ import { CreateElectionComponent } from './create-election.component';
 import { ElectionService } from '../../../../../_services/election.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuditService } from '../../../../../_services/audit.service';
 
 describe('CreateElectionComponent', () => {
   let component: CreateElectionComponent;
@@ -12,8 +14,8 @@ describe('CreateElectionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CreateElectionComponent],
-      imports: [FormsModule, HttpClientTestingModule],
-      providers: [ElectionService]
+      imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
+      providers: [ElectionService, AuditService]
 
     })
       .compileComponents();

@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FilterPipe } from '../../../../../_pipes/filter-user.pipe';
 import { ElectionService } from '../../../../../_services/election.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuditService } from '../../../../../_services/audit.service';
 
 describe('EditBallotsComponent', () => {
   let component: EditBallotsComponent;
@@ -15,7 +16,7 @@ describe('EditBallotsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [EditBallotsComponent, FilterPipe],
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
-            providers: [ElectionService]
+            providers: [ElectionService, AuditService]
 
     })
       .compileComponents();

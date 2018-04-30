@@ -6,6 +6,7 @@ import { FilterPipe } from '../../_pipes/filter-user.pipe';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { UserService } from '../../_services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PairsPipe } from '../../_pipes/pairs.pipe';
 
 describe('HomeManagerComponent', () => {
   let component: HomeManagerComponent;
@@ -13,7 +14,7 @@ describe('HomeManagerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeManagerComponent, FilterPipe, UserInfoComponent],
+      declarations: [HomeManagerComponent, FilterPipe, UserInfoComponent, PairsPipe],
       imports: [FormsModule, HttpClientTestingModule],
       providers: [UserService]
     })
