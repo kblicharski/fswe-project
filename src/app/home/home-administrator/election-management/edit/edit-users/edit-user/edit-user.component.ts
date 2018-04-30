@@ -29,7 +29,6 @@ export class EditUserComponent implements OnInit {
         (data) => {
           this.user = data;
           this.loading = false;
-          console.log(this.loading);
         },
         (error) => {
           console.log(error);

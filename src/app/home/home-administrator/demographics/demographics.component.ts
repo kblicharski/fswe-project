@@ -41,7 +41,7 @@ export class DemographicsComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   ngOnInit(): void {
@@ -56,10 +56,6 @@ export class DemographicsComponent implements OnInit {
           parties.push(user.demographics.party);
           genders.push(user.demographics.gender);
         }
-
-        console.log(races);
-        console.log(parties);
-        console.log(genders);
 
         let len = races.length;
         const whiteRace = (races.filter((r) => r === 'White').length / len) * 100;

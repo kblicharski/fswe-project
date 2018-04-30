@@ -56,8 +56,8 @@ const appRoutes: Routes = [
                   path: 'edit', component: EditComponent, children: [
                     {path: 'users', component: EditUsersComponent},
                     {path: 'users/:id', component: EditUserComponent},
-                    {path: 'elections', component: EditElectionComponent},
-                    {path: 'elections/:id', component: EditElectionsComponent},
+                    {path: 'elections', component: EditElectionsComponent},
+                    {path: 'elections/:id', component: EditElectionComponent},
                     {path: 'ballots', component: EditBallotsComponent},
                     {path: 'ballots/:id', component: EditBallotComponent},
                     {path: 'candidates', component: EditCandidatesComponent},
