@@ -38,7 +38,6 @@ module.exports = function(User) {
           return console.log(err);
         }
 
-
         for (var i in body) {
             if((body[i].precincts).includes(precinctId)) {
               electionIds.push(body[i].id);
