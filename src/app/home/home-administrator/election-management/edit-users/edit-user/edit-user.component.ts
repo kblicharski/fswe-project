@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../../../_models/user';
 import { UserService } from '../../../../../_services/user.service';
 import { AuditService } from '../../../../../_services/audit.service';
+import { AlertService } from '../../../../../_services/alert.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -18,7 +19,8 @@ export class EditUserComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private auditService: AuditService
+    private auditService: AuditService,
+    private alertService: AlertService
   ) {
   }
 
@@ -48,7 +50,7 @@ export class EditUserComponent implements OnInit {
         };
         this.auditService.logAudit(audit).subscribe(
           (data) => {
-            // console.log(data)
+            this.router.navigate(['..'], {relativeTo: this.route});
           }
         );
       },
