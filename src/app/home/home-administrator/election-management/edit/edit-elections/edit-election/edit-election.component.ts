@@ -38,17 +38,12 @@ export class EditElectionComponent implements OnInit {
           this.electionService.getAllOffices().subscribe(
             (data) => {
               this.ballots = data;
-              console.log('offices', data);
-
               this.electionService.getAllManagers().subscribe(
                 (data) => {
                   this.managers = data;
-                  console.log('managers', data);
-
                   this.electionService.getPrecincts().subscribe(
                     (data) => {
                       this.precincts = data;
-                      console.log('precincts', data);
                       this.loading = false;
                     },
                     (error) => {
