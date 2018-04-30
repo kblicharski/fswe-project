@@ -32,7 +32,7 @@ export class RegisterComponent {
     this.userService.create(this.model)
       .subscribe(
         (data) => {
-          const audit = {action: `Registered new user ${this.model.username}`, time: new Date(Date.now())};
+          const audit = {action: `Registered new user: ${this.model.username}.`, time: new Date(Date.now())};
           this.auditService.logAudit(audit);
           this.alertService.success('Registration successful!', true);
           this.router.navigate(['login']);

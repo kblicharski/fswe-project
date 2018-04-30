@@ -238,7 +238,7 @@ module.exports = function(User) {
       accepts: [
         {arg: 'id', type: 'string', required: true},
       ],
-      http: {path: '/:id/resetPassword', verb: 'get'},
+      http: {path: '/:id/resetPassword', verb: 'post'},
       returns: {arg: 'status', type: 'string'}
     }
   );
