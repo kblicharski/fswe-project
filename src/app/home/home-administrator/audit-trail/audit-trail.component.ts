@@ -23,6 +23,9 @@ export class AuditTrailComponent implements OnInit {
   private getAllAuditLogs() {
     this.electionService.getAuditLogs().subscribe(
       (data) => {
+        data.sort(function (a, b) {
+          return new Date(b.time) - new Date(a.time);
+        });
         this.audits = data;
         this.loading = false;
         this.notInitialLoad = true;
