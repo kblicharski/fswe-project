@@ -12,7 +12,7 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     return this.http.post<any>(
-      `${this.apiUrl}/users/login`,
+      `${this.apiUrl}/users/loginUser`,
       {username: username, password: password},
       {
         params: new HttpParams().set('include', 'user')

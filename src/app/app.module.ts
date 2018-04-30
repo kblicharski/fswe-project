@@ -34,6 +34,7 @@ import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit
 import { ElectionService } from './_services/election.service';
 import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuditService } from './_services/audit.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AlertService,
     AuthenticationService,
     UserService,
-    ElectionService
+    ElectionService,
+    AuditService
   ],
   bootstrap: [AppComponent]
 })

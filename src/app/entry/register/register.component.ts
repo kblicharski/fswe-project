@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertService } from '../../_services/alert.service';
 import { UserService } from '../../_services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuditService } from '../../_services/audit.service';
 
 
 @Component({
@@ -20,7 +21,9 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private auditService: AuditService
+  ) {
   }
 
   register() {
@@ -29,6 +32,8 @@ export class RegisterComponent {
     this.userService.create(this.model)
       .subscribe(
         (data) => {
+          const audit = {action: `Registered new user ${this.model.username}`, time: new Date(Date.now())};
+          this.auditService.logAudit(audit);
           this.alertService.success('Registration successful!', true);
           this.router.navigate(['login']);
         },
