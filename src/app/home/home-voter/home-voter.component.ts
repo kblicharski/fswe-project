@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { Election } from '../../_models/election';
@@ -12,7 +12,7 @@ import { Vote } from '../../_models/vote';
 })
 export class HomeVoterComponent implements OnInit {
   loading = true;
-  elections: Election[] = [];
+  elections: Election[];
   localElections: Election[] = [];
   stateElections: Election[] = [];
   nationalElections: Election[] = [];
@@ -20,7 +20,8 @@ export class HomeVoterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private electionService: ElectionService
+    private electionService: ElectionService,
+    private cdf: ChangeDetectorRef
   ) {
   }
 
@@ -41,21 +42,9 @@ export class HomeVoterComponent implements OnInit {
     );
   }
 
-  ongoingCurrentElections() {
-    return !this.loading || this.elections.length > 0;
-  }
-
-  userIsApproved() {
-    return this.currentUser.votingStatus === 'approved';
-  }
-
-  userIsRequesting() {
-    return this.currentUser.votingStatus === 'requesting';
-  }
-
   loadAllElections() {
     const precinctId = this.currentUser.precinctId;
-    // const precinctId = 200;
+    this.elections = [];
     this.userService.getElectionIds(precinctId, this.currentUser.id).subscribe(
       (electionIds: { ids: number[] }) => {
         for (const id of electionIds.ids) {
@@ -73,12 +62,13 @@ export class HomeVoterComponent implements OnInit {
                   this.nationalElections.push(election);
                   break;
               }
+              this.loading = false;
             },
             (error) => {
               console.log(error);
             }
           );
-          this.loading = false;
+
         }
       },
       (error) => {
@@ -88,13 +78,34 @@ export class HomeVoterComponent implements OnInit {
   }
 
   handleVote(vote: Vote) {
-    this.elections = [];
-    this.localElections = [];
-    this.stateElections = [];
-    this.nationalElections = [];
-    this.loadAllElections();
-    this.electionService.incrementCandidateCount(vote.votesCast.candidateId).subscribe(
-      (data) => console.log(data)
+    let election: Election;
+    this.electionService.getById(vote.electionId).subscribe(
+      (data: Election) => {
+        election = data;
+        switch (election.type) {
+          case 'local':
+            this.localElections = this.localElections.filter(e => e.id !== election.id);
+            break;
+          case 'state':
+            this.stateElections = this.stateElections.filter(e => e.id !== election.id);
+            break;
+          case 'national':
+            this.nationalElections = this.nationalElections.filter(e => e.id !== election.id);
+            break;
+        }
+        this.elections = this.localElections.concat(this.stateElections.concat(this.nationalElections));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.electionService.incrementCandidateCount(vote.votesCast.candidateId, vote.voter).subscribe(
+      data => {
+        // console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 

@@ -9,8 +9,10 @@ import { UserService } from '../../_services/user.service';
 })
 export class HomeManagerComponent implements OnInit {
   requestingUsers: User[];
+  currentUser: User;
 
   constructor(private userService: UserService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

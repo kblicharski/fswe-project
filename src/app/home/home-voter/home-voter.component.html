@@ -1,17 +1,26 @@
-<div *ngIf="ongoingCurrentElections()">
-  <div *ngIf="!userIsRequesting()">
-    <div *ngIf="!userIsApproved()">
-      <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+<div *ngIf="elections.length !== 0">
+    <div *ngIf="currentUser.votingStatus !== 'approved'">
+      <h3>Hello, {{currentUser.firstName}}. Please request to vote and your election manager will be with you
+        shortly.</h3>
+      <br>
+      <div *ngIf="currentUser.votingStatus !== 'requesting'">
+        <button class="btn btn-primary" (click)="onSubmitVoteRequest()">Request to Vote</button>
+      </div>
+      <div *ngIf="currentUser.votingStatus === 'requesting'">
+        <app-spinner></app-spinner>
+      </div>
     </div>
-    <div *ngIf="userIsApproved()">
+    <div *ngIf="currentUser.votingStatus === 'approved'">
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
           <div *ngIf="localElections.length > 0">
             <div *ngFor="let election of localElections">
               <h4>{{ election.description }}</h4>
               <div *ngFor="let officeId of election.offices">
-                <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
-                            [officeId]="officeId"></app-office>
+                <div class="mr-2">
+                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                              [officeId]="officeId"></app-office>
+                </div>
                 <br>
               </div>
             </div>
@@ -19,13 +28,15 @@
         </div>
 
         <!-- State Elections -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
           <div *ngIf="stateElections.length > 0">
             <div *ngFor="let election of stateElections">
               <h4>{{ election.description }}</h4>
               <div *ngFor="let officeId of election.offices">
-                <app-office (voted)="loadAllElections()" [userId]="currentUser.id" [electionId]="election.id"
-                            [officeId]="officeId"></app-office>
+                <div class="mr-2">
+                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                              [officeId]="officeId"></app-office>
+                </div>
                 <br>
               </div>
             </div>
@@ -33,26 +44,23 @@
         </div>
 
         <!-- National Elections -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="col-12 col-sm-12 col-md-12 col-xl-4 p-lg-1">
           <div *ngIf="nationalElections.length > 0">
             <div *ngFor="let election of nationalElections">
               <h4>{{ election.description }}</h4>
               <div *ngFor="let officeId of election.offices">
-                <app-office (voted)="loadAllElections()" [userId]="currentUser.id" [electionId]="election.id"
-                            [officeId]="officeId"></app-office>
+                <div class="mr-2">
+                  <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
+                              [officeId]="officeId"></app-office>
+                </div>
                 <br>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-  </div>
-  <div *ngIf="userIsRequesting()">
-    <app-spinner></app-spinner>
-  </div>
 </div>
-<div *ngIf="!loading && !ongoingCurrentElections()">
-  <p>There are no currently ongoing elections.</p>
+<div *ngIf="!loading && elections.length === 0">
+  <p>There are no currently more ongoing elections. Please check back later.</p>
 </div>

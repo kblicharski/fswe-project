@@ -35,7 +35,14 @@ export class AuthenticationService {
       action: `${user.username} logged out`,
       time: new Date(Date.now())
     };
-    this.auditService.logAudit(audit);
+    this.auditService.logAudit(audit).subscribe(
+      (data) => {
+        // console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     localStorage.removeItem('currentUser');
   }
 

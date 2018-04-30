@@ -57,9 +57,9 @@ export class ElectionService {
     return this.http.get<any>(url);
   }
 
-  incrementCandidateCount(id: number): Observable<any> {
-    const url = `${this.apiUrl}/candidates/${id}/increment`;
-    return this.http.post<any>(url, 1);
+  incrementCandidateCount(candidateId: number, userId: number): Observable<any> {
+    const url = `${this.apiUrl}/candidates/${candidateId}/increment?uid=${userId}`;
+    return this.http.post<any>(url, {test: -1});
   }
 
 }

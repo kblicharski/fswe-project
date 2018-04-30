@@ -13,7 +13,7 @@
       <div class="col-12 col-sm-6">
         <div *ngFor="let user of unregisteredUsers | slice:0:5 | FilterPipe:queryString">
           <app-user-info
-            [type]="'administrator'"
+            [type]="'manager'"
             [user]="user"
             (onAllow)="verifyUser(user)"
             (onDeny)="denyUser(user)"
