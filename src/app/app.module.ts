@@ -35,6 +35,9 @@ import { ElectionService } from './_services/election.service';
 import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuditService } from './_services/audit.service';
+import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
+import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
+import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { AuditService } from './_services/audit.service';
     ElectionManagementComponent,
     PageNotFoundComponent,
     AuditTrailComponent,
-    OfficeComponent
+    OfficeComponent,
+    CreateElectionComponent,
+    EditUsersComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

@@ -88,7 +88,6 @@ export class HomeVoterComponent implements OnInit {
   }
 
   handleVote(vote: Vote) {
-    console.log(vote);
     this.elections = [];
     this.localElections = [];
     this.stateElections = [];

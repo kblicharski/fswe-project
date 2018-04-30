@@ -1,55 +1,8 @@
-<button class="btn btn-primary" (click)="displayMode = 'create'">Create an Election</button>
-<button class="btn btn-primary" (click)="displayMode = 'edit'">Search and Edit Users</button>
+<button class="btn btn-primary" (click)="onNavigateTo('create')">Create an Election</button>
+<button class="btn btn-primary" (click)="onNavigateTo('edit')">Search and Edit Users</button>
 <br>
 <hr>
 <br>
+<router-outlet></router-outlet>
 
-<div *ngIf="displayMode === 'create'">
-  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button class="btn btn-primary" mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</div>
 
-<!-- TODO(Kevin): I will implement what goes in here -->
-<div *ngIf="displayMode === 'edit'">
-<input type="search" class="form-control" [(ngModel)]="queryString">
-<br>
-<div *ngFor="let user of users | slice:0:10 | FilterPipe:queryString">
-  <app-user-info
-    [type]="'administrator'"
-    [user]="user"
-    (onAllow)="approveVoteRequest(user)"
-    (onDeny)="denyVoteRequest(user)"
-  ></app-user-info>
-</div>
-</div>

@@ -15,6 +15,9 @@ import { VerifyVotersComponent } from './home/home-administrator/verify-voters/v
 import { VoterGuard } from './_guards/voter.guard';
 import { PageNotFoundComponent } from './utility/page-not-found/page-not-found.component';
 import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit-trail.component';
+import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
+import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
+import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
 
 const appRoutes: Routes = [
   {
@@ -28,7 +31,14 @@ const appRoutes: Routes = [
         children:
           [
             {path: 'verify', component: VerifyVotersComponent},
-            {path: 'manage', component: ElectionManagementComponent},
+            {
+              path: 'manage', component: ElectionManagementComponent,
+              children: [
+                {path: 'create', component: CreateElectionComponent},
+                {path: 'edit', component: EditUsersComponent},
+                {path: 'edit/:id', component: EditUserComponent},
+              ]
+            },
             {path: 'audit', component: AuditTrailComponent},
           ]
       },

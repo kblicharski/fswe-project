@@ -1,0 +1,9 @@
+<input type="search" class="form-control" [(ngModel)]="queryString">
+<br>
+<div *ngFor="let user of users | slice:0:10 | FilterPipe:queryString">
+  <app-user-info
+    (edited)="getAllUsers()"
+    [type]="'administrator'"
+    [user]="user"
+  ></app-user-info>
+</div>
