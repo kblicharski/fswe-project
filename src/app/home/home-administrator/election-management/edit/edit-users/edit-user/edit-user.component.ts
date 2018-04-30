@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../../../../_models/user';
-import { UserService } from '../../../../../_services/user.service';
-import { AuditService } from '../../../../../_services/audit.service';
-import { AlertService } from '../../../../../_services/alert.service';
+import { User } from '../../../../../../_models/user';
+import { UserService } from '../../../../../../_services/user.service';
+import { AuditService } from '../../../../../../_services/audit.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,7 +19,6 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private auditService: AuditService,
-    private alertService: AlertService
   ) {
   }
 

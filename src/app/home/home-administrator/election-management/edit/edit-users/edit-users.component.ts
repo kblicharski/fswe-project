@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../../_models/user';
-import { UserService } from '../../../../_services/user.service';
-import { AuditService } from '../../../../_services/audit.service';
+import { User } from '../../../../../_models/user';
+import { UserService } from '../../../../../_services/user.service';
 
 @Component({
   selector: 'app-edit-users',
