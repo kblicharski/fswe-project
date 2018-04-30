@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(Candidate) {
-  Candidate.increment = function(id, cb) {
+  Candidate.increment = function(id, uid, cb) {
     const request = require('request');
     request('http://localhost:3000/api/candidates/'+ id, {json: true}, (err, res, body) => {
       if (err) {
@@ -16,9 +16,15 @@ module.exports = function(Candidate) {
               console.log(err);
               return cb(null, 404);
             }
+            const request = require('request');
+            request('http://localhost:3000/api/users/'+id, { json: true }, (err, res, body) => {
+              if (err) {
+                console.log(err);
+              }
 
-            const content = {"action": body.name + " has received a vote ", "time": new Date()};
-            Candidate.app.models.audit.create(content);
+              const content = {"action": body.username + " has voted", "time": new Date()};
+              Candidate.app.models.audit.create(content);
+            });
             return cb(null,200);
           });
         });
@@ -35,7 +41,8 @@ module.exports = function(Candidate) {
     'increment',
     {
       accepts: [
-        {arg: 'id', type: 'number', required: true}
+        {arg: 'id', type: 'number', required: true},
+        {arg: 'uid', type: 'number', http: {source: 'query'}}
       ],
       http: {path: '/:id/increment', verb: 'post'},
       returns: {arg: 'incremented', type: 'boolean'}
