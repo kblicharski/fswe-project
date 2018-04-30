@@ -161,6 +161,32 @@ module.exports = function (app) {
           party: "Republican",
           age: 21
         }
+      },{
+        email: "alex.jones@gmail.com",
+        username: "alexJones",
+        password: "alexJones!",
+        firstName: "Alex",
+        lastName: "Jones",
+        ssn: "55555",
+        dob: "2018-02-24T23:40:26.663Z",
+        driversLicense: "js55512311",
+        registrationStatus: "unregistered",
+        emailVerified: true,
+        votingStatus: "requesting",
+        precinctId: 1,
+        role: "voter",
+        address: {
+          street: "University Avenue",
+          city: "Iowa City",
+          state: "Iowa",
+          zipCode: "52245"
+        },
+        demographics: {
+          gender: "M",
+          race: "White",
+          party: "Republican",
+          age: 21
+        }
       }, {
         email: "jon.Adams@gmail.com",
         username: "jonAdams",
@@ -183,9 +209,9 @@ module.exports = function (app) {
         },
         demographics: {
           gender: "M",
-          race: "White",
+          race: "other",
           party: "Republican",
-          age: 21
+          age: 56
         }
       }, {
         email: "jane.smith@gmail.com",
