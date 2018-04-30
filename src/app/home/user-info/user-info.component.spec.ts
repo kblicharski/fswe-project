@@ -31,7 +31,13 @@ describe('UserInfoComponent', () => {
       precinctId: 1,
       username: 'jonAdams',
       emailVerified: true,
-      id: 4
+      id: 4,
+      demographics: {
+        age: 18,
+        race: 'White',
+        gender: 'M',
+        party: 'Republican'
+      }
     };
     fixture.detectChanges();
   });
