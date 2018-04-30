@@ -44,7 +44,7 @@ module.exports = function(User) {
 
             }
         }
-        request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%201%7D%7D', { json: true }, (err, res, body) => {
+        request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%20'+eid+'%7D%7D', { json: true }, (err, res, body) => {
           if (err) {
             return console.log(err);
           }
