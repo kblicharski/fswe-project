@@ -15,10 +15,6 @@
       "type": "string",
       "required": true
     },
-    "dob": {
-      "type": "date",
-      "required": false
-    },
     "voteCount": {
       "type": "number",
       "required": true,

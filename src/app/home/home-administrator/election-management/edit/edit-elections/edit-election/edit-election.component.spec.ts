@@ -9,10 +9,10 @@ describe('EditElectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditElectionComponent ],
+      declarations: [EditElectionComponent],
       imports: [FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
