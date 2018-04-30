@@ -30,7 +30,6 @@ export class CreateBallotComponent implements OnInit {
     this.electionService.getAllCandidates().subscribe(
       (data) => {
         this.candidates = data;
-        console.log(data);
         this.loading = false;
       },
       (error) => {

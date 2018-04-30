@@ -5,45 +5,130 @@
         <div class="panel-heading">
           <span>Election</span>
         </div>
-        <div class="panel-body">
-          <div class="form-group col-xs-6">
-            <label>Precinct ID</label>
-            <input type="text" class="form-control" formControlName="precinctID" required>
-            <small *ngIf="!f.controls.precinctId.valid && f.controls.precinctId.touched" class="help-block">Precinct ID
-              is Required
-            </small>
+
+        <div class="form-group row">
+          <!-- Type -->
+          <div class="col-12 col-sm-6">
+            <label for="type">Type</label>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              name="type"
+              [(ngModel)]="election.type"
+              #type="ngModel"
+              required>
+            <div *ngIf="type.touched && !type.valid" class="alert alert-danger help-block">
+              <div *ngIf="type.errors.required">
+                Type is required.
+              </div>
+              <!--<div *ngIf="type.errors.pattern">-->
+                <!--Type must be 'local', 'state', or 'national'.-->
+              <!--</div>-->
+            </div>
           </div>
-          <div class="form-group col-xs-6">
-            <label>Description</label>
-            <input type="text" class="form-control" formControlName="description" required>
-            <small *ngIf="!f.controls.description.valid && f.controls.description.touched" class="help-block">
-              Description is required
-            </small>
+          <!-- Description -->
+          <div class="col-12 col-sm-6">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              name="description"
+              [(ngModel)]="election.description"
+              #description="ngModel"
+              required>
+            <div *ngIf="description.touched && !description.valid" class="alert alert-danger help-block">
+              Description is required.
+            </div>
           </div>
-          <div class="form-group col-xs-6">
-            <label>Start Date</label>
-            <input type="date" class="form-control" formControlName="start" required>
-            <small *ngIf="!f.controls.start.valid && f.controls.start.touched" class="help-block">
-              Start date is required
-            </small>
+        </div>
+
+        <div class="form-group row">
+          <!-- Start Date -->
+          <div class="col-12 col-sm-6">
+            <label for="startDate">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              name="startDate"
+              [(ngModel)]="election.start"
+              #startDate="ngModel"
+              required
+            />
+            <div *ngIf="startDate.touched && !startDate.valid" class="alert alert-danger help-block">
+              Start date is required.
+            </div>
           </div>
-          <div class="form-group col-xs-6">
-            <label>End Date</label>
-            <input type="date" class="form-control" formControlName="end" required>
-            <small *ngIf="!f.controls.end.valid && f.controls.end.touched" class="help-block">
-              End date is required
-            </small>
+          <!-- End Date -->
+          <div class="col-12 col-sm-6">
+            <label for="endDate">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              name="endDate"
+              [(ngModel)]="election.end"
+              #endDate="ngModel"
+              required
+            />
+            <div *ngIf="endDate.touched && !endDate.valid" class="alert alert-danger help-block">
+              End date is required.
+            </div>
           </div>
-          <div class="form-group col-xs-6">
-            <label>Type</label>
-            <input type="text" class="form-control" formControlName="type" required
-                   pattern="^local$ | ^national$ | ^state$">
-            <small *ngIf="!type.errors.required && f.controls.end.touched" class="help-block">
-              End date is required
-            </small>
-            <small *ngIf="!type.errors.pattern && f.controls.touched">
-              Entry must be local, state or national
-            </small>
+        </div>
+
+        <div class="form-group row">
+          <!-- Precinct IDs -->
+          <div class="col-12 col-sm-4">
+            <label for="precincts">Precincts</label>
+            <div id="precincts" class="form-check" *ngFor="let precinct of precincts | slice:0:10">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="{{precinct.precincts}}"
+                value="{{precinct.precincts}}"
+                (change)="changePrecincts($event, precinct)"
+                id="{{precinct.precincts}}">
+              <label class="form-check-label" for="{{precinct.precincts}}">
+                {{ precinct.precincts }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Ballot IDs -->
+          <div class="col-12 col-sm-4">
+            <label for="ballots">Ballots</label>
+            <div id="ballots" class="form-check" *ngFor="let ballot of ballots">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="{{ballot.id}}"
+                value="{{ballot.id}}"
+                (change)="changeBallots($event, ballot)"
+                id="{{ballot.id}}">
+              <label class="form-check-label" for="{{ballot.id}}">
+                ({{ ballot.id }}): {{ ballot.title }}, {{ ballot.description }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Manager IDs -->
+          <div class="col-12 col-sm-4">
+            <label for="managers">Managers</label>
+            <div id="managers" class="form-check" *ngFor="let manager of managers">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="{{manager.id}}"
+                value="{{manager.id}}"
+                (change)="changeManagers($event, manager)"
+                id="{{manager.id}}">
+              <label class="form-check-label" for="{{manager.id}}">
+                ({{ manager.id }}): {{ manager.username }}
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group row">

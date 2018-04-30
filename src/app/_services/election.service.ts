@@ -122,4 +122,14 @@ export class ElectionService {
     return this.http.get<number>(url);
   }
 
+  getAllManagers(): Observable<any> {
+    const url = 'http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22role%22%3A%22manager%22%7D%7D';
+    return this.http.get<number>(url);
+  }
+
+  getPrecincts(): Observable<any> {
+    const url = 'http://localhost:3000/api/zipCodes?filter=%7B%22fields%22%3A%7B%22precincts%22%3Atrue%7D%7D';
+    return this.http.get<number>(url);
+  }
+
 }
