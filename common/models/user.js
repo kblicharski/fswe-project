@@ -42,6 +42,7 @@ module.exports = function(User) {
         for (var i in body) {
             if((body[i].precincts).includes(precinctId)) {
               electionIds.push(body[i].id);
+
             }
         }
         request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%201%7D%7D', { json: true }, (err, res, body) => {
@@ -52,16 +53,17 @@ module.exports = function(User) {
           for (var i in body) {
             if((body[i].voter) === eid) {
               filterOut.push(body[i].electionId);
+
             }
           }
-        });
-        const filteredEIDs = []
-        for (var i in electionIds) {
-          if(filterOut.includes(electionIds[i]) === false) {
-            filteredEIDs.push(electionIds[i]);
+          const filteredEIDs = [];
+          for (var j in electionIds) {
+            if(filterOut.includes(electionIds[j]) === false) {
+              filteredEIDs.push(electionIds[j]);
+            }
           }
-        }
-        cb(null, filteredEIDs);
+          cb(null, filteredEIDs);
+        });
       });
   };
   User.updatePassword = function(id, oldPassword, newPassword, cb) {
