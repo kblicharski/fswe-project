@@ -11,7 +11,7 @@ module.exports = function (app) {
         lastName: "Smith",
         ssn: "55555",
         dob: "2018-02-24T23:40:26.663Z",
-        driversLicense: "js555123",
+        driversLicense: "js5551231",
         registrationStatus: "registered",
         emailVerified: true,
         votingStatus: "idle",
@@ -20,7 +20,7 @@ module.exports = function (app) {
         address: {
           street: "University Avenue",
           city: "Iowa City",
-          state: "IA",
+          state: "Iowa",
           zipCode: "52245"
         },
         demographics: {
@@ -37,7 +37,7 @@ module.exports = function (app) {
         lastName: "Smith",
         ssn: "55555",
         dob: "2018-02-24T23:40:26.663Z",
-        driversLicense: "js555123",
+        driversLicense: "js55512311",
         registrationStatus: "unregistered",
         emailVerified: true,
         votingStatus: "requesting",
@@ -46,7 +46,7 @@ module.exports = function (app) {
         address: {
           street: "University Avenue",
           city: "Iowa City",
-          state: "IA",
+          state: "Iowa",
           zipCode: "52245"
         },
         demographics: {
@@ -63,7 +63,7 @@ module.exports = function (app) {
         lastName: "Adams",
         ssn: "66666",
         dob: "2018-02-25T23:40:26.663Z",
-        driversLicense: "ja555123",
+        driversLicense: "ja55512311",
         registrationStatus: "registered",
         votingStatus: "approved",
         emailVerified: true,
@@ -72,7 +72,7 @@ module.exports = function (app) {
         address: {
           street: "University Avenue",
           city: "Iowa City",
-          state: "IA",
+          state: "Iowa",
           zipCode: "52245"
         },
         demographics: {
@@ -89,7 +89,7 @@ module.exports = function (app) {
         lastName: "Smith",
         ssn: "55555",
         dob: "2018-02-24T23:40:26.663Z",
-        driversLicense: "js555123",
+        driversLicense: "js555122113",
         registrationStatus: "unregistered",
         emailVerified: true,
         votingStatus: "requesting",
@@ -98,7 +98,7 @@ module.exports = function (app) {
         address: {
           street: "University Avenue",
           city: "Iowa City",
-          state: "IA",
+          state: "Iowa",
           zipCode: "52245"
         },
         demographics: {
@@ -115,7 +115,7 @@ module.exports = function (app) {
         lastName: "Clancy",
         ssn: "77777",
         dob: "2018-02-26T23:40:26.663Z",
-        driversLicense: "jc555123",
+        driversLicense: "jc555121233",
         registrationStatus: "registered",
         votingStatus: "approved",
         emailVerified: true,
@@ -124,7 +124,7 @@ module.exports = function (app) {
         address: {
           street: "University Avenue",
           city: "Iowa City",
-          state: "IA",
+          state: "Iowa",
           zipCode: "52245"
         },
         demographics: {
