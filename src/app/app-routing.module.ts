@@ -18,6 +18,7 @@ import { AuditTrailComponent } from './home/home-administrator/audit-trail/audit
 import { CreateElectionComponent } from './home/home-administrator/election-management/create-election/create-election.component';
 import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
 import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
+import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
 
 const appRoutes: Routes = [
   {
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
               ]
             },
             {path: 'audit', component: AuditTrailComponent},
+            {path: 'demographics', component: DemographicsComponent}
           ]
       },
       {path: 'settings', component: SettingsComponent}

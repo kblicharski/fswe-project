@@ -39,6 +39,8 @@ import { CreateElectionComponent } from './home/home-administrator/election-mana
 import { EditUsersComponent } from './home/home-administrator/election-management/edit-users/edit-users.component';
 import { EditUserComponent } from './home/home-administrator/election-management/edit-users/edit-user/edit-user.component';
 import { PairsPipe } from './_pipes/pairs.pipe';
+import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { PairsPipe } from './_pipes/pairs.pipe';
     CreateElectionComponent,
     EditUsersComponent,
     EditUserComponent,
-    PairsPipe
+    PairsPipe,
+    DemographicsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { PairsPipe } from './_pipes/pairs.pipe';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [
     AuthGuard,
