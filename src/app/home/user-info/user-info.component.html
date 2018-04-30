@@ -23,7 +23,7 @@
 <div *ngIf="type === 'administrator'">
   <div class="card">
     <div class="card-body">
-      <span style="text-align: center">{{ user.username }}</span>
+      <span style="text-align: center">({{ user.id }}) {{ user.username }}, {{ user.role }}</span>
       <button
         class="btn btn-danger float-right"
         style="margin-right: 10px"
