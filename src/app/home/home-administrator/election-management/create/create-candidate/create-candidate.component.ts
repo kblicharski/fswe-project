@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuditService } from '../../../../../_services/audit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ElectionService } from '../../../../../_services/election.service';
-import { Candidate } from '../../../../../_models/candidate';
 
 @Component({
   selector: 'app-create-candidate',
@@ -10,8 +9,9 @@ import { Candidate } from '../../../../../_models/candidate';
   styleUrls: ['./create-candidate.component.css']
 })
 export class CreateCandidateComponent implements OnInit {
-  candidate: Candidate;
+  candidate: any = {};
   loading = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -22,6 +22,7 @@ export class CreateCandidateComponent implements OnInit {
 
   ngOnInit() {
   }
+
   onCreateCandidate() {
     this.electionService.createCandidate(this.candidate).subscribe(
       (data) => {
