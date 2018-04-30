@@ -177,7 +177,7 @@ module.exports = function(app) {
       locations: ["Iowa City"],
       type: 'state',
       start: new Date(2018,3,20),
-      end: new Date(2018,6,20),
+      end: new Date(2018,7,20),
       description: "Iowa Election"
 
     },{
@@ -187,7 +187,7 @@ module.exports = function(app) {
       locations: ["Iowa City"],
       type: 'local',
       start: new Date(2017,3,20),
-      end: new Date(2017,6,20),
+      end: new Date(2017,7,20),
       description: "Iowa Election"
 
     },{
@@ -207,7 +207,7 @@ module.exports = function(app) {
       locations: ["USA"],
       type: 'national',
       start: new Date(2018,3,20),
-      end: new Date(2018,6,20),
+      end: new Date(2018,7,20),
       description: "Presidential Election"
 
       }
