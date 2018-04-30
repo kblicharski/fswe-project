@@ -42,5 +42,14 @@
 
 <!-- TODO(Kevin): I will implement what goes in here -->
 <div *ngIf="displayMode === 'edit'">
-  <p>Search and Edit Mode</p>
+<input type="search" class="form-control" [(ngModel)]="queryString">
+<br>
+<div *ngFor="let user of users | slice:0:10 | FilterPipe:queryString">
+  <app-user-info
+    [type]="'administrator'"
+    [user]="user"
+    (onAllow)="approveVoteRequest(user)"
+    (onDeny)="denyVoteRequest(user)"
+  ></app-user-info>
+</div>
 </div>

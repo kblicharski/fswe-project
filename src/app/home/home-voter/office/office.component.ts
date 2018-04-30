@@ -58,9 +58,11 @@ export class OfficeComponent implements OnInit {
           ballotId: this.officeId
         }
       };
+      console.log(vote);
       this.userService.submitVote(vote).subscribe(
         (data) => {
           console.log(data);
+          console.log('emitting');
           this.voted.emit(vote);
         },
         (error) => {

@@ -77,7 +77,13 @@ export class UserService {
   submitVote(vote: Vote): Observable<any> {
     const url = `${this.apiUrl}/votes`;
     // return this.http.post<any>(url, vote);
-    return this.http.put<any>(url, vote);
+    return this.http.post<any>(url, vote);
   }
+
+  // updateCandidateCount(): Observable<any> {
+  //   const url = `${this.apiUrl}/votes`;
+  //   // return this.http.post<any>(url, vote);
+  //   return this.http.post<any>(url, vote);
+  // }
 
 }

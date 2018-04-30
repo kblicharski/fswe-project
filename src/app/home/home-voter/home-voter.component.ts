@@ -3,6 +3,7 @@ import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { Election } from '../../_models/election';
 import { ElectionService } from '../../_services/election.service';
+import { Vote } from '../../_models/vote';
 
 @Component({
   selector: 'app-home-voter',
@@ -53,11 +54,6 @@ export class HomeVoterComponent implements OnInit {
   }
 
   loadAllElections() {
-    console.log('loading elections');
-    this.elections = [];
-    this.localElections = [];
-    this.stateElections = [];
-    this.nationalElections = [];
     const precinctId = this.currentUser.precinctId;
     // const precinctId = 200;
     this.userService.getElectionIds(precinctId, this.currentUser.id).subscribe(
@@ -65,7 +61,6 @@ export class HomeVoterComponent implements OnInit {
         for (const id of electionIds.ids) {
           this.electionService.getElection(id).subscribe(
             (election: Election) => {
-              console.log(election);
               this.elections.push(election);
               switch (election.type) {
                 case 'local':
@@ -89,6 +84,18 @@ export class HomeVoterComponent implements OnInit {
       (error) => {
         console.log(error);
       }
+    );
+  }
+
+  handleVote(vote: Vote) {
+    console.log(vote);
+    this.elections = [];
+    this.localElections = [];
+    this.stateElections = [];
+    this.nationalElections = [];
+    this.loadAllElections();
+    this.electionService.incrementCandidateCount(vote.votesCast.candidateId).subscribe(
+      (data) => console.log(data)
     );
   }
 

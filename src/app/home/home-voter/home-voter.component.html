@@ -10,7 +10,7 @@
             <div *ngFor="let election of localElections">
               <h4>{{ election.description }}</h4>
               <div *ngFor="let officeId of election.offices">
-                <app-office (voted)="loadAllElections()" [userId]="currentUser.id" [electionId]="election.id"
+                <app-office (voted)="handleVote($event)" [userId]="currentUser.id" [electionId]="election.id"
                             [officeId]="officeId"></app-office>
                 <br>
               </div>
