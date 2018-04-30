@@ -12,7 +12,6 @@ import { Candidate } from '../../../../../_models/candidate';
 export class CreateCandidateComponent implements OnInit {
   candidate: Candidate;
   loading = true;
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -23,7 +22,6 @@ export class CreateCandidateComponent implements OnInit {
 
   ngOnInit() {
   }
-
   onCreateCandidate() {
     this.electionService.createCandidate(this.candidate).subscribe(
       (data) => {
