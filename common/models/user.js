@@ -5,21 +5,21 @@ var strongPassword = new RegExp("^(?=.*[\\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&
 var loopback = require('loopback');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = function (User) {
+module.exports = function(User) {
 
   User.validatesLengthOf('password', {min: 6, message: {min: 'Password is too short'}});
   //User.validatesFormatOf('password', {with: strongPassword , message : {with: 'Password is in wrong format'}});
-  User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message: {with: 'Email is in wrong format'}});
-  User.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message: {with: 'User name is in wrong format'}});
+  User.validatesFormatOf('email', {with: /\S+@\S+\.\S+/, message : {with: 'Email is in wrong format'}});
+  User.validatesFormatOf('username', {with: /^[a-zA-Z0-9]+$/, message : {with: 'User name is in wrong format'}});
   User.validatesLengthOf('ssn', {is: 5, message: {is: 'SSN must be the last 5 numbers of your SSN'}});
   User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting registrationStatus'})
-  User.getEmail = function (id, cb) {
-    User.findById(id, function (err, instance) {
+  User.getEmail = function(id, cb ) {
+    User.findById(id, function (err, instance){
       const request = require('request');
       const id = instance.id;
-      request('http://localhost:3000/api/users/' + id + '?filter=%7B%22fields%22%3A%7B%22email%22%3Atrue%7D%7D', {json: true}, (err, res, body) => {
+      request('http://localhost:3000/api/users/'+id+'?filter=%7B%22fields%22%3A%7B%22email%22%3Atrue%7D%7D', { json: true }, (err, res, body) => {
         if (err) {
           return console.log(err);
         }
@@ -27,44 +27,46 @@ module.exports = function (User) {
       });
     })
   };
-  User.getElections = function (pid, eid, cb) {
-    var currentTime = new Date();
-    const request = require('request');
-    var precinctId = pid;
-    var filterOut = [];
-    var electionIds = [];
-    request('http://localhost:3000/api/elections?filter=%7B%20%22where%22%3A%20%7B%20%22and%22%3A%20%5B%7B%20%22start%22%3A%20%7B%20%22lt%22%3A%20%22' + currentTime + '%22%20%7D%7D%2C%20%7B%20%22end%22%3A%20%7B%20%22gt%22%3A%20%22' + currentTime + '%22%20%7D%7D%5D%7D%7D', {json: true}, (err, res, body) => {
-      if (err) {
-        return console.log(err);
-      }
-
-
-      for (var i in body) {
-        if ((body[i].precincts).includes(precinctId)) {
-          electionIds.push(body[i].id);
-        }
-      }
-      request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%201%7D%7D', {json: true}, (err, res, body) => {
+  User.getElections = function(pid,eid, cb ) {
+      var currentTime = new Date();
+      const request = require('request');
+      var precinctId = pid;
+      var filterOut = [];
+      var electionIds = [];
+      request('http://localhost:3000/api/elections?filter=%7B%20%22where%22%3A%20%7B%20%22and%22%3A%20%5B%7B%20%22start%22%3A%20%7B%20%22lt%22%3A%20%22'+currentTime+'%22%20%7D%7D%2C%20%7B%20%22end%22%3A%20%7B%20%22gt%22%3A%20%22'+currentTime+'%22%20%7D%7D%5D%7D%7D', { json: true }, (err, res, body) => {
         if (err) {
           return console.log(err);
         }
 
+
         for (var i in body) {
-          if ((body[i].voter) === eid) {
-            filterOut.push(body[i].electionId);
+            if((body[i].precincts).includes(precinctId)) {
+              electionIds.push(body[i].id);
+
+            }
+        }
+        request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%201%7D%7D', { json: true }, (err, res, body) => {
+          if (err) {
+            return console.log(err);
           }
-        }
+
+          for (var i in body) {
+            if((body[i].voter) === eid) {
+              filterOut.push(body[i].electionId);
+
+            }
+          }
+          const filteredEIDs = [];
+          for (var j in electionIds) {
+            if(filterOut.includes(electionIds[j]) === false) {
+              filteredEIDs.push(electionIds[j]);
+            }
+          }
+          cb(null, filteredEIDs);
+        });
       });
-      const filteredEIDs = []
-      for (var i in electionIds) {
-        if (filterOut.includes(electionIds[i]) === false) {
-          filteredEIDs.push(electionIds[i]);
-        }
-      }
-      cb(null, filteredEIDs);
-    });
   };
-  User.updatePassword = function (id, oldPassword, newPassword, cb) {
+  User.updatePassword = function(id, oldPassword, newPassword, cb) {
     var newErrMsg, newErr;
     try {
       user.hasPassword(oldPassword, function (err, isMatch) {
@@ -78,7 +80,7 @@ module.exports = function (User) {
               cb(null, true);
             }
           });
-        } else {
+        }else {
           newErrMsg = 'User specified wrong current password !';
           newErr = new Error(newErrMsg);
           newErr.statusCode = 401;
@@ -87,20 +89,20 @@ module.exports = function (User) {
         }
 
       });
-    } catch (err) {
-      console.log(err);
-      cb(err);
-    }
+    }catch (err) {
+        console.log(err);
+        cb(err);
+      }
   };
-  User.loginUser = function (username, password, cb) {
+  User.loginUser = function(username, password, cb) {
     var newErrMsg, newErr;
     const request = require('request');
-    request('http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%20%22' + username + '%22%7D%7D', {json: true}, (err, res, body) => {
+    request('http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%20%22'+username+'%22%7D%7D', {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
       try {
-        if (body[0].registrationStatus === "unregistered") {
+        if(body[0].registrationStatus === "unregistered") {
           newErrMsg = 'User is unregistered';
           newErr = new Error(newErrMsg);
           newErr.statusCode = 401;
@@ -115,15 +117,15 @@ module.exports = function (User) {
         return cb(newErr);
       }
       try {
-        User.login({username: username, password: password}, function (err, isMatch) {
-          if (isMatch) {
+        User.login({username: username, password: password},function(err,isMatch) {
+          if(isMatch) {
             newErrMsg = 'Login Success';
             newErr = new Error(newErrMsg);
             newErr.statusCode = 200;
             const content = {"action": body[0].username + " logged in", "time": new Date()};
             User.app.models.audit.create(content);
-            return cb(null, body[0]);
-          } else {
+            return cb(null,body[0]);
+          }else {
             newErrMsg = 'User specified wrong current password';
             newErr = new Error(newErrMsg);
             newErr.statusCode = 402;
@@ -131,7 +133,7 @@ module.exports = function (User) {
             return cb(newErr);
           }
         });
-      } catch (err) {
+      }catch (err) {
         console.log(err);
         cb(err);
       }
@@ -139,9 +141,9 @@ module.exports = function (User) {
     });
 
   };
-  User.resetPassword = function (id, cb) {
+  User.resetPassword = function(id, cb) {
     const request = require('request');
-    request('http://localhost:3000/api/users/' + id, {json: true}, (err, res, body) => {
+    request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
@@ -158,16 +160,16 @@ module.exports = function (User) {
       var newPassword = retVal;
       var emailAddress = body.email;
       try {
-        User.findById(id, function (err, user) {
+        User.findById(id, function(err, user) {
           if (err) return err;
-          user.updateAttribute('password', User.hashPassword(newPassword), function (err, user) {
-            if (err) return cb(null, 404);
+          user.updateAttribute('password', User.hashPassword(newPassword), function(err, user) {
+            if (err) return cb(null,404);
           });
           var html = '<p>Your password has been reset to:</p>\n' +
             '<p>' + newPassword + '</p>';
 
-          User.sendMail(emailAddress, html, 'Your new password'), function (err, user) {
-            if (err) {
+          User.sendMail(emailAddress, html, 'Your new password'), function(err, user) {
+            if(err) {
               console.log(err);
               return cb(null, 400);
             }
@@ -175,7 +177,7 @@ module.exports = function (User) {
 
 
         });
-      } catch (err) {
+      } catch(err) {
         console.log(err);
         cb(err);
       }
@@ -183,15 +185,15 @@ module.exports = function (User) {
 
     });
   };
-  User.changeRegistrationStatus = function (id, regStatus, cb) {
+  User.changeRegistrationStatus = function(id,regStatus, cb) {
     const request = require('request');
-    request('http://localhost:3000/api/users/' + id, {json: true}, (err, res, body) => {
+    request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
       var emailAddress = body.email;
       try {
-        User.findById(id, function (err, user) {
+        User.findById(id, function(err, user) {
           if (err) return err;
           user.updateAttribute('registrationStatus', regStatus, function (err, user) {
             if (err) {
@@ -207,15 +209,12 @@ module.exports = function (User) {
                 return cb(null, 400);
               }
             };
-            const content = {
-              "action": body.username + "'s registration status has been changed to " + regStatus,
-              "time": new Date()
-            };
+            const content = {"action": body.username + "'s registration status has been changed to "+ regStatus, "time": new Date()};
             User.app.models.audit.create(content);
-            return cb(null, 200);
+            return cb(null,200);
           });
         });
-      } catch (err) {
+      } catch(err) {
         console.log(err);
         return cb(err);
       }
@@ -223,7 +222,7 @@ module.exports = function (User) {
 
     });
   };
-  User.sendMail = function (toEmail, html, subject) {
+  User.sendMail = function(toEmail, html, subject) {
 
     // send email using Email model of Loopback
     User.app.models.Email.send({
@@ -231,8 +230,8 @@ module.exports = function (User) {
       from: 'no-reply@gmail.com',
       subject: subject,
       html: html
-    }, function (err, mail) {
-      if (err) return err;
+    }, function(err, mail) {
+      if(err) return err;
     });
   };
   User.remoteMethod(
@@ -250,20 +249,21 @@ module.exports = function (User) {
     {
       http: {path: '/sendEmail', verb: 'get'},
       accepts: [
-        {arg: 'toEmail', type: 'string', http: {source: 'query'}},
-        {arg: 'html', type: 'string', http: {source: 'query'}},
-        {arg: 'subject', type: 'string', http: {source: 'query'}}
-      ],
+        {arg: 'toEmail', type: 'string', http: { source: 'query' } },
+        {arg: 'html', type: 'string', http: { source: 'query' } },
+        {arg: 'subject', type: 'string', http: { source: 'query' } }
+        ],
       returns: {arg: 'status', type: 'string'}
     }
+
   );
   User.remoteMethod(
     'getEmail',
-    {
-      http: {path: '/getEmail', verb: 'get'},
-      accepts: {arg: 'id', type: 'string', http: {source: 'query'}},
-      returns: {arg: 'email', type: 'string'}
-    }
+      {
+        http: {path: '/getEmail', verb: 'get'},
+        accepts: {arg: 'id', type: 'string', http: { source: 'query' } },
+        returns: {arg: 'email', type: 'string'}
+      }
   );
   User.remoteMethod(
     'getElections',
@@ -292,8 +292,8 @@ module.exports = function (User) {
     'loginUser',
     {
       accepts: [
-        {arg: 'username', type: 'string', http: {source: 'query'}},
-        {arg: 'password', type: 'string', http: {source: 'query'}}
+        {arg: 'username', type: 'string', http: {source: 'query'} },
+        {arg: 'password', type: 'string', http: {source: 'query'} }
       ],
       http: {path: '/loginUser', verb: 'post'},
       returns: {arg: 'status', type: 'string'}
@@ -303,8 +303,8 @@ module.exports = function (User) {
     'changeRegistrationStatus',
     {
       accepts: [
-        {arg: 'id', type: 'string', required: true},
-        {arg: 'status', type: 'string', http: {source: 'query'}}
+        {arg: 'id', type: 'string', required:true },
+        {arg: 'status', type: 'string', http: {source: 'query'} }
       ],
       http: {path: '/:id/changeRegistrationStatus', verb: 'post'},
       returns: {arg: 'status', type: 'string'}
@@ -319,7 +319,6 @@ function registrationStatusValidator(err) {
   else if (this.registrationStatus === "denied") true;
   else err();
 };
-
 function votingStatusValidator(err) {
   if (this.votingStatus === "idle") true;
   else if (this.votingStatus === "requesting") true;
