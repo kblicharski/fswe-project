@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuditService } from '../../_services/audit.service';
 
 @Component({
   selector: 'app-user-info',
@@ -18,7 +19,8 @@ export class UserInfoComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auditService: AuditService
   ) {
   }
 
@@ -36,7 +38,11 @@ export class UserInfoComponent implements OnInit {
   onDeleteUser() {
     this.userService.delete(this.user.id).subscribe(
       (data) => {
-        console.log(data);
+        const audit = {
+          action: `${this.user.username} was deleted`,
+          time: new Date(Date.now())
+        };
+        this.auditService.logAudit(audit);
         this.edited.emit();
       },
       (error) => {

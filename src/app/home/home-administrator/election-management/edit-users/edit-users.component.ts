@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../_models/user';
 import { UserService } from '../../../../_services/user.service';
+import { AuditService } from '../../../../_services/audit.service';
 
 @Component({
   selector: 'app-edit-users',
@@ -12,7 +13,7 @@ export class EditUsersComponent implements OnInit {
   private loading = false;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
   ) {
   }
 
