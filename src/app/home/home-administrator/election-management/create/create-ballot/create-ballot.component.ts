@@ -47,7 +47,7 @@ export class CreateBallotComponent implements OnInit {
     this.electionService.createOffice(this.ballot).subscribe(
       (data) => {
         const audit = {
-          action: `Ballot ${this.ballot.id} was created`,
+          action: `Ballot '${this.ballot.title}' was created`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

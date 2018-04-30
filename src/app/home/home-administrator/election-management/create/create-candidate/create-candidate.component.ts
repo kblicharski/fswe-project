@@ -27,7 +27,7 @@ export class CreateCandidateComponent implements OnInit {
     this.electionService.createCandidate(this.candidate).subscribe(
       (data) => {
         const audit = {
-          action: `Candidate ${this.candidate.id} was created`,
+          action: `Candidate '${this.candidate.name}' was created`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

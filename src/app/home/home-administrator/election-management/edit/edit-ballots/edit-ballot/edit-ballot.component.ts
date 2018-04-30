@@ -54,7 +54,7 @@ export class EditBallotComponent implements OnInit {
     this.electionService.updateOffice(this.ballot).subscribe(
       (data) => {
         const audit = {
-          action: `Ballot ${old.id} was updated`,
+          action: `Ballot '${old.title}' was updated`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

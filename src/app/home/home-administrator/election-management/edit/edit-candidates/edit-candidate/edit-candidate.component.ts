@@ -41,7 +41,7 @@ export class EditCandidateComponent implements OnInit {
     this.electionService.updateCandidate(this.candidate).subscribe(
       (data) => {
         const audit = {
-          action: `Candidate ${old.id} was updated`,
+          action: `Candidate '${old.id}' was updated`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

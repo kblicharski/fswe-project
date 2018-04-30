@@ -85,7 +85,7 @@ export class CreateElectionComponent implements OnInit {
     this.electionService.create(this.election).subscribe(
       (data) => {
         const audit = {
-          action: `Election ${this.election.id} was created`,
+          action: `Election '${this.election.description}' was created`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

@@ -95,7 +95,7 @@ export class EditElectionComponent implements OnInit {
     this.electionService.update(this.election).subscribe(
       (data) => {
         const audit = {
-          action: `Election ${old.id} was updated`,
+          action: `Election '${old.description}' was updated`,
           time: new Date(Date.now())
         };
         this.auditService.logAudit(audit).subscribe(

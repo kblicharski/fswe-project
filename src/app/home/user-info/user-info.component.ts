@@ -39,10 +39,10 @@ export class UserInfoComponent implements OnInit {
     this.userService.delete(this.user.id).subscribe(
       (data) => {
         const audit = {
-          action: `${this.user.username} was deleted`,
+          action: `User '${this.user.username}' was deleted`,
           time: new Date(Date.now())
         };
-        this.auditService.logAudit(audit);
+        this.auditService.logAudit(audit).subscribe();
         this.edited.emit();
       },
       (error) => {

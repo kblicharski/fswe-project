@@ -51,10 +51,10 @@ export class EditCandidatesComponent implements OnInit {
     this.electionService.deleteCandidate(candidate.id).subscribe(
       (data) => {
         const audit = {
-          action: `Candidate ${candidate.id} was deleted`,
+          action: `Candidate '${candidate.name}' was deleted`,
           time: new Date(Date.now())
         };
-        this.auditService.logAudit(audit);
+        this.auditService.logAudit(audit).subscribe();
         this.getAllCandidates();
       },
       (error) => {

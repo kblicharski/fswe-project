@@ -49,10 +49,10 @@ export class EditBallotsComponent implements OnInit {
     this.electionService.deleteOffice(ballot.id).subscribe(
       (data) => {
         const audit = {
-          action: `Ballot ${ballot.id} was deleted`,
+          action: `Ballot ''${ballot.title}' was deleted`,
           time: new Date(Date.now())
         };
-        this.auditService.logAudit(audit);
+        this.auditService.logAudit(audit).subscribe();
         this.getAllBallots();
       },
       (error) => {
