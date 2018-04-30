@@ -45,7 +45,7 @@
       }
     },
     "demographics": {
-      "required": false,
+      "required": true,
       "type": {
         "race": "string",
         "gender": "string",

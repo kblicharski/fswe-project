@@ -14,7 +14,8 @@ import { AuditService } from '../../_services/audit.service';
 })
 export class RegisterComponent {
   model: any = {
-    address: {}
+    address: {},
+    demographics: {}
   };
   loading = false;
 
@@ -29,6 +30,7 @@ export class RegisterComponent {
   register() {
     this.loading = true;
     this.model.dob = new Date(this.model.dob).toISOString();
+    this.model.demographics.age = Math.abs(new Date(Date.now() - new Date(this.model.dob).getTime()).getUTCFullYear() - 1970);
     this.userService.create(this.model)
       .subscribe(
         (data) => {

@@ -1,5 +1,9 @@
 <div *ngIf="!loading">
   <div *ngFor="let audit of audits">
-    <p>{{ audit.time | date:'medium' }}: {{ audit.action }}</p>
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">{{ audit.time | date:'medium' }}: {{ audit.action }}</p>
+      </div>
+    </div>
   </div>
 </div>

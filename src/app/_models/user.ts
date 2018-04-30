@@ -15,4 +15,10 @@ export interface User {
   role: 'voter' | 'manager' | 'administrator';
   precinctId: number;
   emailVerified: boolean;
+  demographics: {
+    race: string,
+    gender: string,
+    party: string,
+    age: number
+  };
 }

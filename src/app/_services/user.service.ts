@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models/user';
 import { Observable } from 'rxjs';
+import { Vote } from '../_models/vote';
 
 @Injectable()
 export class UserService {
@@ -60,17 +61,23 @@ export class UserService {
 
   getIdByUsername(username: string): Observable<number> {
     const url = `http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%22${username}%22%7D%7D`;
-    return this.http.get<Object>(url);
+    return this.http.get<number>(url);
   }
 
   resetPassword(id: number): Observable<any> {
     const url = `${this.apiUrl}/users/${id}/resetPassword`;
-    return this.http.post<Object>(url, id);
+    return this.http.post<any>(url, id);
   }
 
   changeRegistrationStatus(id: number, status: string): Observable<any> {
     const url = `${this.apiUrl}/users/${id}/changeRegistrationStatus?status=${status}`;
     return this.http.post<any>(url, id);
+  }
+
+  submitVote(vote: Vote): Observable<any> {
+    const url = `${this.apiUrl}/votes`;
+    // return this.http.post<any>(url, vote);
+    return this.http.put<any>(url, vote);
   }
 
 }

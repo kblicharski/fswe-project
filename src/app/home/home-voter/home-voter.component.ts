@@ -15,7 +15,7 @@ export class HomeVoterComponent implements OnInit {
   localElections: Election[] = [];
   stateElections: Election[] = [];
   nationalElections: Election[] = [];
-  private currentUser: User;
+  currentUser: User;
 
   constructor(
     private userService: UserService,
@@ -52,14 +52,20 @@ export class HomeVoterComponent implements OnInit {
     return this.currentUser.votingStatus === 'requesting';
   }
 
-  private loadAllElections() {
-    // const precinctId = this.currentUser.precinctId;
-    const precinctId = 200;
+  loadAllElections() {
+    console.log('loading elections');
+    this.elections = [];
+    this.localElections = [];
+    this.stateElections = [];
+    this.nationalElections = [];
+    const precinctId = this.currentUser.precinctId;
+    // const precinctId = 200;
     this.userService.getElectionIds(precinctId, this.currentUser.id).subscribe(
       (electionIds: { ids: number[] }) => {
         for (const id of electionIds.ids) {
           this.electionService.getElection(id).subscribe(
             (election: Election) => {
+              console.log(election);
               this.elections.push(election);
               switch (election.type) {
                 case 'local':
