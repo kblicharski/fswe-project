@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AlertService } from '../../_services/alert.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../_services/user.service';
-import { AuditService } from '../../_services/audit.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,7 +16,6 @@ export class ForgotPasswordComponent {
     private router: Router,
     private alertService: AlertService,
     private userService: UserService,
-    private auditService: AuditService
   ) {
   }
 
@@ -33,21 +31,6 @@ export class ForgotPasswordComponent {
         }
         this.userService.resetPassword(id).subscribe(
           (data) => {
-            const audit = {
-              action: `Sent reset password email to ${this.model.username}.`,
-              time: new Date(Date.now())
-            };
-            this.auditService.logAudit(audit);
-            this.loading = false;
-            this.alertService.success('We have sent an email to the address associated with that username.', true);
-            this.router.navigate(['/login']);
-          },
-          (error) => {
-            const audit = {
-              action: `Failed to send reset password email to ${this.model.username}.`,
-              time: new Date(Date.now())
-            };
-            this.auditService.logAudit(audit);
             this.loading = false;
             this.alertService.success('We have sent an email to the address associated with that username.', true);
             this.router.navigate(['/login']);

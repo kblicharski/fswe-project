@@ -22,9 +22,9 @@ export class AuthenticationService {
       map(response => {
         console.log(response);
         if (response) {
-          localStorage.setItem('currentUser', JSON.stringify(response.user));
+          localStorage.setItem('currentUser', JSON.stringify(response.status));
         }
-        return response.user;
+        return response.status;
       }));
   }
 

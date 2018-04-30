@@ -68,4 +68,9 @@ export class UserService {
     return this.http.post<Object>(url, id);
   }
 
+  changeRegistrationStatus(id: number, status: string): Observable<any> {
+    const url = `${this.apiUrl}/users/${id}/changeRegistrationStatus?status=${status}`;
+    return this.http.post<any>(url, id);
+  }
+
 }
