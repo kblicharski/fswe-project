@@ -86,8 +86,6 @@ export class CreateElectionComponent implements OnInit {
     this.election.precincts = precinctIds;
     this.election.managers = managerIds;
 
-    console.log(this.election);
-
     this.electionService.create(this.election).subscribe(
       (data) => {
         const audit = {
