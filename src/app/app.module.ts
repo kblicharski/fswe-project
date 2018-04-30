@@ -41,6 +41,7 @@ import { EditUserComponent } from './home/home-administrator/election-management
 import { PairsPipe } from './_pipes/pairs.pipe';
 import { DemographicsComponent } from './home/home-administrator/demographics/demographics.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CandidateComponent } from '../../../nested-test/src/app/candidate/candidate.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     EditUserComponent,
     PairsPipe,
     DemographicsComponent,
+    CandidateComponent,
   ],
   imports: [
     BrowserModule,

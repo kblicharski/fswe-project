@@ -15,7 +15,7 @@ module.exports = function(User) {
   User.validate('registrationStatus', registrationStatusValidator, {message: 'Invalid registrationStatus'});
   User.validate('role', roleValidator, {message: 'Invalid role'})
   User.validate('votingStatusValidator', votingStatusValidator, {message: 'Invalid voting registrationStatus'})
-  User.getEmail = function(id, cb ) {
+ /*User.getEmail = function(id, cb ) {
     User.findById(id, function (err, instance){
       const request = require('request');
       const id = instance.id;
@@ -24,47 +24,47 @@ module.exports = function(User) {
           return console.log(err);
         }
         cb(null, body.email);
-      });
+    });
     })
-  };
-  User.getElections = function(pid,eid, cb ) {
-      var currentTime = new Date();
-      const request = require('request');
-      var precinctId = pid;
-      var filterOut = [];
-      var electionIds = [];
-      request('http://localhost:3000/api/elections?filter=%7B%20%22where%22%3A%20%7B%20%22and%22%3A%20%5B%7B%20%22start%22%3A%20%7B%20%22lt%22%3A%20%22'+currentTime+'%22%20%7D%7D%2C%20%7B%20%22end%22%3A%20%7B%20%22gt%22%3A%20%22'+currentTime+'%22%20%7D%7D%5D%7D%7D', { json: true }, (err, res, body) => {
-        if (err) {
-          return console.log(err);
-        }
+  };*/
+  /*User.getElections = function(pid,eid, cb ) {
+    var currentTime = new Date();
+    const request = require('request');
+    var precinctId = pid;
+    var filterOut = [];
+    var electionIds = [];
+    request('http://localhost:3000/api/elections?filter=%7B%20%22where%22%3A%20%7B%20%22and%22%3A%20%5B%7B%20%22start%22%3A%20%7B%20%22lt%22%3A%20%22'+currentTime+'%22%20%7D%7D%2C%20%7B%20%22end%22%3A%20%7B%20%22gt%22%3A%20%22'+currentTime+'%22%20%7D%7D%5D%7D%7D', { json: true }, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
 
-        for (var i in body) {
-            if((body[i].precincts).includes(precinctId)) {
-              electionIds.push(body[i].id);
+      for (var i in body) {
+      if((body[i].precincts).includes(precinctId)) {
+        electionIds.push(body[i].id);
 
-            }
-        }
-        request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%20'+eid+'%7D%7D', { json: true }, (err, res, body) => {
-          if (err) {
-            return console.log(err);
-          }
+      }
+    }
+    request('http://localhost:3000/api/votes?filter=%7B%22where%22%3A%7B%22voter%22%3A%20'+eid+'%7D%7D', { json: true }, (err, res, body) => {
+      if (err) {
+        return console.log(err);
+      }
 
-          for (var i in body) {
-            if((body[i].voter) === eid) {
-              filterOut.push(body[i].electionId);
+      for (var i in body) {
+      if((body[i].voter) === eid) {
+        filterOut.push(body[i].electionId);
 
-            }
-          }
-          const filteredEIDs = [];
-          for (var j in electionIds) {
-            if(filterOut.includes(electionIds[j]) === false) {
-              filteredEIDs.push(electionIds[j]);
-            }
-          }
-          cb(null, filteredEIDs);
-        });
-      });
-  };
+      }
+    }
+    const filteredEIDs = [];
+    for (var j in electionIds) {
+      if(filterOut.includes(electionIds[j]) === false) {
+        filteredEIDs.push(electionIds[j]);
+      }
+    }
+    cb(null, filteredEIDs);
+  });
+  });
+  };*/
   User.updatePassword = function(id, oldPassword, newPassword, cb) {
     var newErrMsg, newErr;
     try {
@@ -89,11 +89,11 @@ module.exports = function(User) {
 
       });
     }catch (err) {
-        console.log(err);
-        cb(err);
-      }
+      console.log(err);
+      cb(err);
+    }
   };
-  User.loginUser = function(username, password, cb) {
+  /*User.loginUser = function(username, password, cb) {
     var newErrMsg, newErr;
     const request = require('request');
     request('http://localhost:3000/api/users?filter=%7B%22where%22%3A%7B%22username%22%3A%20%22'+username+'%22%7D%7D', {json: true}, (err, res, body) => {
@@ -102,124 +102,124 @@ module.exports = function(User) {
       }
       try {
         if(body[0].registrationStatus === "unregistered") {
-          newErrMsg = 'User is unregistered';
+      newErrMsg = 'User is unregistered';
+      newErr = new Error(newErrMsg);
+      newErr.statusCode = 401;
+      newErr.code = 'LOGIN_FAILED_PWD';
+      return cb(newErr);
+    }
+  } catch (err) {
+      newErrMsg = 'Error invalid user';
+      newErr = new Error(newErrMsg);
+      newErr.statusCode = 402;
+      newErr.code = 'LOGIN_FAILED_PWD';
+      return cb(newErr);
+    }
+    try {
+      User.login({username: username, password: password},function(err,isMatch) {
+        if(isMatch) {
+          newErrMsg = 'Login Success';
           newErr = new Error(newErrMsg);
-          newErr.statusCode = 401;
+          newErr.statusCode = 200;
+          const content = {"action": body[0].username + " logged in", "time": new Date()};
+          User.app.models.audit.create(content);
+          return cb(null,body[0]);
+        }else {
+          newErrMsg = 'User specified wrong current password';
+          newErr = new Error(newErrMsg);
+          newErr.statusCode = 402;
           newErr.code = 'LOGIN_FAILED_PWD';
           return cb(newErr);
         }
-      } catch (err) {
-        newErrMsg = 'Error invalid user';
-        newErr = new Error(newErrMsg);
-        newErr.statusCode = 402;
-        newErr.code = 'LOGIN_FAILED_PWD';
-        return cb(newErr);
-      }
-      try {
-        User.login({username: username, password: password},function(err,isMatch) {
-          if(isMatch) {
-            newErrMsg = 'Login Success';
-            newErr = new Error(newErrMsg);
-            newErr.statusCode = 200;
-            const content = {"action": body[0].username + " logged in", "time": new Date()};
-            User.app.models.audit.create(content);
-            return cb(null,body[0]);
-          }else {
-            newErrMsg = 'User specified wrong current password';
-            newErr = new Error(newErrMsg);
-            newErr.statusCode = 402;
-            newErr.code = 'LOGIN_FAILED_PWD';
-            return cb(newErr);
-          }
-        });
-      }catch (err) {
-        console.log(err);
-        cb(err);
-      }
+      });
+    }catch (err) {
+      console.log(err);
+      cb(err);
+    }
 
-    });
+  });
 
-  };
-  User.resetPassword = function(id, cb) {
+  };*/
+  /*User.resetPassword = function(id, cb) {
     const request = require('request');
     request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
       const content = {"action": body.username + " reset his password", "time": new Date()};
-      User.app.models.audit.create(content);
+    User.app.models.audit.create(content);
 
 
-      var length = 8,
-        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-        retVal = "";
-      for (var i = 0, n = charset.length; i < length; ++i) {
-        retVal += charset.charAt(Math.floor(Math.random() * n));
-      }
-      var newPassword = retVal;
-      var emailAddress = body.email;
-      try {
-        User.findById(id, function(err, user) {
-          if (err) return err;
-          user.updateAttribute('password', User.hashPassword(newPassword), function(err, user) {
-            if (err) return cb(null,404);
-          });
-          var html = '<p>Your password has been reset to:</p>\n' +
-            '<p>' + newPassword + '</p>';
-
-          User.sendMail(emailAddress, html, 'Your new password'), function(err, user) {
-            if(err) {
-              console.log(err);
-              return cb(null, 400);
-            }
-          }
-
-
+    var length = 8,
+      charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+      retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    var newPassword = retVal;
+    var emailAddress = body.email;
+    try {
+      User.findById(id, function(err, user) {
+        if (err) return err;
+        user.updateAttribute('password', User.hashPassword(newPassword), function(err, user) {
+          if (err) return cb(null,404);
         });
-      } catch(err) {
-        console.log(err);
-        cb(err);
-      }
-      return cb(null, 200);
+        var html = '<p>Your password has been reset to:</p>\n' +
+          '<p>' + newPassword + '</p>';
 
-    });
-  };
-  User.changeRegistrationStatus = function(id,regStatus, cb) {
+        User.sendMail(emailAddress, html, 'Your new password'), function(err, user) {
+          if(err) {
+            console.log(err);
+            return cb(null, 400);
+          }
+        }
+
+
+      });
+    } catch(err) {
+      console.log(err);
+      cb(err);
+    }
+    return cb(null, 200);
+
+  });
+  };*/
+  /*User.changeRegistrationStatus = function(id,regStatus, cb) {
     const request = require('request');
     request('http://localhost:3000/api/users/'+ id, {json: true}, (err, res, body) => {
       if (err) {
         return console.log(err);
       }
       var emailAddress = body.email;
-      try {
-        User.findById(id, function(err, user) {
-          if (err) return err;
-          user.updateAttribute('registrationStatus', regStatus, function (err, user) {
+    try {
+      User.findById(id, function(err, user) {
+        if (err) return err;
+        user.updateAttribute('registrationStatus', regStatus, function (err, user) {
+          if (err) {
+            console.log(err);
+            return cb(null, 404);
+          }
+          var html = '<p>Your voting status has been set to:</p>\n' +
+            '<p>' + regStatus + '</p>';
+
+          User.sendMail(emailAddress, html, 'Voting Status has Changed'), function (err, user) {
             if (err) {
               console.log(err);
-              return cb(null, 404);
+              return cb(null, 400);
             }
-            var html = '<p>Your voting status has been set to:</p>\n' +
-              '<p>' + regStatus + '</p>';
-
-            User.sendMail(emailAddress, html, 'Voting Status has Changed'), function (err, user) {
-              if (err) {
-                console.log(err);
-                return cb(null, 400);
-              }
-            };
-            const content = {"action": body.username + "'s registration status has been changed to "+ regStatus, "time": new Date()};
-            User.app.models.audit.create(content);
-            return cb(null,200);
-          });
+          };
+          const content = {"action": body.username + "'s registration status has been changed to "+ regStatus, "time": new Date()};
+          User.app.models.audit.create(content);
+          return cb(null,200);
         });
-      } catch(err) {
-        console.log(err);
-        return cb(err);
-      }
+      });
+    } catch(err) {
+      console.log(err);
+      return cb(err);
+    }
 
 
-    });
+  });*/
   };
   User.sendMail = function(toEmail, html, subject) {
 
@@ -251,18 +251,18 @@ module.exports = function(User) {
         {arg: 'toEmail', type: 'string', http: { source: 'query' } },
         {arg: 'html', type: 'string', http: { source: 'query' } },
         {arg: 'subject', type: 'string', http: { source: 'query' } }
-        ],
+      ],
       returns: {arg: 'status', type: 'string'}
     }
 
   );
   User.remoteMethod(
     'getEmail',
-      {
-        http: {path: '/getEmail', verb: 'get'},
-        accepts: {arg: 'id', type: 'string', http: { source: 'query' } },
-        returns: {arg: 'email', type: 'string'}
-      }
+    {
+      http: {path: '/getEmail', verb: 'get'},
+      accepts: {arg: 'id', type: 'string', http: { source: 'query' } },
+      returns: {arg: 'email', type: 'string'}
+    }
   );
   User.remoteMethod(
     'getElections',

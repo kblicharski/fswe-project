@@ -1,33 +1,42 @@
-  <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button class="btn btn-primary" mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="margin-20">
+        <h4>Election Precinct 101</h4>
       </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+      <form [formGroup]="myForm" novalidate>
+        <!--races-->
+        <div formArrayName="races">
+          <div *ngFor="let race of myForm.controls.races.controls; let i=index" class="panel panel-default">
+            <div class="panel-heading">
+              <span>Race {{i + 1}}</span>
+              <button type="button" *ngIf="myForm.controls.races.controls.length > 1" (click)="removeRace(i)">-</button>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <div class="form-group col-xs-6">
+                <label>Office</label>
+                <input type="text" class="form-control" formControlName="office">
+                <small *ngIf="!myForm.controls.races.controls[i].controls.office.valid && myForm.controls.races.controls[i].controls.office.touched" class="help-block">Office is Required</small>
+              </div>
+              <div class="form-group col-xs-6">
+                <label>Description</label>
+                <input type="text" class="form-control" formControlName="description">
+                <small *ngIf="!myForm.controls.races.controls[i].controls.description.valid && myForm.controls.races.controls[i].controls.description.touched" class="help-block">
+                  Description is required
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="margin-20">
+          <button type="button" (click)="addRace()" style="cursor: default">
+            Add another race +
+          </button>
+        </div>
+        <div class="margin-20">
+          <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
