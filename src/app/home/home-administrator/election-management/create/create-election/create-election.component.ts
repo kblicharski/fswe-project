@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuditService } from '../../../../../_services/audit.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ElectionService } from '../../../../../_services/election.service';
+import { Office } from '../../../../../_models/office';
+import { Election } from '../../../../../_models/election';
 
 @Component({
   selector: 'app-create-election',
@@ -7,22 +11,37 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-election.component.css']
 })
 export class CreateElectionComponent implements OnInit {
-
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  election: Election;
+  loading = true;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private electionService: ElectionService,
+    private auditService: AuditService,
   ) {
   }
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+  }
+
+  onCreateElection() {
+    this.electionService.create(this.election).subscribe(
+      (data) => {
+        const audit = {
+          action: `Election ${this.election.id} was created`,
+          time: new Date(Date.now())
+        };
+        this.auditService.logAudit(audit).subscribe(
+          (data) => {
+            this.router.navigate(['..'], {relativeTo: this.route});
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }
