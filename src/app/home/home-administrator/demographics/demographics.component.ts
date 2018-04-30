@@ -14,7 +14,7 @@ export class DemographicsComponent implements OnInit {
 
   party: any[];
 
-  view: any[] = [900, 300];
+  view: any[] = [window.innerWidth - 300, 300];
 
   // options
   showLegend = true;
@@ -30,9 +30,14 @@ export class DemographicsComponent implements OnInit {
 
   loading = true;
 
+  changeView () {
+    this.view = [window.innerWidth - 300, 300];
+  }
+
   constructor(
     private userService: UserService
   ) {
+    window.addEventListener('resize', () => this.changeView());
   }
 
   onSelect(event) {
