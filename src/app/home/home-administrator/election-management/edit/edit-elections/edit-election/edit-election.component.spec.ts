@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditElectionComponent } from './edit-election.component';
+import { FormsModule } from '@angular/forms';
 
 describe('EditElectionComponent', () => {
   let component: EditElectionComponent;
@@ -8,7 +9,8 @@ describe('EditElectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditElectionComponent ]
+      declarations: [ EditElectionComponent ],
+      imports: [FormsModule]
     })
     .compileComponents();
   }));

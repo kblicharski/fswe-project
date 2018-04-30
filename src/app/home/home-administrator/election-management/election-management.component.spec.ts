@@ -4,6 +4,7 @@ import { ElectionManagementComponent } from './election-management.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule, MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ElectionManagementComponent', () => {
   let component: ElectionManagementComponent;
@@ -18,7 +19,8 @@ describe('ElectionManagementComponent', () => {
         MatFormFieldModule,
         ReactiveFormsModule,
         MatInputModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        RouterTestingModule
       ]
     })
       .compileComponents();
