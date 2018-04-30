@@ -24,6 +24,8 @@ export class ForgotPasswordComponent {
     // This email should have a link to reset the user's password.
     // They then click this dynamically generated link, enter their new password, and it
     // edits their entry in the DB. These should be secure, random links.
+
+    // api/users/{id}/resetPassword
     this.loading = true;
     setTimeout(
       () => {

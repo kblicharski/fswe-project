@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { AlertService } from '../../_services/alert.service';
+import { AuditService } from '../../_services/audit.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private auditService: AuditService
+  ) {
   }
 
   ngOnInit() {
@@ -29,12 +32,18 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
+          const audit = {action: `Logged in user ${this.model.username}`, time: new Date(Date.now())};
+          this.auditService.logAudit(audit);
           this.router.navigate([`${data.role}`]);
+          console.log(data);
         },
         error => {
-          // TODO: Change error handling when other things can be sent.
           console.log(error);
-          this.alertService.error('Invalid username or password.');
+          if (error.error.error.statusCode === 402) {
+            this.alertService.error('Incorrect username or password.');
+          } else if (error.error.error.statusCode === 401) {
+            this.alertService.error('You have not been verified yet by your administrator.');
+          }
           this.loading = false;
         });
   }
