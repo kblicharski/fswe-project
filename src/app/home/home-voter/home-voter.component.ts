@@ -47,6 +47,10 @@ export class HomeVoterComponent implements OnInit {
     this.elections = [];
     this.userService.getElectionIds(precinctId, this.currentUser.id).subscribe(
       (electionIds: { ids: number[] }) => {
+        if (electionIds.ids.length === 0) {
+          this.loading = false;
+        }
+
         for (const id of electionIds.ids) {
           this.electionService.getElection(id).subscribe(
             (election: Election) => {
