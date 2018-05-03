@@ -21,7 +21,7 @@ Go to the [Node.js downloads page](https://nodejs.org/en/download/) and choose t
 
 
 ### Setting Up The Project
-Clone the project by running `git clone https://github.com/kblicharski/fswe-project.git`. Change directories using `cd fswe-project`. Install project dependencies by running `npm install`.
+Clone the project by running `git clone https://github.com/kblicharski/fswe-project.git`. Change directories using `cd fswe-project`. Install project dependencies by running `npm install`. Install the Angular CLI by running `npm install -g @angular/cli`. Once that finishes, you are set to run the application locally.
 
 #### Loopback Development Server
 Run `node server/server.js`. Feel free to explorer the backend API at `http://localhost:3000/explorer/`.
