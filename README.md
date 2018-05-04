@@ -1,6 +1,9 @@
 # FsweProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+The link to the demo for our project can be found [here](https://www.youtube.com/watch?v=VQDdzFb79hA).
+The documenatation link can be found [here](https://gitlab.com/kblicharski/fswe-project/blob/master/Documentation%20of%20System.pdf).
+The snapshots of our project views with descriptions can be found [here](https://gitlab.com/kblicharski/fswe-project/tree/master/Snapshots%20fswe).
 
 ## Development server
 
