@@ -2,7 +2,7 @@
 Our final project was an electronic voting application which could be used to manage elections. We used [Loopback](https://loopback.io/) for our backend and [Angular](https://angular.io/) for our frontend. Our final product is a single-page web application which fulfills all of the project criteria while being intuitive and elegantly designed.
 
 ## Links
-- [Video demo of our project](https://www.youtube.com/watch?v=VQDdzFb79hA)
+- [Video Demo](https://www.youtube.com/watch?v=VQDdzFb79hA)
 - [Documentation](https://github.com/kblicharski/fswe-project/blob/master/Documentation%20of%20System.pdf)
 - [Project View Snapshots & Descriptions](https://github.com/kblicharski/fswe-project/tree/master/Snapshots%20fswe)
 
