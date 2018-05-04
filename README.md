@@ -41,14 +41,17 @@ Run `ng test --code-coverage` to execute the unit tests using [Karma](https://ka
 There are three tiers of users: voters, managers, and administrators. In order to see what each is capable of, sample credentials are provided that are created on server start.
 
 #### Voter
+![voting view](https://github.com/kblicharski/fswe-project/blob/master/Snapshots%20fswe/Voting%20View.jpg)
 - Username: jonSmith
 - Password: jonSmith!
 
 #### Manager
+![manager view](https://github.com/kblicharski/fswe-project/blob/master/Snapshots%20fswe/Manager%20view.jpg)
 - Username: jonClancy
 - Password: jonClancy!
 
 #### Administrator
+![admin view](https://github.com/kblicharski/fswe-project/blob/master/Snapshots%20fswe/Voter%20Verification%20Admin.jpg)
 - Username: jonAdams
 - Password: jonAdams!
 
