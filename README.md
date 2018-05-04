@@ -1,9 +1,10 @@
 # 2018 Fundamentals of Software Engineering Final Project
 Our final project was an electronic voting application which could be used to manage elections. We used [Loopback](https://loopback.io/) for our backend and [Angular](https://angular.io/) for our frontend. Our final product is a single-page web application which fulfills all of the project criteria while being intuitive and elegantly designed.
 
-The link to the demo for our project can be found [here](https://www.youtube.com/watch?v=VQDdzFb79hA).
-The documentation link can be found [here](https://gitlab.com/kblicharski/fswe-project/blob/master/Documentation%20of%20System.pdf).
-The snapshots of our project views with descriptions can be found [here](https://gitlab.com/kblicharski/fswe-project/tree/master/Snapshots%20fswe).
+## Links
+- [Video demo of our project](https://www.youtube.com/watch?v=VQDdzFb79hA)
+- [Documentation](https://github.com/kblicharski/fswe-project/blob/master/Documentation%20of%20System.pdf)
+- [Project View Snapshots & Descriptions](https://github.com/kblicharski/fswe-project/tree/master/Snapshots%20fswe)
 
 ## Group Responsibilities
 - **[Kevin Blicharski](https://github.com/kblicharski)**: Frontend development, design, project management
